@@ -1,0 +1,36 @@
+# chargement des librairies
+library(ggplot2)
+library(dplyr)
+library(hrbrthemes)
+
+# création de la base de données pour le graphe
+data <- data.frame(type = c(rep("LumA", 50),
+                            rep("LumB", 50),
+                            rep("Basal", 50),
+                            rep("Her2", 50),
+                            rep("Normal", 50)),
+                  subtype = rep(TCGA.PAM50_genefu_hg18$chr, each = 50),
+                  value = c(TCGA.PAM50_genefu_hg18$LumA,
+                            TCGA.PAM50_genefu_hg18$LumB, 
+                            TCGA.PAM50_genefu_hg18$Basal,
+                            TCGA.PAM50_genefu_hg18$Her2, 
+                            TCGA.PAM50_genefu_hg18$Normal))
+
+# histogramme et densité des différents types de cancer
+density <- data %>%
+  ggplot(aes(x = value, fill = type)) +
+  geom_histogram(color = "#e9ecef", alpha = 0.5, position = "dodge") +
+  geom_density(aes(y = ..density.. * 100, color=type), size=1.5, fill=NA) +
+  scale_color_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  scale_fill_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  theme_ipsum() +
+  labs(fill = "Cancer Type") +
+  xlab("") +
+  ylab("Density") +
+  labs(title = "Density of Cancer Type") +
+  guides(color = "none")
+
+# affichage du graphe
+print(density)
