@@ -1,0 +1,29 @@
+# chargement des librairies
+library(ggplot2)
+library(dplyr)
+library(viridis)
+
+# création de la base de données pour le graphe
+data <- data.frame(
+  type = TCGA.PAM50_genefu_hg18$chr,
+  value = TCGA.PAM50_genefu_hg18$Her2
+)
+
+# histogramme de fréquence pour chaque chromosome
+frequence <- data %>%
+  ggplot(aes(x = value, color = type, fill = type)) +
+  geom_histogram(alpha = 0.6, binwidth = 0.5, position = "identity") +
+  geom_density(alpha = 0.3, fill = "grey", color = "black", size = 0.25) +
+  scale_fill_viridis(discrete = FALSE) +
+  scale_color_viridis(discrete = FALSE) +
+  theme_minimal() +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  xlab("") +
+  ylab("Frequency") +
+  facet_wrap(~type, scales = "free_y")+
+  guides(color = "none", fill="none") +
+  labs(title = "Frequency of Her2 Gene Occurrence on All Chromosomes")
+
+# affichage du graphe
+print(frequence)
