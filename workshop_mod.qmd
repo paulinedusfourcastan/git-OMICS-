@@ -5,4 +5,9 @@ format: html
 
 # Introduction 
 
-JEU DE DONNEES  
+# Données
+
+Les données qu'on utilisera dans ce Workshop se trouvent dans la librairie *OmicCircos* de R.
+Elles se basent sur des bases de données fourni par ***The Cancer Genome Atlas Program*** (TCGA). On s'intéresse aux données des patients diagnostiqués d'un cancer du sein. 
+
+
