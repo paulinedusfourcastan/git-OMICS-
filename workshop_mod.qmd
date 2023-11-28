@@ -16,7 +16,7 @@ Les variables dans ce tableau sont respectivement le chromosome, po et le nom du
 
 * TCGA.BC.fus
 
-Ce tableau représente la fusion des deux gènes qui a eu place pour un individu précis.
+Ce tableau représente la fusion des deux gènes qui a eu place pour un individu préci.
 
 * TCGA.BC.gene.exp.2k.60
 
