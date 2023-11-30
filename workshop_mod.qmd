@@ -10,35 +10,21 @@ format: html
 Les données qu'on utilisera dans ce Workshop se trouvent dans la librairie *OmicCircos* de R.
 Elles se basent sur des bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA). On s'intéresse aux données des patients diagnostiqués d'un cancer du sein. Voici la liste des tableaux utilisés :
 
-* TCGA.BC.cnv.2k.60
+* TCGA.BC.cnv.2k.60 : Les variables dans ce tableau sont respectivement le chromosome, po et le nom du gène observé et les 60 autres variables représentent 60 individus différents.  
 
-Les variables dans ce tableau sont respectivement le chromosome, po et le nom du gène observé et les 60 autres variables représentent 60 individus différents.  
+* TCGA.BC.fus : Ce tableau représente la fusion des deux gènes qui a eu place pour un individu préci.
 
-* TCGA.BC.fus
+* TCGA.BC.gene.exp.2k.60 : Sur 60 individus, on étudie une métrique en rapport avec l'expression du gène. Le chromosome, po et le nom du gène observé sont notés.
 
-Ce tableau représente la fusion des deux gènes qui a eu place pour un individu préci.
+* TCGA.BC.sample60 : On indique ici pour 60 cas quel type de cancer du sein le patient en souffre : LumA, LumB, Basal ou Her2.
 
-* TCGA.BC.gene.exp.2k.60
+* TCGA.BC_Her2_cnv_exp : Dans ce tableau, des tests statistiques sont effectués et on récupère la *t-value* et la *p-value*. De plus, une métrique notée FDR est mesurée. En effet, FDR (First Division Restitution ou restitution de la première division) se réfère généralement à une situation où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue. La variable *Bonferroni* s'agit d'une correction statistique.
 
-Sur 60 individus, on étudie une métrique en rapport avec l'expression du gène. Le chromosome, po et le nom du gène observé sont notés.
-
-* TCGA.BC.sample60
-
-On indique ici pour 60 cas quel type de cancer du sein le patient en souffre : LumA, LumB, Basal ou Her2.
-
-* TCGA.BC_Her2_cnv_exp
-
-Dans ce tableau, des tests statistiques sont effectués et on récupère la *t-value* et la *p-value*. De plus, une métrique notée FDR est mesurée. En effet, FDR (First Division Restitution ou restitution de la première division) se réfère généralement à une situation où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue. La variable *Bonferroni* s'agit d'une correction statistique.
-
-* TCGA.PAM50_genefu_hg18
-
-"PAM50" signifie "Prediction Analysis of Microarray 50 genes". Il s'agit alors d'un ensemble de 50 gènes qui ont été identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein. Le classificateur PAM50 est utilisé pour classer les tumeurs du cancer du sein en sous-types moléculaires spécifiques (LumA, LumB, Basal, Her2 ou Normal) en fonction des schémas d'expression génique.
+* TCGA.PAM50_genefu_hg18 : "PAM50" représente "Prediction Analysis of Microarray 50 genes". Il s'agit alors d'un ensemble de 50 gènes qui ont été identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein. Le classificateur PAM50 est utilisé pour classer les tumeurs du cancer du sein en sous-types moléculaires spécifiques (LumA, LumB, Basal, Her2 ou Normal) en fonction des schémas d'expression génique.
 
 # Lexique
 
-* *hg18*
-
-La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
+* *hg18* : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
 
 
 
