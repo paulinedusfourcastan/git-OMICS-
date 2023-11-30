@@ -10,11 +10,11 @@ format: html
 Les données qu'on utilisera dans ce Workshop se trouvent dans la librairie *OmicCircos* de R.
 Elles se basent sur des bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA). On s'intéresse aux données des patients diagnostiqués d'un cancer du sein. Voici la liste des tableaux utilisés :
 
-* TCGA.BC.cnv.2k.60 : Les variables dans ce tableau sont respectivement le chromosome, po et le nom du gène observé et les 60 autres variables représentent 60 individus différents.  
+* TCGA.BC.cnv.2k.60 : Les variables dans ce tableau sont respectivement le chromosome, sa position et le nom du gène observé et les 60 autres variables représentent 60 individus différents.  
 
 * TCGA.BC.fus : Ce tableau représente la fusion des deux gènes qui a eu place pour un individu préci.
 
-* TCGA.BC.gene.exp.2k.60 : Sur 60 individus, on étudie une métrique en rapport avec l'expression du gène. Le chromosome, po et le nom du gène observé sont notés.
+* TCGA.BC.gene.exp.2k.60 : Sur 60 individus, on étudie une métrique en rapport avec l'expression du gène. Le chromosome, sa position et le nom du gène observé sont notés.
 
 * TCGA.BC.sample60 : On indique ici pour 60 cas quel type de cancer du sein le patient en souffre : LumA, LumB, Basal ou Her2.
 
