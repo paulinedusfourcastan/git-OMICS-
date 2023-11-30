@@ -3,14 +3,14 @@ title: "Workshop MOD"
 format: html
 ---
 
-# Introduction 
+# Introduction
 
 # Données
 
 Les données qu'on utilisera dans ce Workshop se trouvent dans la librairie *OmicCircos* de R.
 Elles se basent sur des bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA). On s'intéresse aux données des patients diagnostiqués d'un cancer du sein. Voici la liste des tableaux utilisés :
 
-* TCGA.BC.cnv.2k.60 : Les variables dans ce tableau sont respectivement le chromosome, sa position et le nom du gène observé et les 60 autres variables représentent 60 individus différents.  
+* TCGA.BC.cnv.2k.60 : Les variables dans ce tableau sont respectivement le chromosome, sa position et le nom du gène observé et les 60 autres variables représentent 60 individus différents.
 
 * TCGA.BC.fus : Ce tableau représente la fusion des deux gènes qui a eu place pour un individu préci.
 
@@ -23,6 +23,29 @@ Elles se basent sur des bases de données fournies par ***The Cancer Genome Atla
 * TCGA.BC_Her2_cnv_exp : Dans ce tableau, des tests statistiques sont effectués et on récupère la *t-value* et la *p-value*. On note les métriques FDR et Bonferroni de plus. 
 
 * TCGA.PAM50_genefu_hg18 : Il s'agit alors d'un ensemble de 50 gènes qui ont été identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (LumA, LumB, Basal, Her2 ou Normal) en fonction des schémas d'expression génique.
+
+# Exemple
+
+```{python}
+x = 3
+print(x)
+```
+
+```{python}
+#|echo: true
+#|output: false
+x = 3
+print(x)
+```
+
+```{python}
+#|echo: true
+#|code-fold: true
+x = 3
+print(x)
+```
+
+
 
 ![Extrait du tableau CNV](./images/Extrait%20PAM50.png)
 
