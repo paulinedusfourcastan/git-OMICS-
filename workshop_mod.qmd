@@ -38,9 +38,9 @@ Elles se basent sur des bases de données fournies par ***The Cancer Genome Atla
 
 * Basal : Le cancer du sein de type basal-like est un sous-type qui est négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
 
-* FDR (First Division Restitution) : Réfère généralement à une situation où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue. 
+* FDR (First Division Restitution) : Réfère à l'évènement où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue. 
 
-* Bonferroni : Une correctio statistique
+* Bonferroni : Une correction statistique.
 
 
 
