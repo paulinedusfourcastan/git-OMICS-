@@ -14,7 +14,7 @@ Elles se basent sur des bases de données fournies par ***The Cancer Genome Atla
 
 * TCGA.BC.fus : Ce tableau représente la fusion des deux gènes qui a eu place pour un individu préci.
 
-![Extrait du tableau fus](./images/tableau%20fus.png.png)
+![Extrait du tableau fus](./images/tableau%20fus.png)
 
 * TCGA.BC.gene.exp.2k.60 : Sur 60 individus, on étudie une métrique en rapport avec l'expression du gène. Le chromosome, sa position et le nom du gène observé sont notés.
 
@@ -30,9 +30,9 @@ Elles se basent sur des bases de données fournies par ***The Cancer Genome Atla
 
 * *hg18* : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
 
-* Her2 : 
+* Her2 : Une protéine naturellement présente dans l’organisme. Il s’agit d’un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire. 
 
-* LumA :
+* LumA : Une protéine nucléaire dont le gène est le TMEM43 situé sur le chromosome 3 humain.
 
 * LumB : 
 
