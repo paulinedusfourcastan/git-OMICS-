@@ -32,11 +32,11 @@ Elles se basent sur des bases de données fournies par ***The Cancer Genome Atla
 
 * Her2 : Une protéine naturellement présente dans l’organisme. Il s’agit d’un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire. 
 
-* LumA : Une protéine nucléaire dont le gène est le TMEM43 situé sur le chromosome 3 humain.
+* LumA : Le cancer du sein Luminal A est l'un des sous-types luminaux et est généralement associé à des caractéristiques moins agressives par rapport à Luminal B.
 
-* LumB : 
+* LumB : Associé à un grade plus élevé, des taux de prolifération accrus, et un pronostic global plus défavorable.
 
-* Basal :
+* Basal : Le cancer du sein de type basal-like est un sous-type qui est négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
 
 
 
