@@ -20,28 +20,28 @@ Elles se basent sur des bases de données fournies par ***The Cancer Genome Atla
 
 * TCGA.BC.sample60 : On indique ici pour 60 cas quel type de cancer du sein le patient en souffre : LumA, LumB, Basal ou Her2.
 
-* TCGA.BC_Her2_cnv_exp : Dans ce tableau, des tests statistiques sont effectués et on récupère la *t-value* et la *p-value*. On note les métriques FDR et Bonferroni de plus. 
+* TCGA.BC_Her2_cnv_exp : Dans ce tableau, des tests statistiques sont effectués et on récupère la *t-value* et la *p-value*. On note les métriques FDR et Bonferroni de plus.
 
 * TCGA.PAM50_genefu_hg18 : Il s'agit alors d'un ensemble de 50 gènes qui ont été identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (LumA, LumB, Basal, Her2 ou Normal) en fonction des schémas d'expression génique.
 
 # Exemple
 
-```{python}
-x = 3
+```{r}
+x <- 3
 print(x)
 ```
 
-```{python}
+```{r}
 #|echo: true
 #|output: false
-x = 3
+x <- 3
 print(x)
 ```
 
-```{python}
+```{r}
 #|echo: true
 #|code-fold: true
-x = 3
+x <- 3
 print(x)
 ```
 
@@ -53,7 +53,7 @@ print(x)
 
 * *hg18* : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
 
-* Her2 : Une protéine naturellement présente dans l’organisme. Il s’agit d’un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire. 
+* Her2 : Une protéine naturellement présente dans l’organisme. Il s’agit d’un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire.
 
 * LumA : Le cancer du sein Luminal A est l'un des sous-types luminaux et est généralement associé à des caractéristiques moins agressives par rapport à Luminal B.
 
@@ -61,7 +61,7 @@ print(x)
 
 * Basal : Un sous-type du cancer du sein négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
 
-* FDR (First Division Restitution) : Réfère à l'évènement où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue. 
+* FDR (First Division Restitution) : Réfère à l'évènement où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue.
 
 * Bonferroni : Une correction statistique.
 
