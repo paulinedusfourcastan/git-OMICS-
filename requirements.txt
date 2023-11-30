@@ -1,8 +1,6 @@
 OmicCircos
 ggplot2
 kdensity
-pheatmap
-plotly
 heatmaply
 dplyr
 viridis
