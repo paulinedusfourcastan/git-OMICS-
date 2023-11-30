@@ -14,6 +14,8 @@ Elles se basent sur des bases de données fournies par ***The Cancer Genome Atla
 
 * TCGA.BC.fus : Ce tableau représente la fusion des deux gènes qui a eu place pour un individu préci.
 
+![Extrait du tableau fus](/images/tableau%20fus.png.png)
+
 * TCGA.BC.gene.exp.2k.60 : Sur 60 individus, on étudie une métrique en rapport avec l'expression du gène. Le chromosome, sa position et le nom du gène observé sont notés.
 
 * TCGA.BC.sample60 : On indique ici pour 60 cas quel type de cancer du sein le patient en souffre : LumA, LumB, Basal ou Her2.
