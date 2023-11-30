@@ -5,3 +5,4 @@ heatmaply
 dplyr
 viridis
 hrbrthemes
+viridisLite
