@@ -6,3 +6,5 @@ dplyr
 viridis
 hrbrthemes
 viridisLite
+circlize
+ComplexHeatmap
