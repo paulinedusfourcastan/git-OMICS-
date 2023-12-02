@@ -49,6 +49,48 @@ print(x)
 
 ![Extrait du tableau CNV](./images/Extrait%20PAM50.png)
 
+
+# Recueillir les données
+
+Afin de pouvoir mettre en oeuvre les différentes méthodes de visualisation, il nous faut tout d'abord recueillir les données et les travailler.
+
+Pour cela, suivez les étapes présentées ci-dessous :
+
+-   Etape 1 : Chargement de la librairie "Omiccircos"
+
+```{r}
+library(OmicCircos)
+```
+
+-   Etape 2 : Importation des données
+
+```{r}
+data("TCGA.PAM50_genefu_hg18")
+data("TCGA.BC.fus")
+data("TCGA.BC.cnv.2k.60")
+data("TCGA.BC.gene.exp.2k.60")
+data("TCGA.BC.sample60")
+data("TCGA.BC_Her2_cnv_exp") 
+```
+
+-   Etape 3 : Travail des données
+
+```{r}
+Her2.i = which(TCGA.BC.sample60[,2] == "Her2")
+Her2.n = TCGA.BC.sample60[Her2.i,1]
+Her2.j = which(colnames(TCGA.BC.cnv.2k.60)%in%Her2.n)
+cnv = TCGA.BC.cnv.2k.60[,c(1:3,Her2.j)]
+
+cnv.m = cnv[,c(4:ncol(cnv))]
+cnv.m[cnv.m > 2] = 2
+cnv.m[cnv.m < -2] = -2
+cnv = cbind(cnv[,1:3], cnv.m)
+
+Her2.j = which(colnames(TCGA.BC.gene.exp.2k.60)%in% Her2.n)
+
+gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
+```
+
 # Lexique
 
 * *hg18* : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
