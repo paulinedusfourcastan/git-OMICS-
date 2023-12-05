@@ -110,4 +110,144 @@ gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 
 
 
+# Visualisations Basiques
+
+L'ensemble des visualisations ci-dessous s'appuient sur la base de données *TCGA.PAM50_genefu_hg18*. 
+
+```{r, include=FALSE}
+#|echo: false
+#|output: false
+#| warning: false
+
+# chargement des packages nécessaires
+library(ggplot2)
+library(dplyr)
+library(viridis)
+library(viridisLite)
+library(OmicCircos)
+library(hrbrthemes)
+
+# chargement des données
+data("TCGA.PAM50_genefu_hg18")
+```
+
+### Comparaison de Densités
+
+Commençons par étudier quelques densités des types de cancer. Voici un exemple très basique de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** :
+
+```{r}
+# création de la base de données
+data <- data.frame(value = c(TCGA.PAM50_genefu_hg18$LumA,
+                            TCGA.PAM50_genefu_hg18$LumB),
+                   type = c(rep("LumA", 50),
+                            rep("LumB", 50)))
+
+# création du graphe
+comparaison <- data %>%
+    ggplot(aes(x=value, fill=type)) +
+    geom_density()
+
+# affichage du graphe
+print(comparaison)
+```
+
+::: {.callout-important appearance="simple"}
+L'utilisation de *ggplot* nécessite la création d'une base de données contenant les variables utiles pour le graphe.
+:::
+
+::: {.callout-tip appearance="simple"}
+## %>%
+Cet opérateur est un pipe, fréquemment représenté par une barre verticale ‘|’ : il renvoie la sortie d’une commande vers l’entrée d’une autre.
+:::
+
+De nombreuses options de *ggplot* peuvent améliorer l'apparence générale de ce graphe telles que ci-dessous.
+
+```{r}
+# création du graphe
+comparaison <- data %>%
+  ggplot(aes(x=value, fill=type)) +
+  geom_density(aes(color=type), alpha=0.4) +
+  scale_color_manual(values = c("darkblue", "pink")) +
+  scale_fill_manual(values = c("darkblue", "pink")) +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  xlab("Value") +
+  ylab("Density") +
+  guides(color = "none") +
+  labs(title = "Density Comparaison of Cancer Types Gene Occurrence",
+       fill = "Cancer Type")
+
+# affichage du graphe
+print(comparaison)
+```
+
+Il est également possible de représenter les densités sur deux graphes différents plutôt que de les superposer. 
+
+```{r}
+# création du graphe
+comparaison <- data %>%
+  ggplot(aes(x=value, fill=type)) +
+  geom_density(aes(color=type), alpha=0.4) +
+  scale_color_manual(values = c("darkblue", "pink")) +
+  scale_fill_manual(values = c("darkblue", "pink")) +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  xlab("Value") +
+  ylab("Density") +
+  facet_wrap(~type, scales = "fixed")+
+  guides(color = "none") +
+  labs(title = "Density Comparaison of Cancer Types Gene Occurrence",
+       fill = "Cancer Type")
+
+# affichage du graphe
+print(comparaison)
+```
+
+::: {.callout-note appearance="simple"}
+## Utilisation de *facet_wrap*
+Les échelles des différents graphiques peuvent être formater différemment à l'aide de l'option *scales* :
+*"fixed"* permet d'obtenir des échelles égales pour tous les graphes mais d'autres options telles que *"free_x"*, *"free_y"* ou *"free"* sont envisageables.
+:::
+
+Le cancer de type *Her2* est le type de cancer le plus courant parmi tous ceux présents dans la base de données support.
+
+**En vous appuyant sur l'exemple précédent, représentez graphiquement la comparaison des densités d'une personne atteinte d'un cancer de type *Her2* et d'une personne saine.** 
+
+::: {.callout-note appearance="simple"}
+Les données d'une personne saine sont contenues dans la variables *Normal* de la base de données.
+:::
+
+Par la suite, les couleurs utilisées pour la représentation de *Her2* et *Normal* seront respectivement *darkred* et *darksalmon*.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+#| output: false
+
+# création de la base de données
+data <- data.frame(value = c(TCGA.PAM50_genefu_hg18$Her2,
+                            TCGA.PAM50_genefu_hg18$Normal),
+                   type = c(rep("Her2", 50),
+                            rep("Normal", 50)))
+
+# création du graphe
+comparaison <- data %>%
+  ggplot(aes(x=value, fill=type)) +
+  geom_density(aes(color=type), alpha=0.4) +
+  scale_color_manual(values = c("darkred", "darksalmon")) +
+  scale_fill_manual(values = c("darkred", "darksalmon")) +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  xlab("Value") +
+  ylab("Density") +
+  guides(color = "none") +
+  labs(title = "Density Comparaison of Cancer Types Gene Occurrence",
+       fill = "Cancer Type")
+
+# affichage du graphe
+print(comparaison)
+```
+
+
+
 
