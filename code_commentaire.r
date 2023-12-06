@@ -33,7 +33,7 @@ par(mar = c(2, 2, 2, 2))
 plot(c(1, 800), c(1, 800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "")
 
 zoom <- c(1, 22, 939245.5, 154143883, 0, 180)
-#  Mise  des chromosomes 
+#  Représentations des chromososmes de 1 à 22 
 circos(R = 400, cir = "hg18", W = 4, type = "chr", print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
 # génes 
 circos(R = 300, cir = "hg18", W = 100, mapping = gene.exp, col.v = 4, type = "heatmap2", cluster = FALSE, col.bar = TRUE, lwd = 0.01, zoom = zoom)
