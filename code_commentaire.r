@@ -35,12 +35,14 @@ plot(c(1, 800), c(1, 800), type = "n", axes = FALSE, xlab = "", ylab = "", main 
 zoom <- c(1, 22, 939245.5, 154143883, 0, 180)
 #  Représentations des chromososmes de 1 à 22  
 circos(R = 400, cir = "hg18", W = 4, type = "chr", print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
-# génes 
-circos(R = 300, cir = "hg18", W = 100, mapping = gene.exp, col.v = 4, type = "heatmap2", cluster = FALSE, col.bar = TRUE, lwd = 0.01, zoom = zoom)
+# Representations des genotypes 
+circos(R = 300, cir = "hg18", W = 100, mapping = gene.exp, col.v = 4, type = "heatmap2", cluster = FALSE, col.bar = TRUE, lwd = 0.01, zoom = zoom)#  
+# Représentation de la copie numérique (CNV) :
 
-# 
 circos(R = 220, cir = "hg18", W = 80, mapping = cnv, col.v = 4, type = "ml3", B = FALSE, lwd = 1, cutoff = 0, zoom = zoom)
 
+## Les CNV, ou "Copy Number Variations" en anglais, désignent des variations dans le nombre de copies d'une séquence spécifique d'ADN observées entre les individus d'une même espèce, incluant les humains. Ces variations englobent des duplications (augmentation du nombre de copies), des délétions (diminution du nombre de copies) ainsi que des réarrangements structuraux.
+## La valeur du CNV constitue un seuil essentiel pour déterminer si un individu est conforme à la normale. Elle permet d'évaluer et de quantifier les écarts par rapport à la configuration génomique typique, aidant ainsi à identifier d'éventuelles anomalies génétiques.
 circos(R = 140, cir = "hg18", W = 80, mapping = pvalue, col.v = 4, type = "l", B = TRUE, lwd = 1, col = colors[1], zoom = zoom)
 
 
