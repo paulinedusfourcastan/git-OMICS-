@@ -1,7 +1,7 @@
 rm(list = ls())
 options(stringsAsFactors = FALSE)
 library(OmicCircos)
-
+# Chargement des données à partir du package OmicCircos de R de différentes types de cencer 
 data("TCGA.PAM50_genefu_hg18")
 data("TCGA.BC.fus")
 data("TCGA.BC.cnv.2k.60")
