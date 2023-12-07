@@ -2,7 +2,7 @@
 title: "Workshop MOD: Visualisation de données omiques avec R"
 ---
 
-# Introduction CDFHGJHKLJKMLJKHGFXGJDFCGJKLKJH
+# Introduction 
 
 # Données
 
