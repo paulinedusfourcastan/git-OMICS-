@@ -1,6 +1,5 @@
 ---
-title: "Workshop MOD"
-format: html
+title: "Workshop MOD: Visualisation de données omiques avec R"
 ---
 
 # Introduction
