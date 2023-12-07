@@ -24,28 +24,6 @@ Elles se basent sur des bases de données fournies par ***The Cancer Genome Atla
 
 * TCGA.PAM50_genefu_hg18 : Il s'agit alors d'un ensemble de 50 gènes qui ont été identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (LumA, LumB, Basal, Her2 ou Normal) en fonction des schémas d'expression génique.
 
-# Exemple
-
-```{r}
-x <- 3
-print(x)
-```
-
-```{r}
-#|echo: true
-#|output: false
-x <- 3
-print(x)
-```
-
-```{r}
-#|echo: true
-#|code-fold: true
-x <- 3
-print(x)
-```
-
-
 
 ![Extrait du tableau CNV](./images/Extrait%20PAM50.png)
 
@@ -70,7 +48,7 @@ data("TCGA.BC.fus")
 data("TCGA.BC.cnv.2k.60")
 data("TCGA.BC.gene.exp.2k.60")
 data("TCGA.BC.sample60")
-data("TCGA.BC_Her2_cnv_exp") 
+data("TCGA.BC_Her2_cnv_exp")
 ```
 
 -   Etape 3 : Travail des données
@@ -108,26 +86,20 @@ gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 * Bonferroni : Une correction statistique.
 
 
-
-
 # Visualisations Basiques
 
-L'ensemble des visualisations ci-dessous s'appuient sur la base de données *TCGA.PAM50_genefu_hg18*. 
+L'ensemble des visualisations ci-dessous s'appuient sur la base de données *TCGA.PAM50_genefu_hg18*.
 
 ```{r, include=FALSE}
 #|echo: false
 #|output: false
-#| warning: false
-
-# téléchargement du package
-install.packages(OmicCircos)
+#|warning: false
 
 # chargement des packages nécessaires
 library(ggplot2)
 library(dplyr)
 library(viridis)
 library(viridisLite)
-library(OmicCircos)
 library(hrbrthemes)
 
 # chargement des données
@@ -184,7 +156,7 @@ comparaison <- data %>%
 print(comparaison)
 ```
 
-Il est également possible de représenter les densités sur deux graphes différents plutôt que de les superposer. 
+Il est également possible de représenter les densités sur deux graphes différents plutôt que de les superposer.
 
 ```{r}
 # création du graphe
@@ -214,7 +186,7 @@ Les échelles des différents graphiques peuvent être formater différemment à
 
 Le cancer de type *Her2* est le type de cancer le plus courant parmi tous ceux présents dans la base de données support.
 
-**En vous appuyant sur l'exemple précédent, représentez graphiquement la comparaison des densités d'une personne atteinte d'un cancer de type *Her2* et d'une personne saine.** 
+**En vous appuyant sur l'exemple précédent, représentez graphiquement la comparaison des densités d'une personne atteinte d'un cancer de type *Her2* et d'une personne saine.**
 
 ::: {.callout-tip appearance="simple"}
 Les données d'une personne saine sont contenues dans la variable *Normal* de la base de données.
@@ -272,9 +244,9 @@ data <- data.frame(type = c(rep("LumA", 50),
                             rep("Normal", 50)),
                   subtype = rep(TCGA.PAM50_genefu_hg18$chr, each = 50),
                   value = c(TCGA.PAM50_genefu_hg18$LumA,
-                            TCGA.PAM50_genefu_hg18$LumB, 
+                            TCGA.PAM50_genefu_hg18$LumB,
                             TCGA.PAM50_genefu_hg18$Basal,
-                            TCGA.PAM50_genefu_hg18$Her2, 
+                            TCGA.PAM50_genefu_hg18$Her2,
                             TCGA.PAM50_genefu_hg18$Normal))
 
 # histogramme et densité des différents types de cancer
@@ -380,9 +352,9 @@ data <- data.frame(type = TCGA.PAM50_genefu_hg18$chr,
                                rep("Her2", 50),
                                rep("Normal", 50)),
                    value = c(TCGA.PAM50_genefu_hg18$LumA,
-                             TCGA.PAM50_genefu_hg18$LumB, 
+                             TCGA.PAM50_genefu_hg18$LumB,
                              TCGA.PAM50_genefu_hg18$Basal,
-                             TCGA.PAM50_genefu_hg18$Her2, 
+                             TCGA.PAM50_genefu_hg18$Her2,
                              TCGA.PAM50_genefu_hg18$Normal))
 
 # histogramme de fréquence pour chaque chromosome
