@@ -163,7 +163,7 @@ print(comparaison)
 
 ::: {.callout-tip appearance="simple"}
 ## Utilisation de *facet_wrap*
-Les échelles des différents graphiques peuvent être formater différemment à l'aide de l'option *scales* :
+Les échelles des différents graphiques peuvent être formatées différemment à l'aide de l'option *scales* :
 *"fixed"* permet d'obtenir des échelles égales pour tous les graphes mais d'autres options telles que *"free_x"*, *"free_y"* ou *"free"* sont envisageables.
 :::
 
