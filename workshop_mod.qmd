@@ -88,6 +88,9 @@ library(hrbrthemes)
 data("TCGA.PAM50_genefu_hg18")
 ```
 # Code commenté
+```{r}
+library(OmicCircos)
+```
 
 ```{r, include=FALSE}
 #|echo: false
