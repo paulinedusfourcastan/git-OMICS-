@@ -153,6 +153,13 @@
       ],
       "Hash": "c3f7b221e60c28f5f3533d74c6fef024"
     },
+    "hrbrthemes": {
+      "Package": "hrbrthemes",
+      "Version": "0.8.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "0d1257948f016840ad90320ed19c8c7d"
+    },
     "IRanges": {
       "Package": "IRanges",
       "Version": "2.32.0",
