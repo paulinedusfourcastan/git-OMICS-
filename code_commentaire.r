@@ -59,7 +59,7 @@ circos(R = 140, cir = "hg18", W = 80, mapping = pvalue, col.v = 4, type = "l", B
 # Plot 5: Représentation des fusions géniques
 circos(R = 130, cir = "hg18", W = 10, mapping = TCGA.BC.fus, type = "link", lwd = 2, zoom = zoom)
 
-# Zoom sur certaines régions spécifiques
+# Zoom sur certaines régions spécifiques(le zoom sur les liens facilite l'exploration ciblée des régions génomiques où des fusions géniques sont suspectées, permettant ainsi une analyse plus approfondie et une meilleure compréhension des implications biologiques de ces événements.)
 ## Zoom sur le premier lien
 highlight.link1 <- c(400, 400, 140, 376.8544, 384.0021, 450, 540.5)
 circos(cir = "hg18", mapping = highlight.link1, type = "highlight.link", col = colors[1], lwd = 1)
