@@ -67,7 +67,7 @@ Her2.j = which(colnames(TCGA.BC.gene.exp.2k.60)%in% Her2.n)
 
 gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 ```
-
+# Explication ddétaillé du code 
 
 # Visualisations classiques
 
