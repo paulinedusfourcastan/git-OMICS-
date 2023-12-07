@@ -68,24 +68,8 @@ Her2.j = which(colnames(TCGA.BC.gene.exp.2k.60)%in% Her2.n)
 gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 ```
 
-# Lexique
 
-* *hg18* : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
-
-* Her2 : Une protéine naturellement présente dans l’organisme. Il s’agit d’un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire.
-
-* LumA : Le cancer du sein Luminal A est l'un des sous-types luminaux et est généralement associé à des caractéristiques moins agressives par rapport à Luminal B.
-
-* LumB : Associé à un grade plus élevé, des taux de prolifération accrus, et un pronostic global plus défavorable.
-
-* Basal : Un sous-type du cancer du sein négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
-
-* FDR (First Division Restitution) : Réfère à l'évènement où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue.
-
-* Bonferroni : Une correction statistique.
-
-
-# Visualisations Basiques
+# Visualisations classiques
 
 L'ensemble des visualisations ci-dessous s'appuient sur la base de données *TCGA.PAM50_genefu_hg18*.
 
@@ -378,4 +362,18 @@ print(frequence)
 
 
 
+# Lexique
 
+* *hg18* : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
+
+* Her2 : Une protéine naturellement présente dans l’organisme. Il s’agit d’un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire.
+
+* LumA : Le cancer du sein Luminal A est l'un des sous-types luminaux et est généralement associé à des caractéristiques moins agressives par rapport à Luminal B.
+
+* LumB : Associé à un grade plus élevé, des taux de prolifération accrus, et un pronostic global plus défavorable.
+
+* Basal : Un sous-type du cancer du sein négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
+
+* FDR (First Division Restitution) : Réfère à l'évènement où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue.
+
+* Bonferroni : Une correction statistique.
