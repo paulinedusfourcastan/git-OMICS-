@@ -119,6 +119,9 @@ L'ensemble des visualisations ci-dessous s'appuient sur la base de données *TCG
 #|output: false
 #| warning: false
 
+# téléchargement du package
+install.packages(OmicCircos)
+
 # chargement des packages nécessaires
 library(ggplot2)
 library(dplyr)
@@ -131,7 +134,7 @@ library(hrbrthemes)
 data("TCGA.PAM50_genefu_hg18")
 ```
 
-### Comparaison de Densités
+### Comparaison de Deux Densités
 
 Commençons par étudier quelques densités des types de cancer. Voici un exemple très basique de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** :
 
@@ -155,7 +158,7 @@ print(comparaison)
 L'utilisation de *ggplot* nécessite la création d'une base de données contenant les variables utiles pour le graphe.
 :::
 
-::: {.callout-tip appearance="simple"}
+::: {.callout-note appearance="simple"}
 ## %>%
 Cet opérateur est un pipe, fréquemment représenté par une barre verticale ‘|’ : il renvoie la sortie d’une commande vers l’entrée d’une autre.
 :::
@@ -203,7 +206,7 @@ comparaison <- data %>%
 print(comparaison)
 ```
 
-::: {.callout-note appearance="simple"}
+::: {.callout-tip appearance="simple"}
 ## Utilisation de *facet_wrap*
 Les échelles des différents graphiques peuvent être formater différemment à l'aide de l'option *scales* :
 *"fixed"* permet d'obtenir des échelles égales pour tous les graphes mais d'autres options telles que *"free_x"*, *"free_y"* ou *"free"* sont envisageables.
@@ -213,8 +216,8 @@ Le cancer de type *Her2* est le type de cancer le plus courant parmi tous ceux p
 
 **En vous appuyant sur l'exemple précédent, représentez graphiquement la comparaison des densités d'une personne atteinte d'un cancer de type *Her2* et d'une personne saine.** 
 
-::: {.callout-note appearance="simple"}
-Les données d'une personne saine sont contenues dans la variables *Normal* de la base de données.
+::: {.callout-tip appearance="simple"}
+Les données d'une personne saine sont contenues dans la variable *Normal* de la base de données.
 :::
 
 Par la suite, les couleurs utilisées pour la représentation de *Her2* et *Normal* seront respectivement *darkred* et *darksalmon*.
@@ -246,6 +249,160 @@ comparaison <- data %>%
 
 # affichage du graphe
 print(comparaison)
+```
+
+### Comparaison de Toutes les Densités
+
+**Pour mieux visualiser les différences entre les types de cancer, représentez la comparaison de la densité de l'ensemble des types de cancer.**
+
+::: {.callout-important appearance="simple"}
+Il est important de préciser au graphe que la variable doit être considéré comme une densité à l'aide de la commande *aes(y=after_stat(density))*.
+:::
+
+```{r}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+#| output: true
+
+# création de la base de données pour le graphe
+data <- data.frame(type = c(rep("LumA", 50),
+                            rep("LumB", 50),
+                            rep("Basal", 50),
+                            rep("Her2", 50),
+                            rep("Normal", 50)),
+                  subtype = rep(TCGA.PAM50_genefu_hg18$chr, each = 50),
+                  value = c(TCGA.PAM50_genefu_hg18$LumA,
+                            TCGA.PAM50_genefu_hg18$LumB, 
+                            TCGA.PAM50_genefu_hg18$Basal,
+                            TCGA.PAM50_genefu_hg18$Her2, 
+                            TCGA.PAM50_genefu_hg18$Normal))
+
+# histogramme et densité des différents types de cancer
+density <- data %>%
+  ggplot(aes(x = value, fill = type)) +
+  geom_density(aes(y = after_stat(density), color=type), linewidth=0.5, alpha=0.4, fill=NA) +
+  scale_color_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  scale_fill_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  xlab("Value") +
+  ylab("Density") +
+  labs(title = "Density of Cancer Types", color = "Cancer Type")
+
+# affichage du graphe
+print(density)
+```
+
+**Ajoutez les histogrammes respectifs des différents types de cancer sur le graphe précédent.**
+
+::: {.callout-tip appearance="simple"}
+## geom_histogram
+Cette commande du package *ggplot2* permet de créer des histogrammes sur R. De nombreuses options sont disponibles comme color, alpha (règle la transparence du remplissage), binwidth (règle la largeur des intervalles)
+et position = "identity", "dodge" (règle la position des bandes).
+:::
+
+```{r}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+#| output: true
+
+# histogramme et densité des différents types de cancer
+density <- data %>%
+  ggplot(aes(x = value, fill = type)) +
+  geom_histogram(aes(y=after_stat(density)), color = "#e9ecef", alpha = 0.3, binwidth=0.5, position = "dodge") +
+  geom_density(aes(y = after_stat(density), color=type), linewidth=0.5, fill=NA) +
+  scale_color_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  scale_fill_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  labs(fill = "Cancer Type") +
+  xlab("") +
+  ylab("Density") +
+  labs(title = "Density of Cancer Type") +
+  guides(color = "none")
+
+# affichage du graphe
+print(density)
+```
+
+
+### Fréquence des Gènes sur l'Ensemble des Chromosomes
+
+**En appliquant les compétences acquises jusqu'ici, représentez la fréquence des gènes de *Her2* sous forme d'histogrammes et de densités pour chacun des chromosomes.**
+
+```{r, warning=FALSE, message=FALSE}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+#| output: true
+#| warning: false
+#| message: false
+
+
+# création de la base de données pour le graphe
+data <- data.frame(
+  type = TCGA.PAM50_genefu_hg18$chr,
+  value = TCGA.PAM50_genefu_hg18$Her2
+)
+
+# histogramme de fréquence pour chaque chromosome
+frequence <- data %>%
+  ggplot(aes(x = value, bins=30, color = type, fill = type)) +
+  geom_histogram(alpha = 0.6, position = "identity") +
+  geom_density(aes(y=after_stat(ndensity)), alpha = 0.5, fill = "grey", color = "black", linewidth = 0.25) +
+  scale_fill_viridis(discrete = FALSE) +
+  scale_color_viridis(discrete = FALSE) +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  xlab("Chromosome") +
+  ylab("Assigned Probability (%)") +
+  facet_wrap(~type, scales = "fixed", nrow=3)+
+  guides(color = "none", fill="none") +
+  labs(title = "Frequency of Her2 Gene Occurrence on All Chromosomes")
+
+# affichage du graphe
+print(frequence)
+```
+
+**De la même façon que le graphe précédent, représentez graphiquement la fréquence des gènes de chaque type de cancer sous forme d'histogrammes et de densités pour chacun des chromosomes.**
+
+```{r, warning=FALSE, message=FALSE}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+#| output: true
+#| warning: false
+#| error: false
+
+# création de la base de données pour le graphe
+data <- data.frame(type = TCGA.PAM50_genefu_hg18$chr,
+                   subtype = c(rep("LumA", 50),
+                               rep("LumB", 50),
+                               rep("Basal", 50),
+                               rep("Her2", 50),
+                               rep("Normal", 50)),
+                   value = c(TCGA.PAM50_genefu_hg18$LumA,
+                             TCGA.PAM50_genefu_hg18$LumB, 
+                             TCGA.PAM50_genefu_hg18$Basal,
+                             TCGA.PAM50_genefu_hg18$Her2, 
+                             TCGA.PAM50_genefu_hg18$Normal))
+
+# histogramme de fréquence pour chaque chromosome
+frequence <- data %>%
+  ggplot(aes(x = value, fill = subtype, color=subtype)) +
+  geom_histogram(alpha = 0.6, position = "dodge") +
+  geom_density(aes(y=after_stat(ndensity), color = subtype), alpha = 0.25, fill = "grey", size = 0.25) +
+  scale_color_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  scale_fill_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  theme(strip.text.x = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5, face="bold")) +
+  xlab("Chromosome") +
+  ylab("Frequency") +
+  facet_wrap(~type, scales = "fixed", nrow=3)+
+  guides(color = "none") +
+  labs(title = "Frequency of Cancer Type Gene Occurrence on Each Chromosome",
+       fill = "Cancer Type")
+
+# affichage du graphe
+print(frequence)
 ```
 
 
