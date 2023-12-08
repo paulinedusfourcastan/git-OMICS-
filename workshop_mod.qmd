@@ -437,6 +437,212 @@ heatmaply(mydata_17, scale_fill_gradient_fun = gradient_col,
           main = "Expression des gènes du chromosome 17")
 ```
 
+
+## Création d'une heatmap circulaire
+
+L'objectif de cette seconde partie sur les heatmap est de réaliser des heatmap circulaires avec dendrogrammes.
+
+Commencez par charger les packages nécessaires :
+
+```{r}
+#| results: hide
+#| message: false
+#| warning: false
+#| output: false
+library(circlize) 
+library(ComplexHeatmap)
+```
+
+On effectue une petite modification de notre dataframe en supprimant une colonne qui ne nous sera pas utile par la suite.
+
+```{r}
+# suppression de la colonne position
+gene.exp2 <- gene.exp[, -2] 
+```
+
+Pour pouvoir réaliser notre heatmap, il nous faut tout d'abord convertir notre dataframe en matrice :
+
+```{r}
+#| message : FALSE
+#| warning: FALSE
+mat <- as.matrix(gene.exp2, labels=TRUE) # on transforme le dataframe en matrice 
+
+# On définit les noms des colonnes et des lignes 
+row_names <- as.vector(gene.exp2$NAME)
+col_names <- c("chr", "NAME", "TCGA.A2.A04W.01A", "TCGA.A2.A0D1.01A",
+               "TCGA.A2.A0EQ.01A", "TCGA.A8.A081.01A", "TCGA.A8.A08J.01A",
+               "TCGA.A8.A09X.01A", "TCGA.AN.A0FV.01A", "TCGA.AO.A0J2.01A",
+               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A", 
+               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A", 
+               "TCGA.E2.A1B0.01A")
+rownames_factor <- factor(row_names)
+
+# On met notre matrice sous format "numeric"
+mat_numeric <- matrix(as.numeric(mat), ncol = ncol(mat))
+rownames(mat_numeric) = row_names
+colnames(mat_numeric) = col_names
+
+# Vecteur des chromosomes :
+split <- as.vector(gene.exp2$chr)
+split <- factor(split)
+```
+
+Création des heatmap circulaires :
+
+-   Sur cette première heatmap, nous avons affiché tous les chromosomes ainsi que tous les gènes de la manière la plus basique possible.
+
+```{r}
+## Affichage des heatmaps
+circos.clear()
+circos.par(start.degree = 90, gap.degree = 3)
+col_fun1 = colorRamp2(c(-6, 0, 6), c("blue", "white", "red"))
+
+# heatmap simple 
+circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
+               split = split, 
+               col = col_fun1)
+
+```
+
+-   Sur cette seconde heatmap, nous avons encadré chaque chromosome et affiché son numéro.
+
+```{r}
+#| message: false
+#| warning: false
+
+# heatmap avec les chromosomes associes
+circos.clear()
+circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
+               split = split, col = col_fun1, track.height = 0.4, 
+               bg.border = "green", bg.lwd = 2, bg.lty = 2, 
+               show.sector.labels = TRUE)
+
+```
+
+-   Sur cette troisième heatmap, nous avons rajouté le nom de chaque gène.
+
+```{r}
+#| message: false
+#| warning: false
+
+# heatmap avec les chromosomes et les noms des genes
+circos.clear()
+circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
+               split = split, col = col_fun1, track.height = 0.4, 
+               bg.border = "green", bg.lwd = 2, bg.lty = 2, 
+               show.sector.labels = TRUE, rownames.side = "outside")
+
+
+
+```
+
+-   Sur cette quatrième heatmap, nous avons rajouté les dendrogrammes ainsi qu'une légende de couleur.
+
+```{r}
+#| message: false
+#| warning: false
+
+# heatmap avec les dendrogrammes 
+circos.clear()
+circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
+               split = split, col = col_fun1, track.height = 0.4, 
+               bg.border = "green", bg.lwd = 2, bg.lty = 2, 
+               show.sector.labels = TRUE, dend.side = "outside")
+lgd = Legend(title = "values", col_fun = col_fun1)
+grid.draw(lgd)
+```
+
+Le nombre de chromosomes étant important, il est compliqué de voir en détail les gènes. L'exercice suivant consiste donc à sélectionner certains chromosomes et à afficher la heatmap circulaire correspondante.
+
+### A vous de jouer
+
+Sélectionnez les chromosomes 1, 3, 6, 11, 17 et 19.
+
+```{r}
+#| eval=FALSE
+x <- c("XXX") # vecteur des chromosomes que l'on souhaite selectionner
+data_chr <- gene.exp2[gene.exp2$chr %in% x, ] # dataframe avec nos chromosomes selectionnes
+
+
+# Convertion en matrice 
+mat_chr <- as.matrix(data_chr, labels=TRUE)
+mat_chr_numeric <- matrix(as.numeric(mat_chr), ncol = ncol(mat_chr))
+
+# On définit les noms des colonnes et des lignes 
+row_names_chr <- as.vector(data_chr$NAME)
+col_names_chr <- c("chr", "NAME", "TCGA.A2.A04W.01A", "TCGA.A2.A0D1.01A",
+               "TCGA.A2.A0EQ.01A", "TCGA.A8.A081.01A", "TCGA.A8.A08J.01A",
+               "TCGA.A8.A09X.01A", "TCGA.AN.A0FV.01A", "TCGA.AO.A0J2.01A",
+               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A", 
+               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A", 
+               "TCGA.E2.A1B0.01A")
+
+
+rownames(mat_chr_numeric) = row_names_chr
+colnames(mat_chr_numeric) = col_names_chr
+
+# Vecteur des chromosomes :
+split2 <- as.vector(data_chr$chr)
+split2 <- factor(split2)
+```
+
+Réaliser maintenant une heatmap affichant les noms des gènes ainsi que les dendrogrammes.
+
+```{r}
+#| eval=FALSE
+circos.clear()
+circos.heatmap(mat_chr_numeric[, !(colnames(mat_chr_numeric) %in% c("chr", "NAME"))], 
+               split = split2, col = col_fun1, track.height = 0.4, 
+               bg.border = "XXX", bg.lwd = 2, bg.lty = 2, 
+               show.sector.labels = TRUE, dend.side = "XXX",
+               rownames.side = "XXX")
+lgd = Legend(title = "values", col_fun = col_fun1)
+grid.draw(lgd)
+```
+
+Voici une idée du résultat que vous devez obtenir :
+
+```{r}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+#| message: false
+#| warning: false
+x <- c(1, 3, 6, 11, 17, 19) 
+data_chr <- gene.exp2[gene.exp2$chr %in% x, ] 
+
+mat_chr <- as.matrix(data_chr, labels=TRUE)
+mat_chr_numeric <- matrix(as.numeric(mat_chr), ncol = ncol(mat_chr))
+
+row_names_chr <- as.vector(data_chr$NAME)
+col_names_chr <- c("chr", "NAME", "TCGA.A2.A04W.01A", "TCGA.A2.A0D1.01A",
+               "TCGA.A2.A0EQ.01A", "TCGA.A8.A081.01A", "TCGA.A8.A08J.01A",
+               "TCGA.A8.A09X.01A", "TCGA.AN.A0FV.01A", "TCGA.AO.A0J2.01A",
+               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A", 
+               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A", 
+               "TCGA.E2.A1B0.01A")
+
+
+rownames(mat_chr_numeric) = row_names_chr
+colnames(mat_chr_numeric) = col_names_chr
+
+split2 <- as.vector(data_chr$chr)
+split2 <- factor(split2)
+
+circos.clear()
+circos.heatmap(mat_chr_numeric[, !(colnames(mat_chr_numeric) %in% c("chr", "NAME"))], 
+               split = split2, col = col_fun1, track.height = 0.4, 
+               bg.border = "green", bg.lwd = 2, bg.lty = 2, 
+               show.sector.labels = TRUE, dend.side = "outside",
+               rownames.side = "inside")
+lgd = Legend(title = "mat", col_fun = col_fun1)
+grid.draw(lgd)
+
+```
+
+Vous pouvez consulter le lien suivant si vous souhaitez en apprendre plus sur les heatmap circulaires : [heatmap circulaire](https://jokergoo.github.io/circlize_book/book/circos-heatmap.html)
+
+
+
 # Lexique
 
 * *hg18* : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
