@@ -358,7 +358,84 @@ frequence <- data %>%
 print(frequence)
 ```
 
+# Création de HEATMAP
 
+Une heatmap (ou carte thermique) est une méthode de visualisation qui permet de représenter des données de grande dimension. C'est une représentation sous forme de grille de cellules colorées. Cette méthode peut être utilisée pour visualiser les observations, les corrélations ou des valeurs manquantes par exemple.
+
+## Création d'une heatmap intéractive
+
+L'objectif de cette partie est de réaliser des heatmap intéractives représentant les observations. Vous pourrez connaître la valeur d'une cellule en faisant simplement glisser votre souris dessus.
+
+Pour cette première visualisation, il vous faut charger la librairie "heatmaply" et faire un choix de gradient de couleurs à l'aide des commandes suivantes :
+
+```{r}
+#| warning : FALSE
+#| message : FALSE
+#| results: hide
+#| output: false
+library(heatmaply) 
+gradient_col <- ggplot2::scale_fill_gradient2(
+  low = "blue", high = "red", midpoint = 0, limits = c(-8, 8))
+```
+
+Vous pouvez trouver ci-joint deux sites donnant des exemples d'utilisation et de l'aide sur la librairie heatmaply :
+
+-   [Exemple d'utilisation de heatmaply](https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html)
+
+-   [Aide heatmaply](https://www.rdocumentation.org/packages/heatmaply/versions/1.4.2/topics/heatmaply)
+
+
+Dans un premier temps, nous allons sélectionner le chromosome que l'on souhaite étudier.
+
+Prenons ici le chromosome numéro 1.
+
+```{r}
+# on selectionne le chromosome souhaité dans notre dataframe
+chr1 <- subset(gene.exp, gene.exp$chr==1) 
+
+# on selectionne les colonnes qui nous interessent
+mydata_1 <- chr1[, 3:18] 
+
+# nom des lignes 
+rownames(mydata_1) <- mydata_1[, 1] 
+
+# on supprime la première colonne qui ne nous interesse plus
+mydata_1 <- mydata_1[, -1] 
+```
+
+Création de la heatmap à l'aide de heatmaply :
+
+```{r}
+heatmaply(mydata_1, scale_fill_gradient_fun = gradient_col, 
+          Colv=NA, Rowv=NA, scale='none', limits = c(-8, 8),
+          xlab = "Individus",ylab = "Gènes",
+          main = "Expression des gènes du chromosome 1")
+```
+
+La heatmap ci-dessus nous donne visuellement une idée de l'expression de chaque gène du chromosome 1. On observe que dans la majorité des cas le gène "CLCA2" est sur-exprimé (les cellules apparaissent très rouges), et les gènes "PDZK1" "DLANI1" sont sous-exprimés (les cellules apparaissent plutôt bleutées).
+
+::: {.callout-note appearance="simple"}
+Vous pouvez choisir d'afficher les corrélations avec la fonction `heatmaply_cor()` ou les valeurs manquantes avec la fonction `heatmaply_na()`.
+:::
+
+### A vous de jouer
+
+En vous basant sur l'exemple ci-dessus, créez une heatmap représentant l'expression des gènes du chromosome 17.
+
+Voici une idée du résultat que vous devez obtenir :
+
+```{r}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+chr17 <- subset(gene.exp, gene.exp$chr == 17 )
+mydata_17 <- chr17[,3:18] 
+rownames(mydata_17) <- mydata_17[,1]
+mydata_17 <- mydata_17[,-1]
+heatmaply(mydata_17, scale_fill_gradient_fun = gradient_col, 
+          Colv=NA, Rowv=NA, scale='none', limits = c(-7, 8),
+          xlab = "Individus",ylab = "Gènes",
+          main = "Expression des gènes du chromosome 17")
+```
 
 # Lexique
 
