@@ -89,7 +89,30 @@ data("TCGA.PAM50_genefu_hg18")
 ```
 # Code commenté
 ```{r}
+# Charger le package OmicCircos
 library(OmicCircos)
+
+# Charger les données à partir du package OmicCircos, provenant d'analyses génomiques du cancer du sein
+data("TCGA.PAM50_genefu_hg18")
+data("TCGA.BC.fus")
+data("TCGA.BC.cnv.2k.60")
+data("TCGA.BC.gene.exp.2k.60")
+data("TCGA.BC.sample60")
+data("TCGA.BC_Her2_cnv_exp")
+
+# Calculer les valeurs -log10 des p-values associées au sous-type Her2
+pvalue <- -1 * log10(TCGA.BC_Her2_cnv_exp[,5])
+pvalue <- cbind(TCGA.BC_Her2_cnv_exp[,c(1:3)], pvalue)
+
+# Identifier les échantillons du sous-type Her2
+Her2.i <- which(TCGA.BC.sample60[,2] == "Her2")
+Her2.n <- TCGA.BC.sample60[Her2.i,1]
+
+# Extraire les données CNV associées au sous-type Her2
+Her2.j <- which(colnames(TCGA.BC.cnv.2k.60) %in% Her2.n)
+cnv <- TCGA.BC.cnv.2k.60[,c(1:3,Her2.j)]
+
+
 ```
 
 ```{r, include=FALSE}
