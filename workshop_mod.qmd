@@ -487,6 +487,10 @@ split <- as.vector(gene.exp2$chr)
 split <- factor(split)
 ```
 
+::: {.callout-note appearance="simple"}
+Le vecteur `split`doit contenir les différents groupes/catégories si vous souhaitez divisez votre heatmap par groupes/catégories.
+:::
+
 Création des heatmap circulaires :
 
 -   Sur cette première heatmap, nous avons affiché tous les chromosomes ainsi que tous les gènes de la manière la plus basique possible.
@@ -530,13 +534,18 @@ circos.clear()
 circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
                split = split, col = col_fun1, track.height = 0.4, 
                bg.border = "green", bg.lwd = 2, bg.lty = 2, 
-               show.sector.labels = TRUE, rownames.side = "outside")
+               show.sector.labels = TRUE, 
+               rownames.side = "outside", rownames.cex = 0.4)
 
 
 
 ```
 
 -   Sur cette quatrième heatmap, nous avons rajouté les dendrogrammes ainsi qu'une légende de couleur.
+
+::: {.callout-important appearance="simple"}
+La méthode de clustering appliquée est `hclust` soit une méthode de classiification hierarchique, l'algorithme utilisé par défaut est celui de Ward.
+:::
 
 ```{r}
 #| message: false
@@ -547,12 +556,18 @@ circos.clear()
 circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
                split = split, col = col_fun1, track.height = 0.4, 
                bg.border = "green", bg.lwd = 2, bg.lty = 2, 
-               show.sector.labels = TRUE, dend.side = "outside")
+               show.sector.labels = TRUE, 
+               dend.side = "outside")
+
 lgd = Legend(title = "values", col_fun = col_fun1)
 grid.draw(lgd)
 ```
 
 Le nombre de chromosomes étant important, il est compliqué de voir en détail les gènes. L'exercice suivant consiste donc à sélectionner certains chromosomes et à afficher la heatmap circulaire correspondante.
+
+::: {.callout-important appearance="simple"}
+Il est important de toujours appeler la commande `circos.clear()` avant chaque nouvelle heatmap.
+:::
 
 ### A vous de jouer
 
@@ -594,8 +609,10 @@ circos.clear()
 circos.heatmap(mat_chr_numeric[, !(colnames(mat_chr_numeric) %in% c("chr", "NAME"))], 
                split = split2, col = col_fun1, track.height = 0.4, 
                bg.border = "XXX", bg.lwd = 2, bg.lty = 2, 
-               show.sector.labels = TRUE, dend.side = "XXX",
-               rownames.side = "XXX")
+               show.sector.labels = TRUE, 
+               dend.side = "XXX",
+               rownames.side = "XXX", rownames.cex = "XXX")
+
 lgd = Legend(title = "values", col_fun = col_fun1)
 grid.draw(lgd)
 ```
@@ -633,14 +650,13 @@ circos.heatmap(mat_chr_numeric[, !(colnames(mat_chr_numeric) %in% c("chr", "NAME
                split = split2, col = col_fun1, track.height = 0.4, 
                bg.border = "green", bg.lwd = 2, bg.lty = 2, 
                show.sector.labels = TRUE, dend.side = "outside",
-               rownames.side = "inside")
-lgd = Legend(title = "mat", col_fun = col_fun1)
+               rownames.side = "inside", rownames.cex = 0.35)
+lgd = Legend(title = "values", col_fun = col_fun1)
 grid.draw(lgd)
 
 ```
 
 Vous pouvez consulter le lien suivant si vous souhaitez en apprendre plus sur les heatmap circulaires : [heatmap circulaire](https://jokergoo.github.io/circlize_book/book/circos-heatmap.html)
-
 
 
 # Lexique
