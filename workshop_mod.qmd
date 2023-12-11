@@ -48,9 +48,7 @@ head(TCGA.PAM50_genefu_hg18)
 
 # Recueil des Données
 
-Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous faut d'abord recueillir les données et les mettre en forme.
-
-Pour cela, suivez les étapes présentées ci-dessous :
+Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous faut d'abord recueillir les données et les mettre en forme. Pour cela, suivez les étapes présentées ci-dessous :
 
 -   **ÉTAPE 1** : Chargement de la librairie "Omiccircos"
 
