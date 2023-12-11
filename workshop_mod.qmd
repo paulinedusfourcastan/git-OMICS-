@@ -85,15 +85,13 @@ Her2.j = which(colnames(TCGA.BC.gene.exp.2k.60)%in% Her2.n)
 gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 ``` 
 
-# Visualisations classiques
+# Visualisations Classiques
 
-L'ensemble des visualisations ci-dessous s'appuient sur la base de données [*TCGA.PAM50_genefu_hg18*](#basesdedonnées).
+L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie *ggplot2* de R. Nous vous apprendront notamment à tracer des graphes de densités et des histogrammes. 
 
-```{r, include=FALSE}
-#|echo: false
-#|output: false
-#|warning: false
+L'ensemble des visualisations de cette partie s'appuient sur la base de données [*TCGA.PAM50_genefu_hg18*](#basesdedonnées) et nécessite le chargement de divers packages.
 
+```{r, message=FALSE}
 # chargement des packages nécessaires
 library(ggplot2)
 library(dplyr)
@@ -104,6 +102,7 @@ library(hrbrthemes)
 # chargement des données
 data("TCGA.PAM50_genefu_hg18")
 ```
+
 ### Comparaison de Deux Densités
 
 Commençons par étudier quelques densités des types de cancer. Voici un exemple très basique de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** :
