@@ -4,42 +4,61 @@ title: "Workshop MOD: Visualisation de données omiques avec R"
 
 # Introduction 
 
+Ce workshop MOD a été effectué par des étudiants du master Statistiques et Sciences des Données :
+
+* Rim Alhajal (**rim.alhajal@etu.umontpellier.fr**)
+* Abdoulaye Diop (**abdoulaye.diop03@etu.umontpellier.fr**)
+* Pauline Dusfour-Castan (**pauline.dusfour-castan@etu.umontpellier.fr**)
+* Lilou Zulewski (**lilou.zulewski01@etu.umontpellier.fr**)
+
+
+
 # Données
 
-Les données qu'on utilisera dans ce Workshop se trouvent dans la librairie *OmicCircos* de R.
-Elles se basent sur des bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA). On s'intéresse aux données des patients diagnostiqués d'un cancer du sein. Voici la liste des tableaux utilisés :
+Les données utilisées dans ce Workshop sont disponibles dans la librairie *OmicCircos* de R. Elles reposent sur les bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA) contenant des données de patients atteints d'un cancer du sein. Voici la liste des tableaux utilisés :
 
-* TCGA.BC.cnv.2k.60 : Les variables dans ce tableau sont respectivement le chromosome, sa position et le nom du gène observé et les 60 autres variables représentent 60 individus différents.
+* **TCGA.BC.cnv.2k.60** : Les variables de ce tableau sont respectivement le chromosome, sa position, le nom du gène observé ainsi que $60$ autres variables représentant $60$ individus différents.
 
-* TCGA.BC.fus : Ce tableau représente la fusion des deux gènes qui a eu place pour un individu préci.
+* **TCGA.BC.fus** : Ce tableau contient les données de fusion de gènes pour un individu précis.
 
-![Extrait du tableau fus](./images/tableau%20fus.png)
+```{r}
+#| echo: false
+#| message: false
+library(OmicCircos)
+data(TCGA.BC.fus)
+head(TCGA.BC.fus)
+```
 
-* TCGA.BC.gene.exp.2k.60 : Sur 60 individus, on étudie une métrique en rapport avec l'expression du gène. Le chromosome, sa position et le nom du gène observé sont notés.
+* **TCGA.BC.gene.exp.2k.60** : Sur $60$ individus, oune métrique liée à l'expression génique et le chromosome, sa position et le nom du gène observé sont consignés.
 
-* TCGA.BC.sample60 : On indique ici pour 60 cas quel type de cancer du sein le patient en souffre : LumA, LumB, Basal ou Her2.
+* **TCGA.BC.sample60** : Ce tableau référence le type de cancer (Normal, LumA, LumB, Basal ou Her2) dont sont atteints $60$ personnes.
 
-* TCGA.BC_Her2_cnv_exp : Dans ce tableau, des tests statistiques sont effectués et on récupère la *t-value* et la *p-value*. On note les métriques FDR et Bonferroni de plus.
+* **TCGA.BC_Her2_cnv_exp** : Dans ce tableau, les *t-value* et *p-value* de tests statistiques et les métriques FDR et Bonferroni sont référencées.
 
-* TCGA.PAM50_genefu_hg18 : Il s'agit alors d'un ensemble de 50 gènes qui ont été identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (LumA, LumB, Basal, Her2 ou Normal) en fonction des schémas d'expression génique.
+* **TCGA.PAM50_genefu_hg18** : Ce tableau contient un ensemble de 50 gènes identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (Normal, LumA, LumB, Basal ou Her2) en fonction des schémas d'expression génique.
+
+```{r}
+#| echo: false
+#| message: false
+library(OmicCircos)
+data(TCGA.PAM50_genefu_hg18)
+head(TCGA.PAM50_genefu_hg18)
+```
 
 
-![Extrait du tableau CNV](./images/Extrait%20PAM50.png)
+# Recueil des Données
 
-
-# Recueillir les données
-
-Afin de pouvoir mettre en oeuvre les différentes méthodes de visualisation, il nous faut tout d'abord recueillir les données et les travailler.
+Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous faut d'abord recueillir les données et les mettre en forme.
 
 Pour cela, suivez les étapes présentées ci-dessous :
 
--   Etape 1 : Chargement de la librairie "Omiccircos"
+-   **ÉTAPE 1** : Chargement de la librairie "Omiccircos"
 
 ```{r}
 library(OmicCircos)
 ```
 
--   Etape 2 : Importation des données
+-   **ÉTAPE 2** : Importation des données
 
 ```{r}
 data("TCGA.PAM50_genefu_hg18")
@@ -50,7 +69,7 @@ data("TCGA.BC.sample60")
 data("TCGA.BC_Her2_cnv_exp")
 ```
 
--   Etape 3 : Mise en forme des données
+-   **ÉTAPE 3** : Mise en forme des données
 
 ```{r}
 Her2.i = which(TCGA.BC.sample60[,2] == "Her2")
