@@ -13,7 +13,7 @@ Ce workshop MOD a été effectué par des étudiants du master Statistiques et S
 
 
 
-# Données
+# Données {#basesdedonnées}
 
 Les données utilisées dans ce Workshop sont disponibles dans la librairie *OmicCircos* de R. Elles reposent sur les bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA) contenant des données de patients atteints d'un cancer du sein. Voici la liste des tableaux utilisés :
 
@@ -87,7 +87,7 @@ gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 
 # Visualisations classiques
 
-L'ensemble des visualisations ci-dessous s'appuient sur la base de données *TCGA.PAM50_genefu_hg18*.
+L'ensemble des visualisations ci-dessous s'appuient sur la base de données [*TCGA.PAM50_genefu_hg18*](#basesdedonnées).
 
 ```{r, include=FALSE}
 #|echo: false
