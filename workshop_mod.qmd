@@ -373,84 +373,152 @@ Cette commande du package *ggplot2* permet de créer des histogrammes sur R. De 
 et position = "identity", "dodge" (règle la position des bandes).
 :::
 
-### Fréquence des Gènes sur l'Ensemble des Chromosomes
+## Comparaison des Densités pour Chacun des Chromosomes
 
-**En appliquant les compétences acquises jusqu'ici, représentez la fréquence des gènes de *Her2* sous forme d'histogrammes et de densités pour chacun des chromosomes.**
-
-```{r, warning=FALSE, message=FALSE}
-#| code-fold: true
-#| code-summary: "Afficher la Solution"
-#| output: true
-#| warning: false
-#| message: false
-
-
-# création de la base de données pour le graphe
-data <- data.frame(
-  type = TCGA.PAM50_genefu_hg18$chr,
-  value = TCGA.PAM50_genefu_hg18$Her2
-)
-
-# histogramme de fréquence pour chaque chromosome
-frequence <- data %>%
-  ggplot(aes(x = value, bins=30, color = type, fill = type)) +
-  geom_histogram(alpha = 0.6, position = "identity") +
-  geom_density(aes(y=after_stat(ndensity)), alpha = 0.5, fill = "grey", color = "black", linewidth = 0.25) +
-  scale_fill_viridis(discrete = FALSE) +
-  scale_color_viridis(discrete = FALSE) +
-  theme(strip.text.x = element_text(size = 8),
-        plot.title = element_text(hjust = 0.5, face="bold")) +
-  xlab("Chromosome") +
-  ylab("Assigned Probability (%)") +
-  facet_wrap(~type, scales = "fixed", nrow=3)+
-  guides(color = "none", fill="none") +
-  labs(title = "Frequency of Her2 Gene Occurrence on All Chromosomes")
-
-# affichage du graphe
-print(frequence)
-```
-
-**De la même façon que le graphe précédent, représentez graphiquement la fréquence des gènes de chaque type de cancer sous forme d'histogrammes et de densités pour chacun des chromosomes.**
+**En appliquant les compétences acquises jusqu'ici, représentez la densité et l'histogramme d'expression de l'ARNmessager des gènes pour le type de cancer *Her2* pour chacun des chromosomes.**
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-fold: true
 #| code-summary: "Afficher la Solution"
 #| output: true
 #| warning: false
-#| error: false
 
-# création de la base de données pour le graphe
-data <- data.frame(type = TCGA.PAM50_genefu_hg18$chr,
-                   subtype = c(rep("LumA", 50),
-                               rep("LumB", 50),
-                               rep("Basal", 50),
-                               rep("Her2", 50),
-                               rep("Normal", 50)),
-                   value = c(TCGA.PAM50_genefu_hg18$LumA,
-                             TCGA.PAM50_genefu_hg18$LumB,
-                             TCGA.PAM50_genefu_hg18$Basal,
-                             TCGA.PAM50_genefu_hg18$Her2,
-                             TCGA.PAM50_genefu_hg18$Normal))
+# création de la base de données
+data <- data.frame(type=TCGA.PAM50_genefu_hg18$chr,
+                   value=TCGA.PAM50_genefu_hg18$Her2)
 
-# histogramme de fréquence pour chaque chromosome
-frequence <- data %>%
-  ggplot(aes(x = value, fill = subtype, color=subtype)) +
-  geom_histogram(alpha = 0.6, position = "dodge") +
-  geom_density(aes(y=after_stat(ndensity), color = subtype), alpha = 0.25, fill = "grey", size = 0.25) +
-  scale_color_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
-  scale_fill_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
-  theme(strip.text.x = element_text(size = 8),
-        plot.title = element_text(hjust = 0.5, face="bold")) +
+# densité pour chaque chromosome
+density <- data %>%
+  ggplot(aes(x=value, bins=30, color=type, fill=type)) +
+  geom_histogram(alpha=0.6, position="identity") +
+  geom_density(aes(y=after_stat(ndensity)),
+               alpha=0.5,
+               fill="grey",
+               color="black",
+               linewidth=0.25) +
+  facet_wrap(~type, scales="fixed", nrow=3) +
+  scale_fill_viridis(discrete=FALSE) +
+  scale_color_viridis(discrete=FALSE) +
+  guides(color="none", fill="none") +
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   xlab("Chromosome") +
   ylab("Frequency") +
-  facet_wrap(~type, scales = "fixed", nrow=3)+
-  guides(color = "none") +
-  labs(title = "Frequency of Cancer Type Gene Occurrence on Each Chromosome",
-       fill = "Cancer Type")
+  labs(title="Gene mRNA Expression Densities for Her2 Type of Cancer on Each of the Chromosomes")
 
 # affichage du graphe
-print(frequence)
+print(density)
 ```
+
+Notons que la densité ne peut pas être représentée avec un seul point ce qui explique l'absence de courbe pour les chromosomes $3$, $14$ et $22$. Quant à lui, l'histogramme représente le nombre de gènes ayant une valeur de test à un endroit donné : par exemple, pour le chromosome $16$, il y a deux gènes qui ont une valeur de test environ égale à $0.21$ pour le type de cancer *Her2*. 
+
+Pour la plupart des chromosomes, la densité observée est bimodale. Quelques chromosomes possèdent une densité différente. En effet, le chromosome $1$ possède un grand pic sur l'histogramme autour de la valeur de test $0$. Le chromosome $17$ est aussi atypique puisque la densité associée est assez étalée dû aux $4$ pics éloignés présents de l'histogramme.
+
+::: {.callout-warning appearance="default" icon=false}
+# POUR ALLER PLUS LOIN...
+
+**De la même façon que le graphe précédent, remplissez les trous pour représenter graphiquement la densité et les histogrammes d'expression de l'ARNm des gènes pour chaque type de cancer sur chacun des chromosomes.**
+
+```{r, warning=FALSE, message=FALSE}
+#| output: false
+#| warning: false
+#| eval: false
+
+# création de la base de données pour le graphe
+data <- data.frame(type=TCGA.PAM50_genefu_hg18$XXX,
+                   subtype=c(rep("LumA", 50),
+                             rep("LumB", 50),
+                             rep("Basal", 50),
+                             rep("Her2", 50),
+                             rep("Normal", 50)),
+                   value=c(XXX,
+                           XXX,
+                           XXX,
+                           XXX,
+                           XXX))
+
+# densité pour chaque chromosome
+density <- data %>%
+  ggplot(aes(x=XXX, fill=XXX, color=XXX)) +
+  geom_histogram(alpha=0.6, position="dodge") +
+  geom_density(aes(y=after_stat(ndensity), color=XXX),
+               alpha=0.25,
+               fill="grey",
+               linewidth=0.25) +
+  facet_wrap(~XXX, scales="XXX", nrow=3) +
+  scale_color_manual(values=c("#69b3a2",
+                              "darkred",
+                              "darkblue",
+                              "pink",
+                              "darksalmon")) +
+  scale_fill_manual(values=c("#69b3a2",
+                             "darkred",
+                             "darkblue",
+                             "pink",
+                             "darksalmon")) +
+  guides(color="none") +
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  xlab("Chromosome") +
+  ylab("Frequency") +
+  labs(title="Gene mRNA Expression Densities for Each Type of Cancer on Each of the Chromosomes",
+       fill="Cancer Type")
+
+# affichage du graphe
+print(density)
+```
+
+```{r, warning=FALSE, message=FALSE}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+#| output: true
+
+# création de la base de données pour le graphe
+data <- data.frame(type=TCGA.PAM50_genefu_hg18$chr,
+                   subtype=c(rep("LumA", 50),
+                             rep("LumB", 50),
+                             rep("Basal", 50),
+                             rep("Her2", 50),
+                             rep("Normal", 50)),
+                   value=c(TCGA.PAM50_genefu_hg18$LumA,
+                           TCGA.PAM50_genefu_hg18$LumB,
+                           TCGA.PAM50_genefu_hg18$Basal,
+                           TCGA.PAM50_genefu_hg18$Her2,
+                           TCGA.PAM50_genefu_hg18$Normal))
+
+# densité pour chaque chromosome
+density <- data %>%
+  ggplot(aes(x=value, fill=subtype, color=subtype)) +
+  geom_histogram(alpha=0.6, position="dodge") +
+  geom_density(aes(y=after_stat(ndensity), color=subtype),
+               alpha=0.25,
+               fill="grey",
+               linewidth=0.25) +
+  facet_wrap(~type, scales="fixed", nrow=3) +
+  scale_color_manual(values=c("#69b3a2",
+                              "darkred",
+                              "darkblue",
+                              "pink",
+                              "darksalmon")) +
+  scale_fill_manual(values=c("#69b3a2",
+                             "darkred",
+                             "darkblue",
+                             "pink",
+                             "darksalmon")) +
+  guides(color="none") +
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  xlab("Chromosome") +
+  ylab("Frequency") +
+  labs(title="Gene mRNA Expression Densities for Each Type of Cancer on Each of the Chromosomes",
+       fill="Cancer Type")
+
+# affichage du graphe
+print(density)
+```
+
+En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous remarquons que les conclusions faites pour le type de cancer *Her2* peuvent être utilisées à nouveau. En effet, les densités associées sont généralement bimodales sauf piur quelques chromosomes. De plus, nous identifions une expression d'ARNm plus concentrée sur les chromosomes $8$, $16$ et $17$ pour le type de cancer *Her2* ainsi que sur les chromosomes $7$, $11$ et $12$ pour le type de cancer *LumA*. Ce grahe permet de mettre en lumière les différentes expressions d'ARNm de mêmes gènes pour les différents types de cancer.
+:::
 
 # Création de HEATMAP
 
