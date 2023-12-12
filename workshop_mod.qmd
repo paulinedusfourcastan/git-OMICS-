@@ -52,11 +52,15 @@ Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous fa
 
 -   **ÉTAPE 1** : Chargement de la librairie "Omiccircos"
 
+Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installer à partir du [CRAN](https://cran.r-project.org/web/packages/) puis l'appeler à l'aide de la fonction `library()`. 
+
 ```{r}
 library(OmicCircos)
 ```
 
 -   **ÉTAPE 2** : Importation des données
+
+Nos données provenant du package `OmicCircos` (maintenant installé), nous les importons à l'aide de la fonction `data()`. 
 
 ```{r}
 data("TCGA.PAM50_genefu_hg18")
