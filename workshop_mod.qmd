@@ -677,20 +677,6 @@ split2 <- factor(split2)
 
 Réaliser maintenant une heatmap affichant les noms des gènes ainsi que les dendrogrammes.
 
-```{r}
-#| eval=FALSE
-circos.clear()
-circos.heatmap(mat_chr_numeric[, !(colnames(mat_chr_numeric) %in% c("chr", "NAME"))], 
-               split = split2, col = col_fun1, track.height = 0.4, 
-               bg.border = "XXX", bg.lwd = 2, bg.lty = 2, 
-               show.sector.labels = TRUE, 
-               dend.side = "XXX",
-               rownames.side = "XXX", rownames.cex = "XXX")
-
-lgd = Legend(title = "values", col_fun = col_fun1)
-grid.draw(lgd)
-```
-
 Voici une idée du résultat que vous devez obtenir :
 
 ```{r}
