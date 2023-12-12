@@ -522,13 +522,13 @@ En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous re
 
 # Création de HEATMAP
 
-Une heatmap (ou carte thermique) est une méthode de visualisation qui permet de représenter des données de grande dimension. C'est une représentation sous forme de grille de cellules colorées. Cette méthode peut être utilisée pour visualiser les observations, les corrélations ou des valeurs manquantes par exemple.
+L'objectif de cette partie est de réaliser des heatmap intéractives représentant les observations. 
 
-## Création d'une heatmap intéractive
+La librairie `heatmaply` dont nous allons nous servir est incluse dans la librairie `plotly` ([plotly](https://plotly-r.com/overview)) qui est une librairie permettant d'inclure de l'interactivité dans les graphiques. 
 
-L'objectif de cette partie est de réaliser des heatmap intéractives représentant les observations. Vous pourrez connaître la valeur d'une cellule en faisant simplement glisser votre souris dessus.
+Dans notre exemple de heatmap, vous pourrez notament connaître la valeur d'une cellule en faisant simplement glisser votre souris dessus, zommer sur sur les cellules et se déplacer dans la figure.
 
-Pour cette première visualisation, il vous faut charger la librairie "heatmaply" et faire un choix de gradient de couleurs à l'aide des commandes suivantes :
+Pour cette première visualisation, il vous faut donc charger la librairie "heatmaply" et faire un choix de gradient de couleurs à l'aide des commandes suivantes :
 
 ```{r}
 #| warning : FALSE
