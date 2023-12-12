@@ -74,18 +74,34 @@ data("TCGA.BC_Her2_cnv_exp")
 -   **ÉTAPE 3** : Mise en forme des données
 
 ```{r}
+# vecteur comprenant les positions de lignes des personnes 
+# possedant un cancer de type Her2
 Her2.i = which(TCGA.BC.sample60[,2] == "Her2")
+
+# vecteur comprenant les identifiants des personnes
+# présentant un cancer de type Her2
 Her2.n = TCGA.BC.sample60[Her2.i,1]
+
+# indices des colonnes de TCGA.BC.cnv.2k.60 dont 
+# les identifiants sont présents dans Her2.n
 Her2.j = which(colnames(TCGA.BC.cnv.2k.60)%in%Her2.n)
+
+# creation d'un data d'expression des différents gènes
+# pour chaque individus presentant un cancer Her2 
 cnv = TCGA.BC.cnv.2k.60[,c(1:3,Her2.j)]
 
+# data cnv auquel on a enlevé les 3 premiere colonnes
 cnv.m = cnv[,c(4:ncol(cnv))]
+
+# bornage des valeurs >2 et <-2
 cnv.m[cnv.m > 2] = 2
 cnv.m[cnv.m < -2] = -2
+
+# on ajoute aux 3 première colonne de cnv nos données bornées
 cnv = cbind(cnv[,1:3], cnv.m)
 
-Her2.j = which(colnames(TCGA.BC.gene.exp.2k.60)%in% Her2.n)
-
+#  extraction des colonnes 1 à 3 de TCGA.BC.gene.exp.2k.60
+# ainsi que des colonnes spécifiées par Her2.j
 gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 ``` 
 
