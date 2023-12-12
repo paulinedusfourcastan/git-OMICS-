@@ -278,9 +278,8 @@ print(comparaison)
 
 La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup plus étalée que celle du type de cancer *Her2* et se mélange ainsi facilement dans les profils génomiques des autres types de cancer. Ce graphique met alors en évidence la rareté du type de cancer *Normal* et la difficulté à le classer. 
 
-### Comparaison de Toutes les Densités
 
-**Pour mieux visualiser les différences entre les types de cancer, représentez la comparaison de la densité de l'ensemble des types de cancer.**
+**Pour mieux visualiser les différences entre tous les types de cancer, représentez la comparaison de la densité de l'ensemble des types de cancer.**
 
 ::: {.callout-important appearance="simple"}
 Il est important de préciser au graphe que la variable doit être considéré comme une densité à l'aide de la commande *aes(y=after_stat(density))*.
@@ -292,66 +291,87 @@ Il est important de préciser au graphe que la variable doit être considéré c
 #| output: true
 
 # création de la base de données pour le graphe
-data <- data.frame(type = c(rep("LumA", 50),
-                            rep("LumB", 50),
-                            rep("Basal", 50),
-                            rep("Her2", 50),
-                            rep("Normal", 50)),
-                  subtype = rep(TCGA.PAM50_genefu_hg18$chr, each = 50),
-                  value = c(TCGA.PAM50_genefu_hg18$LumA,
-                            TCGA.PAM50_genefu_hg18$LumB,
-                            TCGA.PAM50_genefu_hg18$Basal,
-                            TCGA.PAM50_genefu_hg18$Her2,
-                            TCGA.PAM50_genefu_hg18$Normal))
+data <- data.frame(type=c(rep("LumA", 50),
+                          rep("LumB", 50),
+                          rep("Basal", 50),
+                          rep("Her2", 50),
+                          rep("Normal", 50)),
+                  subtype=rep(TCGA.PAM50_genefu_hg18$chr, each=50),
+                  value=c(TCGA.PAM50_genefu_hg18$LumA,
+                          TCGA.PAM50_genefu_hg18$LumB,
+                          TCGA.PAM50_genefu_hg18$Basal,
+                          TCGA.PAM50_genefu_hg18$Her2,
+                          TCGA.PAM50_genefu_hg18$Normal))
 
-# histogramme et densité des différents types de cancer
+# densités des différents types de cancer
 density <- data %>%
-  ggplot(aes(x = value, fill = type)) +
-  geom_density(aes(y = after_stat(density), color=type), linewidth=0.5, alpha=0.4, fill=NA) +
-  scale_color_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
-  scale_fill_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
-  theme(strip.text.x = element_text(size = 8),
-        plot.title = element_text(hjust = 0.5, face="bold")) +
-  xlab("Value") +
+  ggplot(aes(x=value, fill=type)) +
+  geom_density(aes(y=after_stat(density),color=type),  
+               linewidth=0.5, alpha=0.4, fill=NA) +
+  scale_color_manual(values=c("#69b3a2",
+                              "darkred",
+                              "darkblue",
+                              "pink",
+                              "darksalmon")) +
+  scale_fill_manual(values=c("#69b3a2",
+                             "darkred",
+                             "darkblue",
+                             "pink",
+                             "darksalmon")) +
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  xlab("ARNm Expression") +
   ylab("Density") +
-  labs(title = "Density of Cancer Types", color = "Cancer Type")
+  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
+       color="Cancer Type")
 
 # affichage du graphe
 print(density)
 ```
 
-**Ajoutez les histogrammes respectifs des différents types de cancer sur le graphe précédent.**
+Nous remarquons à nouveau une densité d'expression de l'ARNm très étalée pour le type de cancer du sein *Normal*. De plus, les densités pour les types de cancer *Basal* et *LumB* sont assez similaires : *Basal* présente un pic légèrement plus haut et et une courbe plus concentrée autour de $0.5$. Globalement, chacun des types de cancer possède une expression d'ARNm concentrée à différentes valeurs pour les gènes étudiés.
 
-::: {.callout-tip appearance="simple"}
-## geom_histogram
-Cette commande du package *ggplot2* permet de créer des histogrammes sur R. De nombreuses options sont disponibles comme color, alpha (règle la transparence du remplissage), binwidth (règle la largeur des intervalles)
-et position = "identity", "dodge" (règle la position des bandes).
-:::
+::: {.callout-warning appearance="default" icon=false}
+# POUR ALLER PLUS LOIN...
+
+**Ajoutez les histogrammes respectifs des différents types de cancer sur le graphe précédent.**
 
 ```{r}
 #| code-fold: true
 #| code-summary: "Afficher la Solution"
 #| output: true
+#| message: false
 
-# histogramme et densité des différents types de cancer
+# histogrammes et densités des différents types de cancer
 density <- data %>%
-  ggplot(aes(x = value, fill = type)) +
-  geom_histogram(aes(y=after_stat(density)), color = "#e9ecef", alpha = 0.3, binwidth=0.5, position = "dodge") +
-  geom_density(aes(y = after_stat(density), color=type), linewidth=0.5, fill=NA) +
-  scale_color_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
-  scale_fill_manual(values = c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
-  theme(strip.text.x = element_text(size = 8),
-        plot.title = element_text(hjust = 0.5, face="bold")) +
-  labs(fill = "Cancer Type") +
-  xlab("") +
+  ggplot(aes(x=value, fill =type)) +
+  geom_histogram(aes(y=after_stat(density)),
+                 color="#e9ecef",
+                 alpha=0.3,
+                 binwidth=0.5,
+                 position="dodge") +
+  geom_density(aes(y=after_stat(density), color=type), linewidth=0.5, fill=NA) +
+  scale_color_manual(values=c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  scale_fill_manual(values=c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  guides(color="none") + 
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  xlab("ARNm Expression") +
   ylab("Density") +
-  labs(title = "Density of Cancer Type") +
-  guides(color = "none")
+  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
+       fill="Cancer Type")
 
 # affichage du graphe
 print(density)
 ```
 
+:::
+
+::: {.callout-note appearance="simple"}
+## geom_histogram
+Cette commande du package *ggplot2* permet de créer des histogrammes sur R. De nombreuses options sont disponibles comme color, alpha (règle la transparence du remplissage), binwidth (règle la largeur des intervalles)
+et position = "identity", "dodge" (règle la position des bandes).
+:::
 
 ### Fréquence des Gènes sur l'Ensemble des Chromosomes
 
