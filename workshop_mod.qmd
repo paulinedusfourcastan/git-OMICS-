@@ -112,16 +112,20 @@ Le package *ggplot2* fonctionne par couches successives. La première d’entre 
 Il ne faut pas oublier le "**+**" entre les couches successives.
 :::
 
-### Comparaison de Deux Densités
+## Comparaison de Deux Densités
 
-Commençons par étudier quelques densités des types de cancer. Voici un exemple très basique de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** :
+Commençons par étudier certaines densités relatives aux  types de cancer du sein deux à deux afin d'en retirer leurs différences.
+
+Voici un exemple très basique de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** qui sont ceux les plus communs :
 
 ```{r}
+#| output: false
+
 # création de la base de données
-data <- data.frame(value = c(TCGA.PAM50_genefu_hg18$LumA,
-                            TCGA.PAM50_genefu_hg18$LumB),
-                   type = c(rep("LumA", 50),
-                            rep("LumB", 50)))
+data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$LumA,
+                           TCGA.PAM50_genefu_hg18$LumB),
+                   type=c(rep("LumA", 50),
+                          rep("LumB", 50)))
 
 # création du graphe
 comparaison <- data %>%
@@ -132,102 +136,147 @@ comparaison <- data %>%
 print(comparaison)
 ```
 
-::: {.callout-important appearance="simple"}
-L'utilisation de *ggplot* nécessite la création d'une base de données contenant les variables utiles pour le graphe.
-:::
-
 ::: {.callout-note appearance="simple"}
 ## %>%
 Cet opérateur est un pipe, fréquemment représenté par une barre verticale ‘|’ : il renvoie la sortie d’une commande vers l’entrée d’une autre.
 :::
 
-De nombreuses options de *ggplot* peuvent améliorer l'apparence générale de ce graphe telles que ci-dessous.
+```{r}
+#| echo: false
+
+# création de la base de données
+data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$LumA,
+                           TCGA.PAM50_genefu_hg18$LumB),
+                   type=c(rep("LumA", 50),
+                          rep("LumB", 50)))
+
+# création du graphe
+comparaison <- data %>%
+    ggplot(aes(x=value, fill=type)) +
+    geom_density()
+
+# affichage du graphe
+print(comparaison)
+```
+
+De nombreuses options de *ggplot* peuvent améliorer l'apparence générale des graphes. Dans l'exemple ci-dessous, vous pouvez retrouver respectivement la définission manuelle des couleurs, l'option de non-affichage de la légende associée à la coloration en fonction du type, ainsi que la personnalisation des éléments de texte et des légendes. Enfin, l'option *alpha* de *geom_density* règle la transparence de remplissage sous les courbes de densité.
 
 ```{r}
 # création du graphe
 comparaison <- data %>%
   ggplot(aes(x=value, fill=type)) +
   geom_density(aes(color=type), alpha=0.4) +
-  scale_color_manual(values = c("darkblue", "pink")) +
-  scale_fill_manual(values = c("darkblue", "pink")) +
-  theme(strip.text.x = element_text(size = 8),
-        plot.title = element_text(hjust = 0.5, face="bold")) +
-  xlab("Value") +
+  scale_color_manual(values=c("darkblue", "pink")) +
+  scale_fill_manual(values=c("darkblue", "pink")) +
+  guides(color="none") +
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  xlab("ARNm Expression") +
   ylab("Density") +
-  guides(color = "none") +
-  labs(title = "Density Comparaison of Cancer Types Gene Occurrence",
-       fill = "Cancer Type")
+  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
+       fill="Cancer Type")
 
 # affichage du graphe
 print(comparaison)
 ```
 
-Il est également possible de représenter les densités sur deux graphes différents plutôt que de les superposer.
+À l'aide de ce graphe, nous pouvons remarquer que l'ARNmessager des gènes des deux types de cancer *LumA* et *LumB* ne s'expriment pas de la même façon. En effet, celui de *LumA* présente un pic autour de $-0.5$ tandis que celui de *LumB* présente un pic légèrement plus haut autour de $0.4$.
 
-```{r}
-# création du graphe
-comparaison <- data %>%
-  ggplot(aes(x=value, fill=type)) +
-  geom_density(aes(color=type), alpha=0.4) +
-  scale_color_manual(values = c("darkblue", "pink")) +
-  scale_fill_manual(values = c("darkblue", "pink")) +
-  theme(strip.text.x = element_text(size = 8),
-        plot.title = element_text(hjust = 0.5, face="bold")) +
-  xlab("Value") +
-  ylab("Density") +
-  facet_wrap(~type, scales = "fixed")+
-  guides(color = "none") +
-  labs(title = "Density Comparaison of Cancer Types Gene Occurrence",
-       fill = "Cancer Type")
+Il est également possible de représenter les densités sur deux graphes différents en utilisant la commande *facet_wrap(~XXX)*.
 
-# affichage du graphe
-print(comparaison)
-```
-
-::: {.callout-tip appearance="simple"}
-## Utilisation de *facet_wrap*
+::: {.callout-note appearance="simple"}
+## Utilisation de *facet_wrap()*
 Les échelles des différents graphiques peuvent être formatées différemment à l'aide de l'option *scales* :
 *"fixed"* permet d'obtenir des échelles égales pour tous les graphes mais d'autres options telles que *"free_x"*, *"free_y"* ou *"free"* sont envisageables.
 :::
 
-Le cancer de type *Her2* est le type de cancer le plus courant parmi tous ceux présents dans la base de données support.
+```{r}
+# création du graphe
+comparaison <- data %>%
+  ggplot(aes(x=value, fill=type)) +
+  geom_density(aes(color=type), alpha=0.4) +
+  facet_wrap(~type, scales="fixed")+
+  scale_color_manual(values=c("darkblue", "pink")) +
+  scale_fill_manual(values=c("darkblue", "pink")) +
+  guides(color="none") +
+  theme(strip.text.x=element_text(size = 8),
+        plot.title=element_text(size=10, hjust = 0.5, face="bold")) +
+  xlab("ARNm Expression") +
+  ylab("Density") +
+  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
+       fill="Cancer Type")
 
-**En vous appuyant sur l'exemple précédent, représentez graphiquement la comparaison des densités d'une personne atteinte d'un cancer de type *Her2* et d'une personne saine.**
+# affichage du graphe
+print(comparaison)
+```
 
-::: {.callout-tip appearance="simple"}
-Les données d'une personne saine sont contenues dans la variable *Normal* de la base de données.
+**En vous appuyant sur l'exemple précédent, remplissez les trous du code ci-dessous afin de représenter graphiquement la comparaison des densités densités d'expression d'ARNmessager pour les gènes des types de cancer *Her2* et *Normal*.**
+
+::: {.callout-note appearance="simple"}
+Les données relatives aux cancer de type *Normal* sont contenues dans la variable *Normal* de la base de données.
 :::
 
+::: {.callout-important appearance="simple"}
 Par la suite, les couleurs utilisées pour la représentation de *Her2* et *Normal* seront respectivement *darkred* et *darksalmon*.
+:::
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Afficher la Solution"
+#| eval: false
 #| output: false
 
 # création de la base de données
-data <- data.frame(value = c(TCGA.PAM50_genefu_hg18$Her2,
-                            TCGA.PAM50_genefu_hg18$Normal),
-                   type = c(rep("Her2", 50),
-                            rep("Normal", 50)))
+data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$XXX,
+                           TCGA.PAM50_genefu_hg18$XXX),
+                   type=c(rep("XXX", 50),
+                          rep("XXX", 50)))
+
+# création du graphe
+comparaison <- data %>%
+  ggplot(aes(x=XXX, fill=XXX)) +
+  geom_density(aes(color=XXX), alpha=0.4) +
+  scale_color_manual(values=c("XXX", "XXX")) +
+  scale_fill_manual(values=c("XXX", "XXX")) +
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  xlab("ARNm Expression") +
+  ylab("Density") +
+  guides(color="none") +
+  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
+       fill="Cancer Type")
+
+# affichage du graphe
+print(comparaison)
+```
+```{r}
+#| code-fold: true
+#| code-summary: "Afficher la Solution"
+#| output: true
+
+# création de la base de données
+data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$Her2,
+                           TCGA.PAM50_genefu_hg18$Normal),
+                   type=c(rep("Her2", 50),
+                          rep("Normal", 50)))
 
 # création du graphe
 comparaison <- data %>%
   ggplot(aes(x=value, fill=type)) +
   geom_density(aes(color=type), alpha=0.4) +
-  scale_color_manual(values = c("darkred", "darksalmon")) +
-  scale_fill_manual(values = c("darkred", "darksalmon")) +
-  theme(strip.text.x = element_text(size = 8),
-        plot.title = element_text(hjust = 0.5, face="bold")) +
-  xlab("Value") +
+  scale_color_manual(values=c("darkred", "darksalmon")) +
+  scale_fill_manual(values=c("darkred", "darksalmon")) +
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  xlab("ARNm Expression") +
   ylab("Density") +
-  guides(color = "none") +
-  labs(title = "Density Comparaison of Cancer Types Gene Occurrence",
-       fill = "Cancer Type")
+  guides(color="none") +
+  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
+       fill="Cancer Type")
 
 # affichage du graphe
 print(comparaison)
 ```
+
+La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup plus étalée que celle du type de cancer *Her2* et se mélange ainsi facilement dans les profils génomiques des autres types de cancer. Ce graphique met alors en évidence la rareté du type de cancer *Normal* et la difficulté à le classer. 
 
 ### Comparaison de Toutes les Densités
 
