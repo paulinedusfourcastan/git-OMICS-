@@ -104,7 +104,7 @@ data("TCGA.PAM50_genefu_hg18")
 ```
 ## Utilisation de *ggplot2*
 
-Le package *ggplot2* fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelle.
+Le package *ggplot2* fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelles.
 
 ![Schéma Explicatif de l'Utilisation de ggplot](./images/schéma_ggplot.jpg)
 
