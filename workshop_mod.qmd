@@ -87,7 +87,7 @@ gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 
 # Visualisations Classiques
 
-L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie *ggplot2* de R. Nous vous apprendront notamment à tracer des graphes de densités et des histogrammes. 
+L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie *ggplot2* de R. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes. 
 
 L'ensemble des visualisations de cette partie s'appuient sur la base de données [*TCGA.PAM50_genefu_hg18*](#basesdedonnées) et nécessite le chargement de divers packages.
 
@@ -102,6 +102,15 @@ library(hrbrthemes)
 # chargement des données
 data("TCGA.PAM50_genefu_hg18")
 ```
+## Utilisation de *ggplot2*
+
+Le package *ggplot2* fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelle.
+
+![Schéma Explicatif de l'Utilisation de ggplot](./images/schéma_ggplot.jpg)
+
+::: {.callout-important appearance="simple"}
+Il ne faut pas oublier le "**+**" entre les couches successives.
+:::
 
 ### Comparaison de Deux Densités
 
