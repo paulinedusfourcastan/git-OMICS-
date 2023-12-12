@@ -705,9 +705,11 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 
 -   Sur cette quatrième heatmap, nous avons rajouté les dendrogrammes ainsi qu'une légende de couleur.
 
-::: {.callout-note appearance="simple"}
-La méthode de clustering appliquée est `hclust` soit une méthode de classiification hierarchique, l'algorithme utilisé par défaut est celui de Ward.
+::: {.callout-note apparance="simple"}
+La méthode de clustering appliquée est `hclust` soit une méthode de classiification hierarchique, la distance utilisée par défaut est celle de Ward.
+Vous pouvez trouver des informations sur `hclust`au [Lien suivant](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/hclust) et sur la classification hierarchique [ici](https://larmarange.github.io/analyse-R/classification-ascendante-hierarchique.html) et [ici](https://pbil.univ-lyon1.fr/R/pdf/stage7.pdf).
 :::
+
 
 ```{r}
 #| message: false
