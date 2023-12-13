@@ -1,11 +1,11 @@
 ---
-title: "Workshop MOD: Visualisation de données omiques avec R"
+title: "Workshop MOD: Visualisation de Données Omiques avec R"
 
 ---
 
 # Introduction 
 
-Ce workshop MOD a été effectué par des étudiants du master Statistiques et Sciences des Données :
+Ce workshop MOD a été effectué par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
 
 * [Rim Alhajal](rim.alhajal@etu.umontpellier.fr) (**rim.alhajal@etu.umontpellier.fr**)
 * [Abdoulaye Diop](abdoulaye.diop03@etu.umontpellier.fr) (**abdoulaye.diop03@etu.umontpellier.fr**)
@@ -13,10 +13,9 @@ Ce workshop MOD a été effectué par des étudiants du master Statistiques et S
 * [Lilou Zulewski](lilou.zulewski01@etu.umontepllier.fr) (**lilou.zulewski01@etu.umontpellier.fr**)
 
 
-
 # Données {#basesdedonnées}
 
-Les données utilisées dans ce Workshop sont disponibles dans la librairie *OmicCircos* de R. Elles reposent sur les bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA) contenant des données de patients atteints d'un cancer du sein. Voici la liste des tableaux utilisés :
+Les données utilisées dans ce Workshop sont disponibles dans la librairie `OmicCircos` de R. Elles reposent sur les bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA) contenant des données de patients atteints d'un cancer du sein. Voici la liste des tableaux utilisés :
 
 * **TCGA.BC.cnv.2k.60** : Les variables de ce tableau sont respectivement le chromosome, sa position, le nom du gène observé ainsi que $60$ autres variables représentant $60$ individus différents.
 
@@ -47,11 +46,11 @@ head(TCGA.PAM50_genefu_hg18)
 ```
 
 
-# Recueil des Données
+# Recueil des données
 
 Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous faut d'abord recueillir les données et les mettre en forme. Pour cela, suivez les étapes présentées ci-dessous :
 
--   **ÉTAPE 1** : Chargement de la librairie "Omiccircos"
+-   **ÉTAPE 1** : Chargement de la librairie `Omiccircos`
 
 Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installer à partir du [CRAN](https://cran.r-project.org/web/packages/) puis l'appeler à l'aide de la fonction `library()`. 
 
@@ -106,9 +105,9 @@ cnv = cbind(cnv[,1:3], cnv.m)
 gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 ``` 
 
-# Visualisations Classiques
+# Visualisations classiques
 
-L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie *ggplot2* de R. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes. 
+L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie `ggplot2` de R. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes. 
 
 L'ensemble des visualisations de cette partie s'appuient sur la base de données [*TCGA.PAM50_genefu_hg18*](#basesdedonnées) et nécessite le chargement de divers packages.
 
@@ -119,21 +118,21 @@ library(dplyr)
 library(viridis)
 library(viridisLite)
 library(hrbrthemes)
-
-# chargement des données
-data("TCGA.PAM50_genefu_hg18")
 ```
-## Utilisation de *ggplot2*
 
-Le package *ggplot2* fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelles.
+Les visualisations permettent d'étudier les différents types de cancer présentés dans le [lexique#](#lexique).
 
-![Schéma Explicatif de l'Utilisation de ggplot](./images/schéma_ggplot.jpg)
+## Utilisation de `ggplot2`
+
+Le package `ggplot2` fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelles.
+
+![Schéma Explicatif de l'Utilisation de `ggplot`](./images/schéma_ggplot.jpg)
 
 ::: {.callout-important appearance="simple"}
-Il ne faut pas oublier le "**+**" entre les couches successives.
+Il ne faut pas oublier le `+` entre les couches successives.
 :::
 
-## Comparaison de Deux Densités
+## Comparaison de deux densités
 
 Commençons par étudier certaines densités relatives aux  types de cancer du sein deux à deux afin d'en retirer leurs différences.
 
@@ -150,8 +149,10 @@ data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$LumA,
 
 # création du graphe
 comparaison <- data %>%
-    ggplot(aes(x=value, fill=type)) +
-    geom_density()
+    # création de l'objet
+    ggplot(aes(x=value, fill=type)) + 
+    # définition du type de graphe
+    geom_density() 
 
 # affichage du graphe
 print(comparaison)
@@ -159,7 +160,7 @@ print(comparaison)
 
 ::: {.callout-note appearance="simple"}
 ## %>%
-Cet opérateur est un pipe, fréquemment représenté par une barre verticale ‘|’ : il renvoie la sortie d’une commande vers l’entrée d’une autre.
+Cet opérateur est un pipe, fréquemment représenté par une barre verticale `|` dans les terminaux : il renvoie la sortie d’une commande vers l’entrée d’une autre.
 :::
 
 ```{r}
@@ -173,29 +174,37 @@ data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$LumA,
 
 # création du graphe
 comparaison <- data %>%
-    ggplot(aes(x=value, fill=type)) +
-    geom_density()
+    # création de l'objet
+    ggplot(aes(x=value, fill=type)) + 
+    # définition du type de graphe
+    geom_density() 
 
 # affichage du graphe
 print(comparaison)
 ```
 
-De nombreuses options de *ggplot* peuvent améliorer l'apparence générale des graphes. Dans l'exemple ci-dessous, vous pouvez retrouver respectivement la définission manuelle des couleurs, l'option de non-affichage de la légende associée à la coloration en fonction du type, ainsi que la personnalisation des éléments de texte et des légendes. Enfin, l'option *alpha* de *geom_density* règle la transparence de remplissage sous les courbes de densité.
+De nombreuses options de `ggplot` peuvent améliorer l'apparence générale des graphes. Dans l'exemple ci-dessous, vous pouvez retrouver respectivement la définission manuelle des couleurs, l'option de non-affichage de la légende associée à la coloration en fonction du type, ainsi que la personnalisation des éléments de texte et des légendes. Enfin, l'option `alpha` de `geom_density` règle la transparence de remplissage sous les courbes de densité.
 
 ```{r}
 # création du graphe
 comparaison <- data %>%
-  ggplot(aes(x=value, fill=type)) +
+  # création de l'objet
+  ggplot(aes(x=value, fill=type)) + 
+  # définition du type de graphe
   geom_density(aes(color=type), alpha=0.4) +
+  # réglage des couleurs de légende
   scale_color_manual(values=c("darkblue", "pink")) +
   scale_fill_manual(values=c("darkblue", "pink")) +
+  # choix de l'affichage de la légende
   guides(color="none") +
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
-  xlab("ARNm Expression") +
+  # titres
+  xlab("ARNm expression") +
   ylab("Density") +
-  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
-       fill="Cancer Type")
+  labs(title="Comparison of gene expression density across different types of cancer",
+       fill="Cancer type")
 
 # affichage du graphe
 print(comparaison)
@@ -203,33 +212,42 @@ print(comparaison)
 
 À l'aide de ce graphe, nous pouvons remarquer que l'ARNmessager des gènes des deux types de cancer *LumA* et *LumB* ne s'expriment pas de la même façon. En effet, celui de *LumA* présente un pic autour de $-0.5$ tandis que celui de *LumB* présente un pic légèrement plus haut autour de $0.4$.
 
-Il est également possible de représenter les densités sur deux graphes différents en utilisant la commande *facet_wrap(~XXX)*.
+Il est également possible de représenter les densités sur deux graphes différents en utilisant la commande `facet_wrap(~XXX)`.
 
 ::: {.callout-note appearance="simple"}
-## Utilisation de *facet_wrap()*
-Les échelles des différents graphiques peuvent être formatées différemment à l'aide de l'option *scales* :
-*"fixed"* permet d'obtenir des échelles égales pour tous les graphes mais d'autres options telles que *"free_x"*, *"free_y"* ou *"free"* sont envisageables.
+## Utilisation de `facet_wrap()`
+Les échelles des différents graphiques peuvent être formatées différemment à l'aide de l'option `scales` :
+`"fixed"` permet d'obtenir des échelles égales pour tous les graphes mais d'autres options telles que `"free_x"`, `"free_y"` ou `"free"` sont envisageables.
 :::
 
 ```{r}
 # création du graphe
 comparaison <- data %>%
+  # création de l'objet
   ggplot(aes(x=value, fill=type)) +
+  # définition du type de graphe
   geom_density(aes(color=type), alpha=0.4) +
-  facet_wrap(~type, scales="fixed")+
+  # séparation du graphe en sous parties
+  facet_wrap(~type, scales="fixed") +
+  # réglage des couleurs de légende
   scale_color_manual(values=c("darkblue", "pink")) +
   scale_fill_manual(values=c("darkblue", "pink")) +
+  # choix de l'affichage de la légende
   guides(color="none") +
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size = 8),
         plot.title=element_text(size=10, hjust = 0.5, face="bold")) +
-  xlab("ARNm Expression") +
+  # titres
+  xlab("ARNm expression") +
   ylab("Density") +
-  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
-       fill="Cancer Type")
+  labs(title="Comparison of gene expression density across different types of cancer",
+       fill="Cancer type")
 
 # affichage du graphe
 print(comparaison)
 ```
+
+### À vous de jouer
 
 **En vous appuyant sur l'exemple précédent, remplissez les trous du code ci-dessous afin de représenter graphiquement la comparaison des densités densités d'expression d'ARNmessager pour les gènes des types de cancer *Her2* et *Normal*.**
 
@@ -238,7 +256,7 @@ Les données relatives aux cancer de type *Normal* sont contenues dans la variab
 :::
 
 ::: {.callout-important appearance="simple"}
-Par la suite, les couleurs utilisées pour la représentation de *Her2* et *Normal* seront respectivement *darkred* et *darksalmon*.
+Par la suite, les couleurs utilisées pour la représentation de *Her2* et *Normal* seront respectivement `darkred` et `darksalmon`.
 :::
 
 ```{r}
@@ -253,17 +271,23 @@ data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$XXX,
 
 # création du graphe
 comparaison <- data %>%
+  # création de l'objet
   ggplot(aes(x=XXX, fill=XXX)) +
+  # définition du type de graphe
   geom_density(aes(color=XXX), alpha=0.4) +
+  # réglage des couleurs de légende
   scale_color_manual(values=c("XXX", "XXX")) +
   scale_fill_manual(values=c("XXX", "XXX")) +
+  # choix de l'affichage de la légende
+  guides(color="none") +
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
-  xlab("ARNm Expression") +
+  # titres 
+  xlab("ARNm expression") +
   ylab("Density") +
-  guides(color="none") +
-  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
-       fill="Cancer Type")
+  labs(title="Comparison of gene expression density across different types of cancer",
+       fill="Cancer type")
 
 # affichage du graphe
 print(comparaison)
@@ -281,17 +305,23 @@ data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$Her2,
 
 # création du graphe
 comparaison <- data %>%
+  # création de l'objet
   ggplot(aes(x=value, fill=type)) +
+  # définition du type de graphe
   geom_density(aes(color=type), alpha=0.4) +
+  # réglage des couleurs de légende
   scale_color_manual(values=c("darkred", "darksalmon")) +
   scale_fill_manual(values=c("darkred", "darksalmon")) +
+  # choix de l'affichage de la légende
+  guides(color="none") +
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
-  xlab("ARNm Expression") +
+  # titres 
+  xlab("ARNm expression") +
   ylab("Density") +
-  guides(color="none") +
-  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
-       fill="Cancer Type")
+  labs(title="Comparison of gene expression density across different types of cancer",
+       fill="Cancer type")
 
 # affichage du graphe
 print(comparaison)
@@ -299,11 +329,14 @@ print(comparaison)
 
 La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup plus étalée que celle du type de cancer *Her2* et se mélange ainsi facilement dans les profils génomiques des autres types de cancer. Ce graphique met alors en évidence la rareté du type de cancer *Normal* et la difficulté à le classer. 
 
+## Comparaison de toutes les densités
+
+### À vous de jouer
 
 **Pour mieux visualiser les différences entre tous les types de cancer, représentez la comparaison de la densité de l'ensemble des types de cancer.**
 
 ::: {.callout-important appearance="simple"}
-Il est important de préciser au graphe que la variable doit être considéré comme une densité à l'aide de la commande *aes(y=after_stat(density))*.
+Il est important de préciser au graphe que la variable doit être considéré comme une densité à l'aide de la commande `aes(y=after_stat(density))`.
 :::
 
 ```{r}
@@ -311,7 +344,7 @@ Il est important de préciser au graphe que la variable doit être considéré c
 #| code-summary: "Afficher la Solution"
 #| output: true
 
-# création de la base de données pour le graphe
+# création de la base de données
 data <- data.frame(type=c(rep("LumA", 50),
                           rep("LumB", 50),
                           rep("Basal", 50),
@@ -326,9 +359,12 @@ data <- data.frame(type=c(rep("LumA", 50),
 
 # densités des différents types de cancer
 density <- data %>%
+  # création de l'objet
   ggplot(aes(x=value, fill=type)) +
+  # définition du type de graphe
   geom_density(aes(y=after_stat(density),color=type),  
                linewidth=0.5, alpha=0.4, fill=NA) +
+  # réglage des couleurs de légende
   scale_color_manual(values=c("#69b3a2",
                               "darkred",
                               "darkblue",
@@ -339,12 +375,14 @@ density <- data %>%
                              "darkblue",
                              "pink",
                              "darksalmon")) +
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
-  xlab("ARNm Expression") +
+  # titres
+  xlab("ARNm expression") +
   ylab("Density") +
-  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
-       color="Cancer Type")
+  labs(title="Comparison of gene expression density across different types of cancer",
+       color="Cancer type")
 
 # affichage du graphe
 print(density)
@@ -365,22 +403,29 @@ Nous remarquons à nouveau une densité d'expression de l'ARNm très étalée po
 
 # histogrammes et densités des différents types de cancer
 density <- data %>%
+  # créationd de l'objet
   ggplot(aes(x=value, fill =type)) +
+  # définition du premier type de graphe
   geom_histogram(aes(y=after_stat(density)),
                  color="#e9ecef",
                  alpha=0.3,
                  binwidth=0.5,
                  position="dodge") +
+  # définition du second type de graphe
   geom_density(aes(y=after_stat(density), color=type), linewidth=0.5, fill=NA) +
+  # réglage des couleurs de légende
   scale_color_manual(values=c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
   scale_fill_manual(values=c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  # choix de l'affichage de la légende
   guides(color="none") + 
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
-  xlab("ARNm Expression") +
+  # titres
+  xlab("ARNm expression") +
   ylab("Density") +
-  labs(title="Comparison of Gene Expression Density across Different Types of Cancer",
-       fill="Cancer Type")
+  labs(title="Comparison of gene expression density across different types of cancer",
+       fill="Cancer type")
 
 # affichage du graphe
 print(density)
@@ -389,14 +434,56 @@ print(density)
 :::
 
 ::: {.callout-note appearance="simple"}
-## geom_histogram
-Cette commande du package *ggplot2* permet de créer des histogrammes sur R. De nombreuses options sont disponibles comme color, alpha (règle la transparence du remplissage), binwidth (règle la largeur des intervalles)
-et position = "identity", "dodge" (règle la position des bandes).
+## `geom_histogram`
+Cette commande du package `ggplot2` permet de créer des histogrammes sur R. De nombreuses options sont disponibles comme `color`, `alpha` (règle la transparence du remplissage), `binwidth` (règle la largeur des intervalles)
+et `position = "identity", "dodge"` (règle la position des bandes).
 :::
 
-## Comparaison des Densités pour Chacun des Chromosomes
+## Comparaison des densités pour chacun des chromosomes
 
-**En appliquant les compétences acquises jusqu'ici, représentez la densité et l'histogramme d'expression de l'ARNmessager des gènes pour le type de cancer *Her2* pour chacun des chromosomes.**
+### À vous de jouer
+
+**En appliquant les compétences acquises jusqu'ici, remplissez les trous afin de représenter la densité et l'histogramme d'expression de l'ARNmessager des gènes pour le type de cancer *Her2* pour chacun des chromosomes.**
+
+```{r, warning=FALSE, message=FALSE}
+#| output: false
+#| warning: false
+#| eval: false
+
+# création de la base de données
+data <- data.frame(type=XXX,
+                   value=XXX)
+
+# densité pour chaque chromosome
+density <- data %>%
+  # création de l'objet
+  ggplot(aes(x=XXX, bins=30, color=XXX, fill=XXX)) +
+  # définition du premier type de graphe
+  geom_histogram(alpha=0.6, position="identity") +
+  # définition du second type de graphe
+  geom_density(aes(y=after_stat(ndensity)),
+               alpha=0.5,
+               fill="grey",
+               color="black",
+               linewidth=0.25) +
+  # séparation du graphe en sous parties
+  facet_wrap(~XXX, scales="XXX", nrow=3) +
+  # réglage des couleurs de légende
+  scale_fill_viridis(discrete=FALSE) +
+  scale_color_viridis(discrete=FALSE) +
+  # choix de l'affichage de la légende
+  guides(color="none", fill="none") +
+  # personnalisation des éléments de texte
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  # titres
+  xlab("Chromosome") +
+  ylab("Frequency") +
+  labs(title="Gene mRNA expression densities for Her2 type of cancer on each of the chromosomes")
+
+# affichage du graphe
+print(density)
+```
 
 ```{r, warning=FALSE, message=FALSE}
 #| code-fold: true
@@ -410,22 +497,30 @@ data <- data.frame(type=TCGA.PAM50_genefu_hg18$chr,
 
 # densité pour chaque chromosome
 density <- data %>%
+  # création de l'objet
   ggplot(aes(x=value, bins=30, color=type, fill=type)) +
+  # définition du premier type de graphe
   geom_histogram(alpha=0.6, position="identity") +
+  # définition du second type de graphe
   geom_density(aes(y=after_stat(ndensity)),
                alpha=0.5,
                fill="grey",
                color="black",
                linewidth=0.25) +
+  # séparation du graphe en sous parties
   facet_wrap(~type, scales="fixed", nrow=3) +
+  # réglage des couleurs de légende
   scale_fill_viridis(discrete=FALSE) +
   scale_color_viridis(discrete=FALSE) +
+  # choix de l'affichage de la légende
   guides(color="none", fill="none") +
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  # titres
   xlab("Chromosome") +
   ylab("Frequency") +
-  labs(title="Gene mRNA Expression Densities for Her2 Type of Cancer on Each of the Chromosomes")
+  labs(title="Gene mRNA expression densities for Her2 type of cancer on each of the chromosomes")
 
 # affichage du graphe
 print(density)
@@ -460,13 +555,18 @@ data <- data.frame(type=TCGA.PAM50_genefu_hg18$XXX,
 
 # densité pour chaque chromosome
 density <- data %>%
+  # création de l'objet
   ggplot(aes(x=XXX, fill=XXX, color=XXX)) +
+  # définition du premier type de graphe
   geom_histogram(alpha=0.6, position="dodge") +
+  # définition du second type de graphe
   geom_density(aes(y=after_stat(ndensity), color=XXX),
                alpha=0.25,
                fill="grey",
                linewidth=0.25) +
+  # séparation du graphe en sous parties
   facet_wrap(~XXX, scales="XXX", nrow=3) +
+  # réglage des couleurs de légende
   scale_color_manual(values=c("#69b3a2",
                               "darkred",
                               "darkblue",
@@ -477,13 +577,16 @@ density <- data %>%
                              "darkblue",
                              "pink",
                              "darksalmon")) +
+  # choix de l'affichage de la légende
   guides(color="none") +
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  # titres
   xlab("Chromosome") +
   ylab("Frequency") +
-  labs(title="Gene mRNA Expression Densities for Each Type of Cancer on Each of the Chromosomes",
-       fill="Cancer Type")
+  labs(title="Gene mRNA expression densities for each type of cancer on each of the chromosomes",
+       fill="Cancer type")
 
 # affichage du graphe
 print(density)
@@ -509,13 +612,18 @@ data <- data.frame(type=TCGA.PAM50_genefu_hg18$chr,
 
 # densité pour chaque chromosome
 density <- data %>%
+  # création de l'objet
   ggplot(aes(x=value, fill=subtype, color=subtype)) +
+  # définition du premier type de graphe
   geom_histogram(alpha=0.6, position="dodge") +
+  # définition du second type de graphe
   geom_density(aes(y=after_stat(ndensity), color=subtype),
                alpha=0.25,
                fill="grey",
                linewidth=0.25) +
+  # séparation du graphe en sous parties
   facet_wrap(~type, scales="fixed", nrow=3) +
+  # réglage des couleurs de légende
   scale_color_manual(values=c("#69b3a2",
                               "darkred",
                               "darkblue",
@@ -526,13 +634,16 @@ density <- data %>%
                              "darkblue",
                              "pink",
                              "darksalmon")) +
+  # choix de l'affichage de la légende
   guides(color="none") +
+  # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  # titres
   xlab("Chromosome") +
   ylab("Frequency") +
-  labs(title="Gene mRNA Expression Densities for Each Type of Cancer on Each of the Chromosomes",
-       fill="Cancer Type")
+  labs(title="Gene mRNA expression densities for each type of cancer on each of the chromosomes",
+       fill="Cancer type")
 
 # affichage du graphe
 print(density)
