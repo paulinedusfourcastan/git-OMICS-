@@ -127,7 +127,7 @@ library(hrbrthemes)
 Les visualisations permettent d'étudier les différents types de cancer présentés dans le [lexique#](#lexique).
 
 
-## Visualisation des 10 observations des données 
+## Visualisation des 10 premières observations des données 
 
 
 
