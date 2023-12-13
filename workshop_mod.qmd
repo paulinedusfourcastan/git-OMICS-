@@ -1083,19 +1083,19 @@ De l'extérieur vers l'intérieur, vous pouvez trouver :
 
 # Lexique
 
-* *hg18* : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 s'agit de la version avant dernière.
+* **hg18** : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 correspond à l'avant dernière version.
 
-* Her2 : Une protéine naturellement présente dans l’organisme. Il s’agit d’un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire.
+* **Her2** : Il s'agit d'une protéine naturellement présente dans l’organisme : un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire.
 
-* LumA : Le cancer du sein Luminal A est l'un des sous-types luminaux et est généralement associé à des caractéristiques moins agressives par rapport à Luminal B.
+* **LumA** : Le cancer du sein Luminal A est l'un des sous-types luminaux et est généralement associé à des caractéristiques moins agressives que Luminal B.
 
-* LumB : Associé à un grade plus élevé, des taux de prolifération accrus, et un pronostic global plus défavorable.
+* **LumB** : Ce type de cancer du sein est associé à un grade plus élevé, des taux de prolifération accrus, et un pronostic global plus défavorable.
 
-* Basal : Un sous-type du cancer du sein négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
+* **Basal** : Il s'agit d'un sous-type du cancer du sein négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
 
-* FDR (First Division Restitution) : Réfère à l'évènement où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue.
+* **FDR** (First Division Restitution) : Ceci réfère à l'évènement où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue.
 
-* Bonferroni : Une correction statistique.
+* **Bonferroni** : Cette correction statistique permet d'ajuster le niveau de confiance de chaque intervalle pour que le niveau de confiance simultané ne soit pas erroné.
 
 
 
