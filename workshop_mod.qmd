@@ -117,12 +117,35 @@ L'ensemble des visualisations de cette partie s'appuient sur la base de données
 # chargement des packages nécessaires
 library(ggplot2)
 library(dplyr)
+library(tidyr)
+library(plotly)
 library(viridis)
 library(viridisLite)
 library(hrbrthemes)
 ```
 
 Les visualisations permettent d'étudier les différents types de cancer présentés dans le [lexique#](#lexique).
+## Utilisation de `plotly`
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+data(TCGA.PAM50_genefu_hg18)
+df<-TCGA.PAM50_genefu_hg18
+# Pour voir mieux, j'ai affiché que les 10 premières lignes du dataset. Si vous voulez voir plus, vous pouvez mettre en commentaire la ligne suivante.
+df<-df[1:10,]
+df_long <- df %>%
+  gather(key = "Subtype", value = "Expression", -chr, -po, -Gene)
+
+ggplot(df_long, aes(x = Gene, y = Expression, fill = Subtype)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Expression génique des gènes dans les sous-catégories de cancer du sein",
+       x = "Gène", y = "Expression génique") +
+  theme_minimal()
+
+```
 
 ## Utilisation de `ggplot2`
 
@@ -133,6 +156,7 @@ Le package `ggplot2` fonctionne par couches successives. La première d’entre 
 ::: {.callout-important appearance="simple"}
 Il ne faut pas oublier le `+` entre les couches successives.
 :::
+
 
 ## Comparaison de deux densités
 
