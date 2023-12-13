@@ -8,10 +8,10 @@ format: html: page-layout: full
 
 Ce workshop MOD a été effectué par des étudiants du master Statistiques et Sciences des Données :
 
-* Rim Alhajal (**rim.alhajal@etu.umontpellier.fr**)
-* Abdoulaye Diop (**abdoulaye.diop03@etu.umontpellier.fr**)
-* Pauline Dusfour-Castan (**pauline.dusfour-castan@etu.umontpellier.fr**)
-* Lilou Zulewski (**lilou.zulewski01@etu.umontpellier.fr**)
+* [Rim Alhajal](rim.alhajal@etu.umontpellier.fr) (**rim.alhajal@etu.umontpellier.fr**)
+* [Abdoulaye Diop](abdoulaye.diop03@etu.umontpellier.fr) (**abdoulaye.diop03@etu.umontpellier.fr**)
+* [Pauline Dusfour-Castan](pauline.dusfour-castan@etu.umontpellier.fr) (**pauline.dusfour-castan@etu.umontpellier.fr**)
+* [Lilou Zulewski](lilou.zulewski01@etu.umontepllier.fr) (**lilou.zulewski01@etu.umontpellier.fr**)
 
 
 
