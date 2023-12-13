@@ -1,5 +1,7 @@
 ---
 title: "Workshop MOD: Visualisation de données omiques avec R"
+format: html: page-layout: full
+
 ---
 
 # Introduction 
