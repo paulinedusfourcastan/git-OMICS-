@@ -125,13 +125,45 @@ library(hrbrthemes)
 ```
 
 Les visualisations permettent d'étudier les différents types de cancer présentés dans le [lexique#](#lexique).
-## Utilisation de `plotly`
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
+## Visualisation des 10 observations des données 
+
+
+
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Voir le diagramme en barre"
+#| output: true
+
+data(TCGA.PAM50_genefu_hg18)
+df<-TCGA.PAM50_genefu_hg18
+# Pour voir mieux, j'ai affiché que les 10 premières lignes du dataset. Si vous voulez voir plus, vous pouvez mettre en commentaire la ligne suivante.
+df<-df[1:10,]
+df_long <- df %>%
+  gather(key = "Subtype", value = "Expression", -chr, -po, -Gene)
+
+ggplot(df_long, aes(x = Gene, y = Expression, fill = Subtype)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Expression génique des gènes dans les sous-catégories de cancer du sein",
+       x = "Gène", y = "Expression génique") +
+  theme_minimal()
+
+```
+
+## Utilisation de `plotly`
+
+`Plotly` est une bibliothèque graphique interactive qui permet de créer des graphiques interactifs dans le langage de programmation R. Elle offre la possibilité de créer des graphiques tels que des diagrammes en barres, des diagrammes circulaires, des graphiques en nuage de points et bien d'autres, tout en permettant aux utilisateurs d'explorer et d'interagir avec les graphiques directement.
+
+* Faisons un heatmap pour mieux voir les données dans l'ensemble
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Voir le heatmap pour chaque type de cancer"
+#| output: true
+
 data(TCGA.PAM50_genefu_hg18)
 df<-TCGA.PAM50_genefu_hg18
 # Pour voir mieux, j'ai affiché que les 10 premières lignes du dataset. Si vous voulez voir plus, vous pouvez mettre en commentaire la ligne suivante.
