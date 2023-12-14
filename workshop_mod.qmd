@@ -9,10 +9,10 @@ format:
 
 Ce workshop [MOD](https://montpellier-omics-days.fr/) a été effectué par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
 
-* [Rim Alhajal](rim.alhajal@etu.umontpellier.fr) (**rim.alhajal@etu.umontpellier.fr**)
-* [Abdoulaye Diop](abdoulaye.diop03@etu.umontpellier.fr) (**abdoulaye.diop03@etu.umontpellier.fr**)
-* [Pauline Dusfour-Castan](pauline.dusfour-castan@etu.umontpellier.fr) (**pauline.dusfour-castan@etu.umontpellier.fr**)
-* [Lilou Zulewski](lilou.zulewski01@etu.umontepllier.fr) (**lilou.zulewski01@etu.umontpellier.fr**)
+* Rim Alhajal : **rim.alhajal@etu.umontpellier.fr**
+* Abdoulaye Diop : **abdoulaye.diop03@etu.umontpellier.fr**
+* Pauline Dusfour-Castan : **pauline.dusfour-castan@etu.umontpellier.fr**
+* Lilou Zulewski : **lilou.zulewski01@etu.umontpellier.fr**
 
 En génomique, les bases de données à étudier sont généralement très grandes : des visualisations exploratoires permettent de les aborder. Cependant, ces visualisations deviennent complexes dû à la dimension ce qui réduit l’accès aux informations significatives, nuisant aux interprétations. L’objectif de ce workshop est d’améliorer vos compétences en visualisation des données appliquées au cancer du sein.
 
@@ -55,7 +55,18 @@ Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous fa
 
 -   **ÉTAPE 1** : Chargement de la librairie `OmicCircos`
 
-Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installé à partir du [CRAN](https://cran.r-project.org/web/packages/) puis l'appeler à l'aide de la fonction `library()`.
+Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installé à partir de [Bioconductor](https://bioconductor-org.translate.goog/packages/release/bioc/html/OmicCircos.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=tc/) puis l'appeler à l'aide de la fonction `library()`.
+
+```{r}
+#| eval: FALSE
+#| code-fold: true
+#| code-summary: "Installer Bioconductor"
+
+if (!require("BiocManager", tranquillement = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("OmicCircos")
+```
 
 ```{r}
 library(OmicCircos)
