@@ -218,10 +218,10 @@ comparaison <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("ARNm expression") +
-  ylab("Density") +
-  labs(title="Comparison of gene expression density across different types of cancer",
-       fill="Cancer type")
+  xlab("Expression d'ARNm") +
+  ylab("Densité") +
+  labs(title="Comparaison de la densité d'expression génique entre différents types de cancer",
+       fill="Type de cancer")
 
 # affichage du graphe
 print(comparaison)
@@ -255,10 +255,10 @@ comparaison <- data %>%
   theme(strip.text.x=element_text(size = 8),
         plot.title=element_text(size=10, hjust = 0.5, face="bold")) +
   # titres
-  xlab("ARNm expression") +
-  ylab("Density") +
-  labs(title="Comparison of gene expression density across different types of cancer",
-       fill="Cancer type")
+  xlab("Expression d'ARNm") +
+  ylab("Densité") +
+  labs(title="Comparaison de la densité d'expression génique entre différents types de cancer",
+       fill="Type de cancer")
 
 # affichage du graphe
 print(comparaison)
@@ -301,10 +301,10 @@ comparaison <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("ARNm expression") +
-  ylab("Density") +
-  labs(title="Comparison of gene expression density across different types of cancer",
-       fill="Cancer type")
+  xlab("Expression d'ARNm") +
+  ylab("Densité") +
+  labs(title="Comparaison de la densité d'expression génique entre différents types de cancer",
+       fill="Type de cancer")
 
 # affichage du graphe
 print(comparaison)
@@ -335,10 +335,10 @@ comparaison <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("ARNm expression") +
-  ylab("Density") +
-  labs(title="Comparison of gene expression density across different types of cancer",
-       fill="Cancer type")
+  xlab("Expression d'ARNm") +
+  ylab("Densité") +
+  labs(title="Comparaison de la densité d'expression génique entre différents types de cancer",
+       fill="Type de cancer")
 
 # affichage du graphe
 print(comparaison)
@@ -396,16 +396,16 @@ density <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("ARNm expression") +
-  ylab("Density") +
-  labs(title="Comparison of gene expression density across different types of cancer",
-       color="Cancer type")
+  xlab("Expression d'ARNm") +
+  ylab("Densité") +
+  labs(title="Comparaison de la densité d'expression génique entre différents types de cancer",
+       color="Type de cancer")
 
 # affichage du graphe
 print(density)
 ```
 
-Nous remarquons à nouveau une densité d'expression de l'ARNm très étalée pour le type de cancer du sein *Normal*. De plus, les densités pour les types de cancer *Basal* et *LumB* sont assez similaires : *Basal* présente un pic légèrement plus haut et et une courbe plus concentrée autour de $0.5$. Globalement, chacun des types de cancer possède une expression d'ARNm concentrée à différentes valeurs pour les gènes étudiés.
+Nous remarquons à nouveau une densité d'expression de l'ARNm très dispersée pour le type de cancer du sein *Normal*. De plus, les densités pour les types de cancer *Basal* et *LumB* sont assez similaires : *Basal* présente un mode légèrement plus haut et et une courbe plus concentrée autour de $0.5$. Notons également que *LumA* est le seul type de cancer pour lequel la densité est bimodale.
 
 ::: {.callout-warning appearance="default" icon=false}
 # POUR ALLER PLUS LOIN...
@@ -439,10 +439,10 @@ density <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("ARNm expression") +
-  ylab("Density") +
-  labs(title="Comparison of gene expression density across different types of cancer",
-       fill="Cancer type")
+  xlab("Expression d'ARNm") +
+  ylab("Densité") +
+  labs(title="Comparaison de la densité d'expression génique entre différents types de cancer",
+       fill="Type de cancer")
 
 # affichage du graphe
 print(density)
@@ -494,9 +494,9 @@ density <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("Chromosome") +
-  ylab("Frequency") +
-  labs(title="Gene mRNA expression densities for Her2 type of cancer on each of the chromosomes")
+  xlab("Expression d'ARNm") +
+  ylab("Fréquence") +
+  labs(title="Densités d'expression génique pour le type de cancer Her2 sur chacun des chromosomes")
 
 # affichage du graphe
 print(density)
@@ -535,9 +535,9 @@ density <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("Chromosome") +
-  ylab("Frequency") +
-  labs(title="Gene mRNA expression densities for Her2 type of cancer on each of the chromosomes")
+  xlab("Expression d'ARNm") +
+  ylab("Fréquence") +
+  labs(title="Densités d'expression génique pour le type de cancer Her2 sur chacun des chromosomes")
 
 # affichage du graphe
 print(density)
@@ -545,7 +545,7 @@ print(density)
 
 Notons que la densité ne peut pas être représentée avec un seul point ce qui explique l'absence de courbe pour les chromosomes $3$, $14$ et $22$. Quant à lui, l'histogramme représente le nombre de gènes ayant une valeur de test à un endroit donné : par exemple, pour le chromosome $16$, il y a deux gènes qui ont une valeur de test environ égale à $0.21$ pour le type de cancer *Her2*.
 
-Pour la plupart des chromosomes, la densité observée est bimodale. Quelques chromosomes possèdent une densité différente. En effet, le chromosome $1$ possède un grand pic sur l'histogramme autour de la valeur de test $0$. Le chromosome $17$ est aussi atypique puisque la densité associée est assez étalée dû aux $4$ pics éloignés présents de l'histogramme.
+Pour la plupart des chromosomes, la densité observée est bimodale. Quelques chromosomes possèdent une densité différente. En effet, le chromosome $1$ possède un grand mode sur l'histogramme autour de la valeur de test $0$. Le chromosome $17$ est aussi atypique puisque la densité associée est assez étalée dû aux $4$ modes de valeurs assez dispersées présents dans l'histogramme.
 
 ::: {.callout-warning appearance="default" icon=false}
 # POUR ALLER PLUS LOIN...
@@ -600,10 +600,10 @@ density <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("Chromosome") +
-  ylab("Frequency") +
-  labs(title="Gene mRNA expression densities for each type of cancer on each of the chromosomes",
-       fill="Cancer type")
+  xlab("Expression d'ARNm") +
+  ylab("Fréquence") +
+  labs(title="Densités d'expression génique pour chaque type de cancer sur chacun des chromosomes",
+       fill="Type de cancer")
 
 # affichage du graphe
 print(density)
@@ -657,16 +657,16 @@ density <- data %>%
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
-  xlab("Chromosome") +
-  ylab("Frequency") +
-  labs(title="Gene mRNA expression densities for each type of cancer on each of the chromosomes",
-       fill="Cancer type")
+  xlab("Expression d'ARNm") +
+  ylab("Fréquence") +
+  labs(title="Densités d'expression génique pour chaque type de cancer sur chacun des chromosomes",
+       fill="Type de cancer")
 
 # affichage du graphe
 print(density)
 ```
 
-En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous remarquons que les conclusions faites pour le type de cancer *Her2* peuvent être utilisées à nouveau. En effet, les densités associées sont généralement bimodales sauf piur quelques chromosomes. De plus, nous identifions une expression d'ARNm plus concentrée sur les chromosomes $8$, $16$ et $17$ pour le type de cancer *Her2* ainsi que sur les chromosomes $7$, $11$ et $12$ pour le type de cancer *LumA*. Ce grahe permet de mettre en lumière les différentes expressions d'ARNm de mêmes gènes pour les différents types de cancer.
+En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous remarquons que les conclusions faites pour le type de cancer *Her2* peuvent être utilisées à nouveau. En effet, les densités associées sont généralement bimodales sauf pour quelques chromosomes. De plus, nous identifions une expression d'ARNm plus concentrée sur les chromosomes $8$, $16$ et $17$ pour le type de cancer *Her2* ainsi que sur les chromosomes $7$, $11$ et $12$ pour le type de cancer *LumA*. Ce grahe permet de mettre en lumière les différentes expressions d'ARNm de mêmes gènes pour les différents types de cancer.
 :::
 
 # Création de HEATMAP
@@ -1103,27 +1103,33 @@ De l'extérieur vers l'intérieur, vous pouvez trouver :
 
 * **Bonferroni** : Cette correction statistique permet d'ajuster le niveau de confiance de chaque intervalle pour que le niveau de confiance simultané ne soit pas erroné.
 
-## Graphiques supplémentaires
+# Graphiques supplémentaires
 
+Ce dernier graphe représente l'expression génique de plusieurs gènes pour chacun des types de cancer. Pour une meilleure lisibilité, seuls les $10$ premiers gènes de la base de données ont été utilisés mais il est possible d'en afficher plus. Par exemple, pour en afficher $15$, vous pourriez utiliser `data <- data[1:15,]`.
 
 ```{r}
-#| code-fold: true
-#| code-summary: "Voir le diagramme en barre"
-#| output: true
+# mise en forme des données
+data <- TCGA.PAM50_genefu_hg18
+data <- data[1:10,]
+data_long <- data %>%
+  gather(key="Subtype", value="Expression", -chr, -po, -Gene)
 
-data(TCGA.PAM50_genefu_hg18)
-df<-TCGA.PAM50_genefu_hg18
-# Pour voir mieux, j'ai affiché que les 10 premières lignes du dataset. Si vous voulez voir plus, vous pouvez mettre en commentaire la ligne suivante.
-df<-df[1:10,]
-df_long <- df %>%
-  gather(key = "Subtype", value = "Expression", -chr, -po, -Gene)
-
-ggplot(df_long, aes(x = Gene, y = Expression, fill = Subtype)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Expression génique des gènes dans les sous-catégories de cancer du sein",
-       x = "Gène", y = "Expression génique") +
-  theme_minimal()
-
+# création de l'objet
+ggplot(data_long, aes(x=Gene, y=Expression, fill=Subtype)) +
+  # définition du type de graphe
+  geom_bar(stat="identity") +
+  # réglage des couleurs de légende
+  scale_fill_manual(values=c("#69b3a2",
+                             "darkred",
+                             "darkblue",
+                             "pink",
+                             "darksalmon")) +
+  # personnalisation des éléments de texte
+  theme(strip.text.x=element_text(size=8),
+        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
+  # titres
+  labs(title="Expression génique des gènes pour les différents types de cancer du sein",
+       x="Gène",
+       y="Expression génique",
+       fill="Type de cancer")
 ```
-
-
