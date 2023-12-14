@@ -15,11 +15,7 @@ format:
       toggle: false
       source: false
     self-contained: true
-    grid:
-      sidebar-width: 300px
-      body-width: 900px
-      margin-width: 200px
-      gutter-width: 1.5rem
+    page-layout: article
     code-overflow: wrap
     fig-responsive: true
     fig-format: svg
