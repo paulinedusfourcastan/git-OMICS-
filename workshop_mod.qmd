@@ -55,7 +55,7 @@ Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous fa
 
 -   **ÉTAPE 1** : Chargement de la librairie `OmicCircos`
 
-Pour pouvoir utiliser ÒmicCircos`, il faut tout d'abord l'avoir installé à partir de [Bioconductor](https://bioconductor-org.translate.goog/packages/release/bioc/html/OmicCircos.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=tc/) puis l'appeler à l'aide de la fonction `library()`.
+Pour pouvoir utiliser `ÒmicCircos`, il faut tout d'abord l'avoir installé à partir de [Bioconductor](https://bioconductor-org.translate.goog/packages/release/bioc/html/OmicCircos.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=tc/) puis l'appeler à l'aide de la fonction `library()`.
 
 ```{r}
 #| eval: FALSE
