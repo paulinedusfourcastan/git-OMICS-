@@ -266,7 +266,7 @@ print(comparaison)
 
 ### À vous de jouer
 
-**En vous appuyant sur l'exemple précédent, remplissez les trous du code ci-dessous afin de représenter graphiquement la comparaison des densités d'expression d'ARNmessager pour les gènes des types de cancer *Her2* et *Normal*.**
+**En vous appuyant sur l'exemple précédent, remplissez les trous du code ci-dessous (indiqués par 'XXX') afin de représenter graphiquement la comparaison des densités d'expression d'ARNmessager pour les gènes des types de cancer *Her2* et *Normal*.**
 
 ::: {.callout-note appearance="simple"}
 Les données relatives aux cancer de type *Normal* sont contenues dans la variable *Normal* de la base de données.
@@ -350,7 +350,7 @@ La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup p
 
 ### À vous de jouer
 
-**Pour mieux visualiser les différences entre tous les types de cancer, représentez la comparaison de la densité de l'ensemble des types de cancer.**
+**Pour mieux visualiser les différences entre tous les types de cancer, représentez la comparaison de la densité de l'ensemble des types de cancer. Vous pouvez copier-coller les codes précédents et ajouter/modifier uniquement le nécessaire.**
 
 ::: {.callout-important appearance="simple"}
 Il est important de préciser au graphe que la variable doit être considéré comme une densité à l'aide de la commande `aes(y=after_stat(density))`.
@@ -460,7 +460,7 @@ et `position = "identity", "dodge"` (règle la position des bandes).
 
 ### À vous de jouer
 
-**En appliquant les compétences acquises jusqu'ici, remplissez les trous afin de représenter la densité et l'histogramme d'expression de l'ARNmessager des gènes pour le type de cancer *Her2* pour chacun des chromosomes.**
+**En appliquant les compétences acquises jusqu'ici, remplissez les trous du code ci-dessous (indiqués par 'XXX') afin de représenter la densité et l'histogramme d'expression de l'ARNmessager des gènes pour le type de cancer *Her2* pour chacun des chromosomes.**
 
 ```{r, warning=FALSE, message=FALSE}
 #| output: false
@@ -550,7 +550,7 @@ Pour la plupart des chromosomes, la densité observée est bimodale. Quelques ch
 ::: {.callout-warning appearance="default" icon=false}
 # POUR ALLER PLUS LOIN...
 
-**De la même façon que le graphe précédent, remplissez les trous pour représenter graphiquement la densité et les histogrammes d'expression de l'ARNm des gènes pour chaque type de cancer sur chacun des chromosomes.**
+**De la même façon que le graphe précédent, remplissez les trous du code ci-dessous (indiqués par 'XXX') pour représenter graphiquement la densité et les histogrammes d'expression de l'ARNm des gènes pour chaque type de cancer sur chacun des chromosomes.**
 
 ```{r, warning=FALSE, message=FALSE}
 #| output: false
