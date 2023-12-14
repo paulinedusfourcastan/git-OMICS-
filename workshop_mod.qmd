@@ -1,11 +1,11 @@
 ---
 title: "Workshop MOD: Visualisation de Données Omiques avec R"
-format: 
+format:
   html:
     page-layout: full
 ---
 
-# Introduction 
+# Introduction
 
 Ce workshop MOD a été effectué par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
 
@@ -54,7 +54,7 @@ Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous fa
 
 -   **ÉTAPE 1** : Chargement de la librairie `Omiccircos`
 
-Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installer à partir du [CRAN](https://cran.r-project.org/web/packages/) puis l'appeler à l'aide de la fonction `library()`. 
+Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installer à partir du [CRAN](https://cran.r-project.org/web/packages/) puis l'appeler à l'aide de la fonction `library()`.
 
 ```{r}
 library(OmicCircos)
@@ -62,7 +62,7 @@ library(OmicCircos)
 
 -   **ÉTAPE 2** : Importation des données
 
-Nos données provenant du package `OmicCircos` (maintenant installé), nous les importons à l'aide de la fonction `data()`. 
+Nos données provenant du package `OmicCircos` (maintenant installé), nous les importons à l'aide de la fonction `data()`.
 
 ```{r}
 data("TCGA.PAM50_genefu_hg18")
@@ -76,7 +76,7 @@ data("TCGA.BC_Her2_cnv_exp")
 -   **ÉTAPE 3** : Mise en forme des données
 
 ```{r}
-# vecteur comprenant les positions de lignes des personnes 
+# vecteur comprenant les positions de lignes des personnes
 # possedant un cancer de type Her2
 Her2.i = which(TCGA.BC.sample60[,2] == "Her2")
 
@@ -84,12 +84,12 @@ Her2.i = which(TCGA.BC.sample60[,2] == "Her2")
 # présentant un cancer de type Her2
 Her2.n = TCGA.BC.sample60[Her2.i,1]
 
-# indices des colonnes de TCGA.BC.cnv.2k.60 dont 
+# indices des colonnes de TCGA.BC.cnv.2k.60 dont
 # les identifiants sont présents dans Her2.n
 Her2.j = which(colnames(TCGA.BC.cnv.2k.60)%in%Her2.n)
 
 # creation d'un data d'expression des différents gènes
-# pour chaque individus presentant un cancer Her2 
+# pour chaque individus presentant un cancer Her2
 cnv = TCGA.BC.cnv.2k.60[,c(1:3,Her2.j)]
 
 # data cnv auquel on a enlevé les 3 premiere colonnes
@@ -105,11 +105,11 @@ cnv = cbind(cnv[,1:3], cnv.m)
 #  extraction des colonnes 1 à 3 de TCGA.BC.gene.exp.2k.60
 # ainsi que des colonnes spécifiées par Her2.j
 gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
-``` 
+```
 
 # Visualisations classiques
 
-L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie `ggplot2` de R. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes. 
+L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie `ggplot2` de R. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes.
 
 L'ensemble des visualisations de cette partie s'appuient sur la base de données [*TCGA.PAM50_genefu_hg18*](#basesdedonnées) et nécessite le chargement de divers packages.
 
@@ -127,7 +127,7 @@ library(hrbrthemes)
 Les visualisations permettent d'étudier les différents types de cancer présentés dans le [lexique#](#lexique).
 
 
-## Visualisation des 10 premières observations des données 
+## Visualisation des 10 premières observations des données
 
 
 
@@ -187,7 +187,7 @@ heatmap_interactif
 
 Le package `ggplot2` fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelles.
 
-![Schéma Explicatif de l'Utilisation de `ggplot`](./images/schéma_ggplot.png)
+![Schéma Explicatif de l'Utilisation de `ggplot`](./images/schema_ggplot.png)
 
 ::: {.callout-important appearance="simple"}
 Il ne faut pas oublier le `+` entre les couches successives.
@@ -212,9 +212,9 @@ data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$LumA,
 # création du graphe
 comparaison <- data %>%
     # création de l'objet
-    ggplot(aes(x=value, fill=type)) + 
+    ggplot(aes(x=value, fill=type)) +
     # définition du type de graphe
-    geom_density() 
+    geom_density()
 
 # affichage du graphe
 print(comparaison)
@@ -237,9 +237,9 @@ data <- data.frame(value=c(TCGA.PAM50_genefu_hg18$LumA,
 # création du graphe
 comparaison <- data %>%
     # création de l'objet
-    ggplot(aes(x=value, fill=type)) + 
+    ggplot(aes(x=value, fill=type)) +
     # définition du type de graphe
-    geom_density() 
+    geom_density()
 
 # affichage du graphe
 print(comparaison)
@@ -251,7 +251,7 @@ De nombreuses options de `ggplot` peuvent améliorer l'apparence générale des 
 # création du graphe
 comparaison <- data %>%
   # création de l'objet
-  ggplot(aes(x=value, fill=type)) + 
+  ggplot(aes(x=value, fill=type)) +
   # définition du type de graphe
   geom_density(aes(color=type), alpha=0.4) +
   # réglage des couleurs de légende
@@ -345,7 +345,7 @@ comparaison <- data %>%
   # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
-  # titres 
+  # titres
   xlab("ARNm expression") +
   ylab("Density") +
   labs(title="Comparison of gene expression density across different types of cancer",
@@ -379,7 +379,7 @@ comparaison <- data %>%
   # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
-  # titres 
+  # titres
   xlab("ARNm expression") +
   ylab("Density") +
   labs(title="Comparison of gene expression density across different types of cancer",
@@ -389,7 +389,7 @@ comparaison <- data %>%
 print(comparaison)
 ```
 
-La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup plus étalée que celle du type de cancer *Her2* et se mélange ainsi facilement dans les profils génomiques des autres types de cancer. Ce graphique met alors en évidence la rareté du type de cancer *Normal* et la difficulté à le classer. 
+La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup plus étalée que celle du type de cancer *Her2* et se mélange ainsi facilement dans les profils génomiques des autres types de cancer. Ce graphique met alors en évidence la rareté du type de cancer *Normal* et la difficulté à le classer.
 
 ## Comparaison de toutes les densités
 
@@ -424,7 +424,7 @@ density <- data %>%
   # création de l'objet
   ggplot(aes(x=value, fill=type)) +
   # définition du type de graphe
-  geom_density(aes(y=after_stat(density),color=type),  
+  geom_density(aes(y=after_stat(density),color=type),
                linewidth=0.5, alpha=0.4, fill=NA) +
   # réglage des couleurs de légende
   scale_color_manual(values=c("#69b3a2",
@@ -479,7 +479,7 @@ density <- data %>%
   scale_color_manual(values=c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
   scale_fill_manual(values=c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
   # choix de l'affichage de la légende
-  guides(color="none") + 
+  guides(color="none") +
   # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
@@ -588,7 +588,7 @@ density <- data %>%
 print(density)
 ```
 
-Notons que la densité ne peut pas être représentée avec un seul point ce qui explique l'absence de courbe pour les chromosomes $3$, $14$ et $22$. Quant à lui, l'histogramme représente le nombre de gènes ayant une valeur de test à un endroit donné : par exemple, pour le chromosome $16$, il y a deux gènes qui ont une valeur de test environ égale à $0.21$ pour le type de cancer *Her2*. 
+Notons que la densité ne peut pas être représentée avec un seul point ce qui explique l'absence de courbe pour les chromosomes $3$, $14$ et $22$. Quant à lui, l'histogramme représente le nombre de gènes ayant une valeur de test à un endroit donné : par exemple, pour le chromosome $16$, il y a deux gènes qui ont une valeur de test environ égale à $0.21$ pour le type de cancer *Her2*.
 
 Pour la plupart des chromosomes, la densité observée est bimodale. Quelques chromosomes possèdent une densité différente. En effet, le chromosome $1$ possède un grand pic sur l'histogramme autour de la valeur de test $0$. Le chromosome $17$ est aussi atypique puisque la densité associée est assez étalée dû aux $4$ pics éloignés présents de l'histogramme.
 
@@ -716,9 +716,9 @@ En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous re
 
 # Création de HEATMAP
 
-L'objectif de cette partie est de réaliser des heatmap intéractives représentant les observations. 
+L'objectif de cette partie est de réaliser des heatmap intéractives représentant les observations.
 
-La librairie `heatmaply` dont nous allons nous servir est incluse dans la librairie `plotly` ([plotly](https://plotly-r.com/overview)) qui est une librairie permettant d'inclure de l'interactivité dans les graphiques. 
+La librairie `heatmaply` dont nous allons nous servir est incluse dans la librairie `plotly` ([plotly](https://plotly-r.com/overview)) qui est une librairie permettant d'inclure de l'interactivité dans les graphiques.
 
 Dans notre exemple de heatmap, vous pourrez notament connaître la valeur d'une cellule en faisant simplement glisser votre souris dessus, zommer sur sur les cellules et se déplacer dans la figure.
 
@@ -729,7 +729,7 @@ Pour cette première visualisation, il vous faut donc charger la librairie "heat
 #| message : FALSE
 #| results: hide
 #| output: false
-library(heatmaply) 
+library(heatmaply)
 gradient_col <- ggplot2::scale_fill_gradient2(
   low = "blue", high = "red", midpoint = 0, limits = c(-8, 8))
 ```
@@ -747,22 +747,22 @@ Prenons ici le chromosome numéro 1.
 
 ```{r}
 # on selectionne le chromosome souhaité dans notre dataframe
-chr1 <- subset(gene.exp, gene.exp$chr==1) 
+chr1 <- subset(gene.exp, gene.exp$chr==1)
 
 # on selectionne les colonnes qui nous interessent
-mydata_1 <- chr1[, 3:18] 
+mydata_1 <- chr1[, 3:18]
 
-# nom des lignes 
-rownames(mydata_1) <- mydata_1[, 1] 
+# nom des lignes
+rownames(mydata_1) <- mydata_1[, 1]
 
 # on supprime la première colonne qui ne nous interesse plus
-mydata_1 <- mydata_1[, -1] 
+mydata_1 <- mydata_1[, -1]
 ```
 
 Création de la heatmap à l'aide de heatmaply :
 
 ```{r}
-heatmaply(mydata_1, scale_fill_gradient_fun = gradient_col, 
+heatmaply(mydata_1, scale_fill_gradient_fun = gradient_col,
           Colv=NA, Rowv=NA, scale='none', limits = c(-8, 8),
           xlab = "Individus",ylab = "Gènes",
           main = "Expression des gènes du chromosome 1")
@@ -784,10 +784,10 @@ Voici une idée du résultat que vous devez obtenir :
 #| code-fold: true
 #| code-summary: "Afficher la Solution"
 chr17 <- subset(gene.exp, gene.exp$chr == 17 )
-mydata_17 <- chr17[,3:18] 
+mydata_17 <- chr17[,3:18]
 rownames(mydata_17) <- mydata_17[,1]
 mydata_17 <- mydata_17[,-1]
-heatmaply(mydata_17, scale_fill_gradient_fun = gradient_col, 
+heatmaply(mydata_17, scale_fill_gradient_fun = gradient_col,
           Colv=NA, Rowv=NA, scale='none', limits = c(-7, 8),
           xlab = "Individus",ylab = "Gènes",
           main = "Expression des gènes du chromosome 17")
@@ -805,7 +805,7 @@ Commencez par charger les packages nécessaires :
 #| message: false
 #| warning: false
 #| output: false
-library(circlize) 
+library(circlize)
 library(ComplexHeatmap)
 ```
 
@@ -813,7 +813,7 @@ On effectue une petite modification de notre dataframe en supprimant une colonne
 
 ```{r}
 # suppression de la colonne position
-gene.exp2 <- gene.exp[, -2] 
+gene.exp2 <- gene.exp[, -2]
 ```
 
 Pour pouvoir réaliser notre heatmap, il nous faut tout d'abord convertir notre dataframe en matrice :
@@ -821,15 +821,15 @@ Pour pouvoir réaliser notre heatmap, il nous faut tout d'abord convertir notre 
 ```{r}
 #| message : FALSE
 #| warning: FALSE
-mat <- as.matrix(gene.exp2, labels=TRUE) # on transforme le dataframe en matrice 
+mat <- as.matrix(gene.exp2, labels=TRUE) # on transforme le dataframe en matrice
 
-# On définit les noms des colonnes et des lignes 
+# On définit les noms des colonnes et des lignes
 row_names <- as.vector(gene.exp2$NAME)
 col_names <- c("chr", "NAME", "TCGA.A2.A04W.01A", "TCGA.A2.A0D1.01A",
                "TCGA.A2.A0EQ.01A", "TCGA.A8.A081.01A", "TCGA.A8.A08J.01A",
                "TCGA.A8.A09X.01A", "TCGA.AN.A0FV.01A", "TCGA.AO.A0J2.01A",
-               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A", 
-               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A", 
+               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A",
+               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A",
                "TCGA.E2.A1B0.01A")
 rownames_factor <- factor(row_names)
 
@@ -857,9 +857,9 @@ circos.clear()
 circos.par(start.degree = 90, gap.degree = 3)
 col_fun1 = colorRamp2(c(-6, 0, 6), c("blue", "white", "red"))
 
-# heatmap simple 
-circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
-               split = split, 
+# heatmap simple
+circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
+               split = split,
                col = col_fun1)
 
 ```
@@ -872,9 +872,9 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 
 # heatmap avec les chromosomes associes
 circos.clear()
-circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
-               split = split, col = col_fun1, track.height = 0.4, 
-               bg.border = "green", bg.lwd = 2, bg.lty = 2, 
+circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
+               split = split, col = col_fun1, track.height = 0.4,
+               bg.border = "green", bg.lwd = 2, bg.lty = 2,
                show.sector.labels = TRUE)
 
 ```
@@ -887,10 +887,10 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 
 # heatmap avec les chromosomes et les noms des genes
 circos.clear()
-circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
-               split = split, col = col_fun1, track.height = 0.4, 
-               bg.border = "green", bg.lwd = 2, bg.lty = 2, 
-               show.sector.labels = TRUE, 
+circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
+               split = split, col = col_fun1, track.height = 0.4,
+               bg.border = "green", bg.lwd = 2, bg.lty = 2,
+               show.sector.labels = TRUE,
                rownames.side = "outside", rownames.cex = 0.4)
 
 
@@ -909,12 +909,12 @@ Vous pouvez trouver des informations sur `hclust`au [Lien suivant](https://www.r
 #| message: false
 #| warning: false
 
-# heatmap avec les dendrogrammes 
+# heatmap avec les dendrogrammes
 circos.clear()
-circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))], 
-               split = split, col = col_fun1, track.height = 0.4, 
-               bg.border = "green", bg.lwd = 2, bg.lty = 2, 
-               show.sector.labels = TRUE, 
+circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
+               split = split, col = col_fun1, track.height = 0.4,
+               bg.border = "green", bg.lwd = 2, bg.lty = 2,
+               show.sector.labels = TRUE,
                dend.side = "outside")
 
 lgd = Legend(title = "values", col_fun = col_fun1)
@@ -937,17 +937,17 @@ x <- c("XXX") # vecteur des chromosomes que l'on souhaite selectionner
 data_chr <- gene.exp2[gene.exp2$chr %in% x, ] # dataframe avec nos chromosomes selectionnes
 
 
-# Convertion en matrice 
+# Convertion en matrice
 mat_chr <- as.matrix(data_chr, labels=TRUE)
 mat_chr_numeric <- matrix(as.numeric(mat_chr), ncol = ncol(mat_chr))
 
-# On définit les noms des colonnes et des lignes 
+# On définit les noms des colonnes et des lignes
 row_names_chr <- as.vector(data_chr$NAME)
 col_names_chr <- c("chr", "NAME", "TCGA.A2.A04W.01A", "TCGA.A2.A0D1.01A",
                "TCGA.A2.A0EQ.01A", "TCGA.A8.A081.01A", "TCGA.A8.A08J.01A",
                "TCGA.A8.A09X.01A", "TCGA.AN.A0FV.01A", "TCGA.AO.A0J2.01A",
-               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A", 
-               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A", 
+               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A",
+               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A",
                "TCGA.E2.A1B0.01A")
 
 
@@ -968,8 +968,8 @@ Voici une idée du résultat que vous devez obtenir :
 #| code-summary: "Afficher la Solution"
 #| message: false
 #| warning: false
-x <- c(1, 3, 6, 11, 17, 19) 
-data_chr <- gene.exp2[gene.exp2$chr %in% x, ] 
+x <- c(1, 3, 6, 11, 17, 19)
+data_chr <- gene.exp2[gene.exp2$chr %in% x, ]
 
 mat_chr <- as.matrix(data_chr, labels=TRUE)
 mat_chr_numeric <- matrix(as.numeric(mat_chr), ncol = ncol(mat_chr))
@@ -978,8 +978,8 @@ row_names_chr <- as.vector(data_chr$NAME)
 col_names_chr <- c("chr", "NAME", "TCGA.A2.A04W.01A", "TCGA.A2.A0D1.01A",
                "TCGA.A2.A0EQ.01A", "TCGA.A8.A081.01A", "TCGA.A8.A08J.01A",
                "TCGA.A8.A09X.01A", "TCGA.AN.A0FV.01A", "TCGA.AO.A0J2.01A",
-               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A", 
-               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A", 
+               "TCGA.AO.A12D.01A", "TCGA.B6.A0RS.01A", "TCGA.BH.A0EE.01A",
+               "TCGA.C8.A12L.01A", "TCGA.C8.A12P.01A", "TCGA.D8.A13Z.01A",
                "TCGA.E2.A1B0.01A")
 
 
@@ -990,9 +990,9 @@ split2 <- as.vector(data_chr$chr)
 split2 <- factor(split2)
 
 circos.clear()
-circos.heatmap(mat_chr_numeric[, !(colnames(mat_chr_numeric) %in% c("chr", "NAME"))], 
-               split = split2, col = col_fun1, track.height = 0.4, 
-               bg.border = "green", bg.lwd = 2, bg.lty = 2, 
+circos.heatmap(mat_chr_numeric[, !(colnames(mat_chr_numeric) %in% c("chr", "NAME"))],
+               split = split2, col = col_fun1, track.height = 0.4,
+               bg.border = "green", bg.lwd = 2, bg.lty = 2,
                show.sector.labels = TRUE, dend.side = "outside",
                rownames.side = "inside", rownames.cex = 0.35)
 lgd = Legend(title = "values", col_fun = col_fun1)
@@ -1017,25 +1017,25 @@ Vous pouvez trouver de l'aide au package OmicCircos aux liens suivants :
 ```{r, circos}
 
 
-colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs
 
-# Si vous souhaitez enregistrer votre image sous forme de pdf 
+# Si vous souhaitez enregistrer votre image sous forme de pdf
 #pdf("visucomp_histo.pdf", 8,8) # nom de l'image
 #par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
- 
-plot(c(1,800), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+
+plot(c(1,800), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "")
 zoom = c(1, 22, 939245.5, 154143883, 0, 180)
 
 ######  Moitié droite du cercle ##########
 
 # mettre les chromosomes et l'emplacement des genes
-circos(type = "chr", R = 400, cir = "hg18", W = 4, 
+circos(type = "chr", R = 400, cir = "hg18", W = 4,
        print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
 
 
 # creation de la heatmap
-circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
-       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100,
+       mapping = gene.exp, col.v = 4, cluster = FALSE,
        col.bar = TRUE, lwd = 0.01, zoom = zoom)
 
 # nombre de copies (gain_rouge, perte_bleu)
@@ -1049,44 +1049,44 @@ circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
        zoom = zoom)
 
 # lien entre certains genes
-circos(type = "link", R = 130, cir = "hg18", W = 10, 
+circos(type = "link", R = 130, cir = "hg18", W = 10,
        mapping = TCGA.BC.fus, lwd = 2, zoom = zoom)
 
 # Mise en valeur des chromosomes 11 et 17
 the.col1 = rainbow(10, alpha = 0.5)[1]
 highlight = c(140, 400, 11, 282412.5, 11, 133770314.5, the.col1, the.col1)
 
-circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+circos(type = "hl", R = 110, cir = "hg18", W = 40,
        mapping = highlight, lwd = 2, zoom = zoom)
 
 the.col2 = rainbow(10, alpha = 0.5)[6];
 highlight = c(140, 400, 17, 739525, 17, 78385909, the.col2, the.col2)
 
-circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+circos(type = "hl", R = 110, cir = "hg18", W = 40,
        mapping = highlight, lwd = 2, zoom = zoom)
 
 highlight.link1 = c(400, 400, 140, 376.8544, 384.0021,
                     450, 540.5)
 
-circos(type = "highlight.link", cir = "hg18", 
+circos(type = "highlight.link", cir = "hg18",
        mapping = highlight.link1, col = the.col1, lwd = 1)
 
 highlight.link2 = c(400, 400, 140, 419.1154, 423.3032,
                     543, 627)
 
-circos(type = "highlight.link", cir = "hg18", 
+circos(type = "highlight.link", cir = "hg18",
        mapping = highlight.link2, col = the.col2, lwd = 1)
 
 
 ####### Moitié gauche du cercle #######
 
-# Chromosome 11 
+# Chromosome 11
 zoom = c(11, 11, 282412.5, 133770314.5, 180, 270)
 
-circos(type = "chr",R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
+circos(type = "chr",R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE,
        scale = TRUE, zoom = zoom)
 
-circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100,
        mapping = gene.exp, col.v = 4, cluster = FALSE, lwd = 0.01,
        zoom = zoom)
 
@@ -1101,13 +1101,13 @@ circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
 
 
 
-# Chromosome 17 
+# Chromosome 17
 zoom = c(17, 17, 739525, 78385909, 274, 356)
 
-circos(type = "chr", R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
+circos(type = "chr", R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE,
        scale = TRUE, zoom = zoom)
 
-circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100,
        mapping = gene.exp, col.v = 4,  cluster = FALSE, lwd = 0.01,
        zoom = zoom)
 
