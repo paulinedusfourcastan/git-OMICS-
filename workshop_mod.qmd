@@ -689,7 +689,7 @@ Pour cette première visualisation, il vous faut donc charger la librairie `heat
 #| output: true
 library(heatmaply)
 gradient_col <- ggplot2::scale_fill_gradient2(
-  low = "blue", high = "red", midpoint = 0, limits = c(-8, 8))
+  low="blue", high="red", midpoint=0, limits=c(-8, 8))
 print(gradient_col)
 ```
 
@@ -746,10 +746,10 @@ chr17 <- subset(gene.exp, gene.exp$chr == 17 )
 mydata_17 <- chr17[,3:18]
 rownames(mydata_17) <- mydata_17[,1]
 mydata_17 <- mydata_17[,-1]
-heatmaply(mydata_17, scale_fill_gradient_fun = gradient_col,
-          Colv=NA, Rowv=NA, scale='none', limits = c(-7, 8),
-          xlab = "Individus",ylab = "Gènes",
-          main = "Expression des gènes du chromosome 17")
+heatmaply(mydata_17, scale_fill_gradient_fun=gradient_col,
+          Colv=NA, Rowv=NA, scale='none', limits=c(-7, 8),
+          xlab="Individus",ylab="Gènes",
+          main="Expression des gènes du chromosome 17")
 ```
 
 
@@ -799,8 +799,8 @@ rownames_factor <- factor(row_names)
 
 # On met notre matrice sous format "numeric"
 mat_numeric <- matrix(as.numeric(mat), ncol = ncol(mat))
-rownames(mat_numeric) = row_names
-colnames(mat_numeric) = col_names
+rownames(mat_numeric) <- row_names
+colnames(mat_numeric) <- col_names
 
 # Vecteur des chromosomes :
 split <- as.vector(gene.exp2$chr)
@@ -852,10 +852,10 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 # heatmap avec les chromosomes et les noms des gènes
 circos.clear()
 circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
-               split = split, col = col_fun1, track.height = 0.4,
-               bg.border = "green", bg.lwd = 2, bg.lty = 2,
-               show.sector.labels = TRUE,
-               rownames.side = "outside", rownames.cex = 0.4)
+               split=split, col=col_fun1, track.height=0.4,
+               bg.border="green", bg.lwd=2, bg.lty=2,
+               show.sector.labels=TRUE,
+               rownames.side="outside", rownames.cex=0.4)
 
 
 
@@ -871,12 +871,12 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 # heatmap avec les dendrogrammes
 circos.clear()
 circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
-               split = split, col = col_fun1, track.height = 0.4,
-               bg.border = "green", bg.lwd = 2, bg.lty = 2,
-               show.sector.labels = TRUE,
-               dend.side = "outside")
+               split=split, col=col_fun1, track.height=0.4,
+               bg.border="green", bg.lwd=2, bg.lty=2,
+               show.sector.labels=TRUE,
+               dend.side="outside")
 
-lgd = Legend(title = "values", col_fun = col_fun1)
+lgd = Legend(title="values", col_fun=col_fun1)
 grid.draw(lgd)
 ```
 
@@ -910,8 +910,8 @@ col_names_chr <- c("chr", "NAME", "TCGA.A2.A04W.01A", "TCGA.A2.A0D1.01A",
                "TCGA.E2.A1B0.01A")
 
 
-rownames(mat_chr_numeric) = row_names_chr
-colnames(mat_chr_numeric) = col_names_chr
+rownames(mat_chr_numeric) <- row_names_chr
+colnames(mat_chr_numeric) <- col_names_chr
 
 # Vecteur des chromosomes :
 split2 <- as.vector(data_chr$chr)
@@ -942,19 +942,19 @@ col_names_chr <- c("chr", "NAME", "TCGA.A2.A04W.01A", "TCGA.A2.A0D1.01A",
                "TCGA.E2.A1B0.01A")
 
 
-rownames(mat_chr_numeric) = row_names_chr
-colnames(mat_chr_numeric) = col_names_chr
+rownames(mat_chr_numeric) <- row_names_chr
+colnames(mat_chr_numeric) <- col_names_chr
 
 split2 <- as.vector(data_chr$chr)
 split2 <- factor(split2)
 
 circos.clear()
 circos.heatmap(mat_chr_numeric[, !(colnames(mat_chr_numeric) %in% c("chr", "NAME"))],
-               split = split2, col = col_fun1, track.height = 0.4,
-               bg.border = "green", bg.lwd = 2, bg.lty = 2,
-               show.sector.labels = TRUE, dend.side = "outside",
-               rownames.side = "inside", rownames.cex = 0.35)
-lgd = Legend(title = "values", col_fun = col_fun1)
+               split=split2, col=col_fun1, track.height=0.4,
+               bg.border="green", bg.lwd = 2, bg.lty=2,
+               show.sector.labels=TRUE, dend.side="outside",
+               rownames.side="inside", rownames.cex=0.35)
+lgd = Legend(title="values", col_fun=col_fun1)
 grid.draw(lgd)
 
 ```
@@ -976,14 +976,14 @@ Vous pouvez trouver de l'aide au package `OmicCircos` aux liens suivants :
 ```{r, circos}
 
 
-colors = rainbow(10, alpha = 0.5)   # choix des couleurs
+colors <- rainbow(10, alpha = 0.5)   # choix des couleurs
 
 # Si vous souhaitez enregistrer votre image sous forme de pdf
 #pdf("visucomp_histo.pdf", 8,8) # nom de l'image
-#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+#par(mar=c(2, 2, 2, 2))  # definition de la fenetre graphique
 
 plot(c(1,800), c(1,800), type="n", axes=FALSE, xlab="", ylab="", main="")
-zoom = c(1, 22, 939245.5, 154143883, 0, 180)
+zoom <- c(1, 22, 939245.5, 154143883, 0, 180)
 
 ######  Moitié droite du cercle ##########
 
