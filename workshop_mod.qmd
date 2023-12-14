@@ -671,6 +671,10 @@ En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous re
 
 # Création de HEATMAP
 
+Une heatmap (ou carte thermique) est une méthode de visualisation qui permet de représenter des données de grande dimension. C'est une représentation sous forme de grille de cellules colorées. Cette méthode peut être utilisée pour visualiser les observations, les corrélations ou des valeurs manquantes par exemple.
+
+## Création d'une heatmap intéractive
+
 L'objectif de cette partie est de réaliser des heatmap intéractives représentant les observations.
 
 La librairie `heatmaply` dont nous allons nous servir est incluse dans l'écosystème de `plotly` ([plotly](https://plotly-r.com/overview)) qui est un outil permettant d'inclure de l'interactivité dans les graphiques.
