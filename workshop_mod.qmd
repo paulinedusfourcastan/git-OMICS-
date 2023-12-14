@@ -55,7 +55,7 @@ Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous fa
 
 -   **ÉTAPE 1** : Chargement de la librairie `OmicCircos`
 
-Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installé à partir de [Bioconductor](https://bioconductor-org.translate.goog/packages/release/bioc/html/OmicCircos.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=tc/) puis l'appeler à l'aide de la fonction `library()`.
+Pour pouvoir utiliser ÒmicCircos`, il faut tout d'abord l'avoir installé à partir de [Bioconductor](https://bioconductor-org.translate.goog/packages/release/bioc/html/OmicCircos.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=fr&_x_tr_pto=tc/) puis l'appeler à l'aide de la fonction `library()`.
 
 ```{r}
 #| eval: FALSE
@@ -88,7 +88,7 @@ data("TCGA.BC.sample60")
 
 ```{r}
 # vecteur comprenant les positions de lignes des personnes
-# possedant un cancer de type Her2
+# possédant un cancer de type Her2
 Her2.i = which(TCGA.BC.sample60[,2] == "Her2")
 
 # vecteur comprenant les identifiants des personnes
@@ -99,11 +99,11 @@ Her2.n = TCGA.BC.sample60[Her2.i,1]
 # les identifiants sont présents dans Her2.n
 Her2.j = which(colnames(TCGA.BC.cnv.2k.60)%in%Her2.n)
 
-# creation d'un data d'expression des différents gènes
-# pour chaque individus presentant un cancer Her2
+# création d'un data d'expression des différents gènes
+# pour chaque individus présentant un cancer Her2
 cnv = TCGA.BC.cnv.2k.60[,c(1:3,Her2.j)]
 
-# data cnv auquel on a enlevé les 3 premieres colonnes
+# data cnv auquel on a enlevé les 3 premières colonnes
 cnv.m = cnv[,c(4:ncol(cnv))]
 
 # bornage des valeurs >2 et <-2
@@ -693,7 +693,7 @@ gradient_col <- ggplot2::scale_fill_gradient2(
 print(gradient_col)
 ```
 
-Vous pouvez trouver ci-joint deux sites donnant des exemples d'utilisation et de l'aide sur la librairie heatmaply :
+Vous pouvez trouver ci-joint deux sites donnant des exemples d'utilisation et de l'aide sur la librairie `heatmaply` :
 
 -   [Exemple d'utilisation de heatmaply](https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html)
 
@@ -705,10 +705,10 @@ Dans un premier temps, nous allons sélectionner le chromosome que l'on souhaite
 Prenons ici le chromosome numéro 1.
 
 ```{r}
-# on selectionne le chromosome souhaité dans notre dataframe
+# on sélectionne le chromosome souhaité dans notre dataframe
 chr1 <- subset(gene.exp, gene.exp$chr==1)
 
-# on selectionne les colonnes qui nous intéressent
+# on sélectionne les colonnes qui nous intéressent
 mydata_1 <- chr1[, 3:18]
 
 # nom des lignes
@@ -727,7 +727,7 @@ heatmaply(mydata_1, scale_fill_gradient_fun=gradient_col,
           main="Expression des gènes du chromosome 1")
 ```
 
-La heatmap ci-dessus nous donne visuellement une idée de l'expression de chaque gène du chromosome 1. On observe que dans la majorité des cas le gène *CLCA2* est sur-exprimé (les cellules apparaissent très rouges), et les gènes *PDZK1* *DLANI1* sont sous-exprimés (les cellules apparaissent plutôt bleutées).
+La heatmap ci-dessus nous donne visuellement une idée de l'expression de chaque gène du chromosome 1. On observe que dans la majorité des cas le gène *CLCA2* est sur-exprimé (les cellules sont rouges), et les gènes *PDZK1* *DLANI1* sont sous-exprimés (les cellules sont bleutées).
 
 ::: {.callout-note appearance="simple"}
 Vous pouvez choisir d'afficher les corrélations avec la fonction `heatmaply_cor()` ou les valeurs manquantes avec la fonction `heatmaply_na()`.
@@ -808,7 +808,7 @@ Le vecteur `split`doit contenir les différents groupes/catégories si vous souh
 
 Création des heatmap circulaires :
 
--   Sur cette première heatmap, nous avons affiché tous les chromosomes ainsi que tous les gènes de la manière la plus basique possible.
+-   Sur cette première heatmap, nous avons affiché tous les chromosomes ainsi que tous les gènes de manière simple. 
 
 ```{r}
 ## Affichage des heatmaps
@@ -823,13 +823,13 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 
 ```
 
--   Sur cette seconde heatmap, nous avons encadré chaque chromosome et affiché son numéro.
+-   Sur cette seconde heatmap, nous avons encadré chaque chromosome et affiché leur numéro.
 
 ```{r}
 #| message: false
 #| warning: false
 
-# heatmap avec les chromosomes associes
+# heatmap avec les chromosomes associés
 circos.clear()
 circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
                split=split, col=col_fun1, track.height=0.4,
@@ -844,7 +844,7 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 #| message: false
 #| warning: false
 
-# heatmap avec les chromosomes et les noms des genes
+# heatmap avec les chromosomes et les noms des gènes
 circos.clear()
 circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
                split = split, col = col_fun1, track.height = 0.4,
@@ -892,8 +892,8 @@ Sélectionnez les chromosomes 1, 3, 6, 11, 17 et 19.
 
 ```{r}
 #| eval=FALSE
-x <- c("XXX") # vecteur des chromosomes que l'on souhaite selectionner
-data_chr <- gene.exp2[gene.exp2$chr %in% x, ] # dataframe avec nos chromosomes selectionnes
+x <- c("XXX") # vecteur des chromosomes que l'on souhaite sélectionner
+data_chr <- gene.exp2[gene.exp2$chr %in% x, ] # dataframe avec nos chromosomes sélectionnés
 
 
 # Convertion en matrice
@@ -987,12 +987,12 @@ zoom = c(1, 22, 939245.5, 154143883, 0, 180)
 
 ######  Moitié droite du cercle ##########
 
-# mettre les chromosomes et l'emplacement des genes
+# mettre les chromosomes et l'emplacement des gènes
 circos(type="chr", R=400, cir="hg18", W=4,
        print.chr.lab=TRUE, scale=TRUE, zoom=zoom)
 
 
-# creation de la heatmap
+# création de la heatmap
 circos(type="heatmap2", R=300, cir="hg18", W=100,
        mapping=gene.exp, col.v=4, cluster=FALSE,
        col.bar=TRUE, lwd=0.01, zoom=zoom)
@@ -1002,14 +1002,11 @@ circos(type="ml3", R=220, cir="hg18", W=80, mapping=cnv,
        col.v=4, B=FALSE, lwd=1, cutoff=0,
        zoom=zoom)
 
-# creation de l'histogramme
+# création de l'histogramme
 circos(type="h", R=140, cir="hg18", W=80, mapping=cnv,
        col.v=4, B=TRUE, lwd=1, col=colors[1],
        zoom=zoom)
 
-# lien entre certains genes
-circos(type="link", R=130, cir="hg18", W=10,
-       mapping=TCGA.BC.fus, lwd=2, zoom=zoom)
 
 # Mise en valeur des chromosomes 11 et 17
 the.col1 = rainbow(10, alpha=0.5)[1]
@@ -1087,7 +1084,6 @@ De l'extérieur vers l'intérieur, vous pouvez trouver :
 
 -   des histogrammes pour observer la dispersion de la loi de distribution
 
--   des liaisons entre les protéines de fusion (tracées avec l'algorithme de courbe de Bézier)
 
 
 
