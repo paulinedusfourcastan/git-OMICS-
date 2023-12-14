@@ -1082,7 +1082,7 @@ De l'extérieur vers l'intérieur, vous pouvez trouver :
 
 -   le nombre de copies de chaque gènes par rapport à la normale (rouge : gain, bleu : perte)
 
--   des histogrammes pour observer la dispersion de la loi de distribution
+-   des histogrammes pour observer la dispersion des distributions
 
 
 
