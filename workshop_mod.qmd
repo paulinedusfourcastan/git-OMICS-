@@ -5,15 +5,16 @@ format:
     page-layout: full
 ---
 
-# Introduction
+# Présentation du workshop
 
-Ce workshop MOD a été effectué par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
+Ce workshop [MOD](https://montpellier-omics-days.fr/) a été effectué par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
 
 * [Rim Alhajal](rim.alhajal@etu.umontpellier.fr) (**rim.alhajal@etu.umontpellier.fr**)
 * [Abdoulaye Diop](abdoulaye.diop03@etu.umontpellier.fr) (**abdoulaye.diop03@etu.umontpellier.fr**)
 * [Pauline Dusfour-Castan](pauline.dusfour-castan@etu.umontpellier.fr) (**pauline.dusfour-castan@etu.umontpellier.fr**)
 * [Lilou Zulewski](lilou.zulewski01@etu.umontepllier.fr) (**lilou.zulewski01@etu.umontpellier.fr**)
 
+En génomique, les bases de données à étudier sont généralement très grandes : des visualisations exploratoires permettent de les aborder. Cependant, ces visualisations deviennent complexes dû à la dimension ce qui réduit l’accès aux informations significatives, nuisant aux interprétations. L’objectif de ce workshop est d’améliorer vos compétences en visualisation des données appliquées au cancer du sein.
 
 # Données {#basesdedonnées}
 
