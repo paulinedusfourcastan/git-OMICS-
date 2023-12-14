@@ -17,25 +17,7 @@ Ce workshop MOD a été effectué par des étudiants du [master Statistiques et 
 
 # Données {#basesdedonnées}
 
-Les données utilisées dans ce Workshop sont disponibles dans la librairie `OmicCircos` de R. Elles reposent sur les bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA) contenant des données de patients atteints d'un cancer du sein. Voici la liste des tableaux utilisés :
-
-* **TCGA.BC.cnv.2k.60** : Les variables de ce tableau sont respectivement le chromosome, sa position, le nom du gène observé ainsi que $60$ autres variables représentant $60$ individus différents.
-
-* **TCGA.BC.fus** : Ce tableau contient les données de fusion de gènes pour un individu précis.
-
-```{r}
-#| echo: false
-#| message: false
-library(OmicCircos)
-data(TCGA.BC.fus)
-head(TCGA.BC.fus)
-```
-
-* **TCGA.BC.gene.exp.2k.60** : Sur $60$ individus, oune métrique liée à l'expression génique et le chromosome, sa position et le nom du gène observé sont consignés.
-
-* **TCGA.BC.sample60** : Ce tableau référence le type de cancer (Normal, LumA, LumB, Basal ou Her2) dont sont atteints $60$ personnes.
-
-* **TCGA.BC_Her2_cnv_exp** : Dans ce tableau, les *t-value* et *p-value* de tests statistiques et les métriques FDR et Bonferroni sont référencées.
+Les données utilisées dans ce Workshop sont disponibles dans la librairie `OmicCircos` de `R`. Elles reposent sur les bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA) contenant des données de patients atteints d'un cancer du sein. Voici la liste des tableaux utilisés :
 
 * **TCGA.PAM50_genefu_hg18** : Ce tableau contient un ensemble de 50 gènes identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (Normal, LumA, LumB, Basal ou Her2) en fonction des schémas d'expression génique.
 
@@ -47,14 +29,32 @@ data(TCGA.PAM50_genefu_hg18)
 head(TCGA.PAM50_genefu_hg18)
 ```
 
+* **TCGA.BC.fus** : Ce tableau contient les données de fusion de gènes pour un individu précis.
+
+```{r}
+#| echo: false
+#| message: false
+library(OmicCircos)
+data(TCGA.BC.fus)
+head(TCGA.BC.fus)
+```
+
+* **TCGA.BC.cnv.2k.60** : Les variables de ce tableau sont respectivement le chromosome, sa position, le nom du gène observé ainsi que $60$ autres variables représentant $60$ individus différents.
+
+* **TCGA.BC.gene.exp.2k.60** : Sur $60$ individus, une métrique liée à l'expression génique et le chromosome, sa position et le nom du gène observé sont consignés.
+
+* **TCGA.BC.sample60** : Ce tableau référence le type de cancer (Normal, LumA, LumB, Basal ou Her2) dont sont atteints $60$ personnes.
+
+* **TCGA.BC_Her2_cnv_exp** : Dans ce tableau, les *t-value* et *p-value* de tests statistiques et les métriques FDR et Bonferroni sont référencées.
+
 
 # Recueil des données
 
 Afin de mettre en oeuvre les différentes méthodes de visualisation, il nous faut d'abord recueillir les données et les mettre en forme. Pour cela, suivez les étapes présentées ci-dessous :
 
--   **ÉTAPE 1** : Chargement de la librairie `Omiccircos`
+-   **ÉTAPE 1** : Chargement de la librairie `OmicCircos`
 
-Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installer à partir du [CRAN](https://cran.r-project.org/web/packages/) puis l'appeler à l'aide de la fonction `library()`.
+Pour pouvoir utiliser une librairie, il faut tout d'abord l'avoir installé à partir du [CRAN](https://cran.r-project.org/web/packages/) puis l'appeler à l'aide de la fonction `library()`.
 
 ```{r}
 library(OmicCircos)
@@ -70,7 +70,6 @@ data("TCGA.BC.fus")
 data("TCGA.BC.cnv.2k.60")
 data("TCGA.BC.gene.exp.2k.60")
 data("TCGA.BC.sample60")
-data("TCGA.BC_Her2_cnv_exp")
 ```
 
 -   **ÉTAPE 3** : Mise en forme des données
@@ -92,14 +91,14 @@ Her2.j = which(colnames(TCGA.BC.cnv.2k.60)%in%Her2.n)
 # pour chaque individus presentant un cancer Her2
 cnv = TCGA.BC.cnv.2k.60[,c(1:3,Her2.j)]
 
-# data cnv auquel on a enlevé les 3 premiere colonnes
+# data cnv auquel on a enlevé les 3 premieres colonnes
 cnv.m = cnv[,c(4:ncol(cnv))]
 
 # bornage des valeurs >2 et <-2
 cnv.m[cnv.m > 2] = 2
 cnv.m[cnv.m < -2] = -2
 
-# on ajoute aux 3 première colonne de cnv nos données bornées
+# on ajoute aux 3 premières colonnes de cnv nos données bornées
 cnv = cbind(cnv[,1:3], cnv.m)
 
 #  extraction des colonnes 1 à 3 de TCGA.BC.gene.exp.2k.60
@@ -109,7 +108,7 @@ gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
 
 # Visualisations classiques
 
-L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie `ggplot2` de R. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes.
+L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie `ggplot2` de `R`. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes.
 
 L'ensemble des visualisations de cette partie s'appuient sur la base de données [*TCGA.PAM50_genefu_hg18*](#basesdedonnées) et nécessite le chargement de divers packages.
 
@@ -124,70 +123,14 @@ library(viridisLite)
 library(hrbrthemes)
 ```
 
-Les visualisations permettent d'étudier les différents types de cancer présentés dans le [lexique#](#lexique).
+Les visualisations permettent d'étudier les différents types de cancer présentés dans le [lexique](#lexique).
 
-
-## Visualisation des 10 premières observations des données
-
-
-
-
-```{r}
-#| code-fold: true
-#| code-summary: "Voir le diagramme en barre"
-#| output: true
-
-data(TCGA.PAM50_genefu_hg18)
-df<-TCGA.PAM50_genefu_hg18
-# Pour voir mieux, j'ai affiché que les 10 premières lignes du dataset. Si vous voulez voir plus, vous pouvez mettre en commentaire la ligne suivante.
-df<-df[1:10,]
-df_long <- df %>%
-  gather(key = "Subtype", value = "Expression", -chr, -po, -Gene)
-
-ggplot(df_long, aes(x = Gene, y = Expression, fill = Subtype)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Expression génique des gènes dans les sous-catégories de cancer du sein",
-       x = "Gène", y = "Expression génique") +
-  theme_minimal()
-
-```
-
-## Utilisation de `plotly`
-
-`Plotly` est une bibliothèque graphique interactive qui permet de créer des graphiques interactifs dans le langage de programmation R. Elle offre la possibilité de créer des graphiques tels que des diagrammes en barres, des diagrammes circulaires, des graphiques en nuage de points et bien d'autres, tout en permettant aux utilisateurs d'explorer et d'interagir avec les graphiques directement.
-
-* Faisons un heatmap pour mieux voir les données dans l'ensemble
-
-
-```{r}
-#| code-fold: true
-#| code-summary: "Voir le heatmap pour chaque type de cancer"
-#| output: true
-
-df<-TCGA.PAM50_genefu_hg18
-df_long <- df %>%
-  gather(key = "Subtype", value = "Expression", -chr, -po, -Gene)
-
-# Créer le graphique ggplot
-heatmap_plot <- ggplot(df_long, aes(x = Gene, y = Subtype, fill = Expression)) +
-  geom_tile() +
-  labs(title = "Heatmap de l'expression génique dans les sous-catégories de cancer du sein",
-       x = "Gène", y = "Sous-type de cancer du sein") +
-  theme_minimal()
-
-# Convertir le graphique ggplot en heatmap interactif avec plotly
-heatmap_interactif <- ggplotly(heatmap_plot, tooltip = "all")
-
-# Afficher le heatmap interactif
-heatmap_interactif
-
-```
 
 ## Utilisation de `ggplot2`
 
 Le package `ggplot2` fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelles.
 
-![Schéma Explicatif de l'Utilisation de `ggplot`](./images/schema_ggplot.png)
+![](./images/schema_ggplot.png)
 
 ::: {.callout-important appearance="simple"}
 Il ne faut pas oublier le `+` entre les couches successives.
@@ -221,7 +164,7 @@ print(comparaison)
 ```
 
 ::: {.callout-note appearance="simple"}
-## %>%
+## `%>%`
 Cet opérateur est un pipe, fréquemment représenté par une barre verticale `|` dans les terminaux : il renvoie la sortie d’une commande vers l’entrée d’une autre.
 :::
 
@@ -245,7 +188,7 @@ comparaison <- data %>%
 print(comparaison)
 ```
 
-De nombreuses options de `ggplot` peuvent améliorer l'apparence générale des graphes. Dans l'exemple ci-dessous, vous pouvez retrouver respectivement la définission manuelle des couleurs, l'option de non-affichage de la légende associée à la coloration en fonction du type, ainsi que la personnalisation des éléments de texte et des légendes. Enfin, l'option `alpha` de `geom_density` règle la transparence de remplissage sous les courbes de densité.
+De nombreuses options de `ggplot` peuvent améliorer l'apparence générale des graphes. Dans l'exemple ci-dessous, vous pouvez retrouver respectivement la définition manuelle des couleurs, l'option de non-affichage de la légende associée à la coloration en fonction du type, ainsi que la personnalisation des éléments de texte et des légendes. Enfin, l'option `alpha` de `geom_density` règle la transparence de remplissage sous les courbes de densité.
 
 ```{r}
 # création du graphe
@@ -272,7 +215,7 @@ comparaison <- data %>%
 print(comparaison)
 ```
 
-À l'aide de ce graphe, nous pouvons remarquer que l'ARNmessager des gènes des deux types de cancer *LumA* et *LumB* ne s'expriment pas de la même façon. En effet, celui de *LumA* présente un pic autour de $-0.5$ tandis que celui de *LumB* présente un pic légèrement plus haut autour de $0.4$.
+À l'aide de ce graphe, nous pouvons remarquer que l'ARNmessager des gènes des deux types de cancer *LumA* et *LumB* ne s'exprime pas de la même façon. En effet, celui de *LumA* présente un mode autour de $-0.5$ tandis que celui de *LumB* présente un mode légèrement plus haut autour de $0.4$.
 
 Il est également possible de représenter les densités sur deux graphes différents en utilisant la commande `facet_wrap(~XXX)`.
 
@@ -311,7 +254,7 @@ print(comparaison)
 
 ### À vous de jouer
 
-**En vous appuyant sur l'exemple précédent, remplissez les trous du code ci-dessous afin de représenter graphiquement la comparaison des densités densités d'expression d'ARNmessager pour les gènes des types de cancer *Her2* et *Normal*.**
+**En vous appuyant sur l'exemple précédent, remplissez les trous du code ci-dessous afin de représenter graphiquement la comparaison des densités d'expression d'ARNmessager pour les gènes des types de cancer *Her2* et *Normal*.**
 
 ::: {.callout-note appearance="simple"}
 Les données relatives aux cancer de type *Normal* sont contenues dans la variable *Normal* de la base de données.
@@ -389,7 +332,7 @@ comparaison <- data %>%
 print(comparaison)
 ```
 
-La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup plus étalée que celle du type de cancer *Her2* et se mélange ainsi facilement dans les profils génomiques des autres types de cancer. Ce graphique met alors en évidence la rareté du type de cancer *Normal* et la difficulté à le classer.
+La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup plus dispersée que celle du type de cancer *Her2* et se mélange ainsi facilement dans les profils génomiques des autres types de cancer. Ce graphique met alors en évidence la difficulté à distinguer le cancer de type *Normal* des autres types de cancer.
 
 ## Comparaison de toutes les densités
 
@@ -718,20 +661,20 @@ En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous re
 
 L'objectif de cette partie est de réaliser des heatmap intéractives représentant les observations.
 
-La librairie `heatmaply` dont nous allons nous servir est incluse dans la librairie `plotly` ([plotly](https://plotly-r.com/overview)) qui est une librairie permettant d'inclure de l'interactivité dans les graphiques.
+La librairie `heatmaply` dont nous allons nous servir est incluse dans l'écosystème de `plotly` ([plotly](https://plotly-r.com/overview)) qui est un outil permettant d'inclure de l'interactivité dans les graphiques.
 
-Dans notre exemple de heatmap, vous pourrez notament connaître la valeur d'une cellule en faisant simplement glisser votre souris dessus, zommer sur sur les cellules et se déplacer dans la figure.
+Dans notre exemple de heatmap, vous pourrez notament connaître la valeur d'une cellule en faisant simplement glisser votre souris dessus, zoommer sur les cellules et se déplacer dans la figure.
 
-Pour cette première visualisation, il vous faut donc charger la librairie "heatmaply" et faire un choix de gradient de couleurs à l'aide des commandes suivantes :
+Pour cette première visualisation, il vous faut donc charger la librairie `heatmaply` et faire un choix de gradient de couleurs à l'aide des commandes suivantes :
 
 ```{r}
 #| warning : FALSE
 #| message : FALSE
-#| results: hide
-#| output: false
+#| output: true
 library(heatmaply)
 gradient_col <- ggplot2::scale_fill_gradient2(
   low = "blue", high = "red", midpoint = 0, limits = c(-8, 8))
+print(gradient_col)
 ```
 
 Vous pouvez trouver ci-joint deux sites donnant des exemples d'utilisation et de l'aide sur la librairie heatmaply :
@@ -749,26 +692,26 @@ Prenons ici le chromosome numéro 1.
 # on selectionne le chromosome souhaité dans notre dataframe
 chr1 <- subset(gene.exp, gene.exp$chr==1)
 
-# on selectionne les colonnes qui nous interessent
+# on selectionne les colonnes qui nous intéressent
 mydata_1 <- chr1[, 3:18]
 
 # nom des lignes
 rownames(mydata_1) <- mydata_1[, 1]
 
-# on supprime la première colonne qui ne nous interesse plus
+# on supprime la première colonne qui ne contient que des 1
 mydata_1 <- mydata_1[, -1]
 ```
 
-Création de la heatmap à l'aide de heatmaply :
+Création de la heatmap à l'aide de `heatmaply` :
 
 ```{r}
-heatmaply(mydata_1, scale_fill_gradient_fun = gradient_col,
-          Colv=NA, Rowv=NA, scale='none', limits = c(-8, 8),
-          xlab = "Individus",ylab = "Gènes",
-          main = "Expression des gènes du chromosome 1")
+heatmaply(mydata_1, scale_fill_gradient_fun=gradient_col,
+          Colv=NA, Rowv=NA, scale='none', limits=c(-8, 8),
+          xlab="Individus", ylab="Gènes",
+          main="Expression des gènes du chromosome 1")
 ```
 
-La heatmap ci-dessus nous donne visuellement une idée de l'expression de chaque gène du chromosome 1. On observe que dans la majorité des cas le gène "CLCA2" est sur-exprimé (les cellules apparaissent très rouges), et les gènes "PDZK1" "DLANI1" sont sous-exprimés (les cellules apparaissent plutôt bleutées).
+La heatmap ci-dessus nous donne visuellement une idée de l'expression de chaque gène du chromosome 1. On observe que dans la majorité des cas le gène *CLCA2* est sur-exprimé (les cellules apparaissent très rouges), et les gènes *PDZK1* *DLANI1* sont sous-exprimés (les cellules apparaissent plutôt bleutées).
 
 ::: {.callout-note appearance="simple"}
 Vous pouvez choisir d'afficher les corrélations avec la fonction `heatmaply_cor()` ou les valeurs manquantes avec la fonction `heatmaply_na()`.
@@ -854,13 +797,13 @@ Création des heatmap circulaires :
 ```{r}
 ## Affichage des heatmaps
 circos.clear()
-circos.par(start.degree = 90, gap.degree = 3)
+circos.par(start.degree=90, gap.degree=3)
 col_fun1 = colorRamp2(c(-6, 0, 6), c("blue", "white", "red"))
 
 # heatmap simple
 circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
-               split = split,
-               col = col_fun1)
+               split=split,
+               col=col_fun1)
 
 ```
 
@@ -873,9 +816,9 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 # heatmap avec les chromosomes associes
 circos.clear()
 circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
-               split = split, col = col_fun1, track.height = 0.4,
-               bg.border = "green", bg.lwd = 2, bg.lty = 2,
-               show.sector.labels = TRUE)
+               split=split, col=col_fun1, track.height=0.4,
+               bg.border="green", bg.lwd=2, bg.lty=2,
+               show.sector.labels=TRUE)
 
 ```
 
@@ -1004,9 +947,9 @@ Vous pouvez consulter le lien suivant si vous souhaitez en apprendre plus sur le
 
 # Visualisation avec Circos
 
-A présent, nous allons réaliser une visualisation circulaire à l'aide du package `omicCircos` et de la fonction`circos`.
+A présent, nous allons réaliser une visualisation circulaire à l'aide du package `OmicCircos` et de la fonction `circos()`.
 
-Vous pouvez trouver de l'aide au package OmicCircos aux liens suivants :
+Vous pouvez trouver de l'aide au package `OmicCircos` aux liens suivants :
 
 -   [Aide du package](https://bioc.ism.ac.jp/packages/3.7/bioc/manuals/OmicCircos/man/OmicCircos.pdf)
 
@@ -1023,59 +966,59 @@ colors = rainbow(10, alpha = 0.5)   # choix des couleurs
 #pdf("visucomp_histo.pdf", 8,8) # nom de l'image
 #par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
 
-plot(c(1,800), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "")
+plot(c(1,800), c(1,800), type="n", axes=FALSE, xlab="", ylab="", main="")
 zoom = c(1, 22, 939245.5, 154143883, 0, 180)
 
 ######  Moitié droite du cercle ##########
 
 # mettre les chromosomes et l'emplacement des genes
-circos(type = "chr", R = 400, cir = "hg18", W = 4,
-       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
+circos(type="chr", R=400, cir="hg18", W=4,
+       print.chr.lab=TRUE, scale=TRUE, zoom=zoom)
 
 
 # creation de la heatmap
-circos(type = "heatmap2", R = 300, cir = "hg18", W = 100,
-       mapping = gene.exp, col.v = 4, cluster = FALSE,
-       col.bar = TRUE, lwd = 0.01, zoom = zoom)
+circos(type="heatmap2", R=300, cir="hg18", W=100,
+       mapping=gene.exp, col.v=4, cluster=FALSE,
+       col.bar=TRUE, lwd=0.01, zoom=zoom)
 
 # nombre de copies (gain_rouge, perte_bleu)
-circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
-       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
-       zoom = zoom)
+circos(type="ml3", R=220, cir="hg18", W=80, mapping=cnv,
+       col.v=4, B=FALSE, lwd=1, cutoff=0,
+       zoom=zoom)
 
 # creation de l'histogramme
-circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
-       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
-       zoom = zoom)
+circos(type="h", R=140, cir="hg18", W=80, mapping=cnv,
+       col.v=4, B=TRUE, lwd=1, col=colors[1],
+       zoom=zoom)
 
 # lien entre certains genes
-circos(type = "link", R = 130, cir = "hg18", W = 10,
-       mapping = TCGA.BC.fus, lwd = 2, zoom = zoom)
+circos(type="link", R=130, cir="hg18", W=10,
+       mapping=TCGA.BC.fus, lwd=2, zoom=zoom)
 
 # Mise en valeur des chromosomes 11 et 17
-the.col1 = rainbow(10, alpha = 0.5)[1]
+the.col1 = rainbow(10, alpha=0.5)[1]
 highlight = c(140, 400, 11, 282412.5, 11, 133770314.5, the.col1, the.col1)
 
-circos(type = "hl", R = 110, cir = "hg18", W = 40,
-       mapping = highlight, lwd = 2, zoom = zoom)
+circos(type="hl", R=110, cir="hg18", W=40,
+       mapping=highlight, lwd=2, zoom=zoom)
 
-the.col2 = rainbow(10, alpha = 0.5)[6];
+the.col2 = rainbow(10, alpha=0.5)[6];
 highlight = c(140, 400, 17, 739525, 17, 78385909, the.col2, the.col2)
 
-circos(type = "hl", R = 110, cir = "hg18", W = 40,
-       mapping = highlight, lwd = 2, zoom = zoom)
+circos(type="hl", R=110, cir="hg18", W=40,
+       mapping=highlight, lwd=2, zoom=zoom)
 
 highlight.link1 = c(400, 400, 140, 376.8544, 384.0021,
                     450, 540.5)
 
-circos(type = "highlight.link", cir = "hg18",
-       mapping = highlight.link1, col = the.col1, lwd = 1)
+circos(type="highlight.link", cir="hg18",
+       mapping=highlight.link1, col=the.col1, lwd=1)
 
 highlight.link2 = c(400, 400, 140, 419.1154, 423.3032,
                     543, 627)
 
-circos(type = "highlight.link", cir = "hg18",
-       mapping = highlight.link2, col = the.col2, lwd = 1)
+circos(type="highlight.link", cir="hg18",
+       mapping=highlight.link2, col=the.col2, lwd=1)
 
 
 ####### Moitié gauche du cercle #######
@@ -1098,9 +1041,6 @@ circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
        col.v = 4, B = TRUE, lwd = 1, col = colors[1],
        zoom = zoom)
 
-
-
-
 # Chromosome 17
 zoom = c(17, 17, 739525, 78385909, 274, 356)
 
@@ -1119,10 +1059,6 @@ circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
        col.v = 4,  B = TRUE, lwd = 1, col = colors[1],
        zoom = zoom)
 
-
-
-
-
 ```
 
 De l'extérieur vers l'intérieur, vous pouvez trouver :
@@ -1136,8 +1072,6 @@ De l'extérieur vers l'intérieur, vous pouvez trouver :
 -   des histogrammes pour observer la dispersion de la loi de distribution
 
 -   des liaisons entre les protéines de fusion (tracées avec l'algorithme de courbe de Bézier)
-
-
 
 
 
@@ -1157,6 +1091,27 @@ De l'extérieur vers l'intérieur, vous pouvez trouver :
 
 * **Bonferroni** : Cette correction statistique permet d'ajuster le niveau de confiance de chaque intervalle pour que le niveau de confiance simultané ne soit pas erroné.
 
+## Graphiques supplémentaires
 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Voir le diagramme en barre"
+#| output: true
+
+data(TCGA.PAM50_genefu_hg18)
+df<-TCGA.PAM50_genefu_hg18
+# Pour voir mieux, j'ai affiché que les 10 premières lignes du dataset. Si vous voulez voir plus, vous pouvez mettre en commentaire la ligne suivante.
+df<-df[1:10,]
+df_long <- df %>%
+  gather(key = "Subtype", value = "Expression", -chr, -po, -Gene)
+
+ggplot(df_long, aes(x = Gene, y = Expression, fill = Subtype)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Expression génique des gènes dans les sous-catégories de cancer du sein",
+       x = "Gène", y = "Expression génique") +
+  theme_minimal()
+
+```
 
 
