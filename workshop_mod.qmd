@@ -153,7 +153,7 @@ Il ne faut pas oublier le `+` entre les couches successives.
 
 Commençons par étudier certaines densités relatives aux  types de cancer du sein deux à deux afin d'en retirer leurs différences.
 
-Voici un exemple très basique de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** qui sont ceux les plus communs :
+Voici un exemple très simple de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** qui sont ceux les plus communs :
 
 ```{r}
 #| output: false
