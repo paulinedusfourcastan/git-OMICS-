@@ -18,7 +18,7 @@ En génomique, les bases de données à étudier sont généralement très grand
 
 # Données {#basesdedonnées}
 
-Les données utilisées dans ce Workshop sont disponibles dans la librairie `OmicCircos` de `R`. Elles reposent sur les bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA) contenant des données de patients atteints de différents sous-types de cancer du sein (Normal, LumA, LumB, Basal ou Her2) présentés présentés dans le [lexique](#lexique). Voici la liste des tableaux utilisés :
+Les données utilisées dans ce Workshop sont disponibles dans la librairie `OmicCircos` de `R`. Elles reposent sur les bases de données fournies par ***The Cancer Genome Atlas Program*** (TCGA) contenant des données de patients atteints de différents sous-types de cancer du sein (Normal, LumA, LumB, Basal ou Her2) présentés dans le [lexique](#lexique). Voici la liste des tableaux utilisés :
 
 * **TCGA.PAM50_genefu_hg18** : Ce tableau contient un ensemble de 50 gènes identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (Normal, LumA, LumB, Basal ou Her2) en fonction des schémas d'expression génique.
 
