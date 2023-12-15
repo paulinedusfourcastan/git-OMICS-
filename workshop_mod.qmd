@@ -143,7 +143,6 @@ Les visualisations permettent d'étudier les différents types de cancer présen
 Le package `ggplot2` fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelles.
 
 ![](./images/schema_ggplot.png)
-![](./images/nouveau%20schema.png)
 
 ::: {.callout-important appearance="simple"}
 Il ne faut pas oublier le `+` entre les couches successives.
