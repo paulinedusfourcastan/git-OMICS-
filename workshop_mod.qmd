@@ -7,7 +7,7 @@ format:
 
 # Présentation du workshop
 
-Ce workshop [MOD](https://montpellier-omics-days.fr/) a été effectué par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
+Ce workshop s'inscrit dans le cadre des journées [Montpellier Omics Days](https://montpellier-omics-days.fr/) organisées par les étudiants du [Master Bioinformatique](https://formations.umontpellier.fr/fr/formations/master-lmd-XB/master-bioinformatique-KKI9GZEV.html) et a été effectué par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
 
 * Rim Alhajal : **rim.alhajal@etu.umontpellier.fr**
 * Pauline Dusfour-Castan : **pauline.dusfour-castan@etu.umontpellier.fr**
