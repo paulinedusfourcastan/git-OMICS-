@@ -757,7 +757,7 @@ heatmaply(mydata_17, scale_fill_gradient_fun=gradient_col,
 L'objectif de cette seconde partie sur les heatmap est de réaliser des heatmap circulaires avec dendrogrammes.
 
 ::: {.callout-note apparance="simple"}
-La méthode de clustering appliquée est `hclust` soit une méthode de classiification hierarchique, la distance utilisée par défaut est celle de Ward.
+La méthode de clustering appliquée est `hclust` soit une méthode de classification hierarchique, la distance utilisée par défaut est celle de Ward.
 Vous pouvez trouver des informations sur `hclust`au [Lien suivant](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/hclust) et sur la classification hierarchique [ici](https://larmarange.github.io/analyse-R/classification-ascendante-hierarchique.html) et [ici](https://pbil.univ-lyon1.fr/R/pdf/stage7.pdf).
 :::
 
