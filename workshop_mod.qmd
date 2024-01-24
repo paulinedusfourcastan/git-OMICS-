@@ -972,76 +972,78 @@ Vous pouvez trouver de l'aide au package `OmicCircos` aux liens suivants :
 
 -   [Zoom sur des secteurs](https://jokergoo.github.io/circlize_book/book/advanced-layout.html#zooming-of-sectors)
 
+Voici la réalisation finale que nous allons décortiquer étape par étape.
+
 ```{r, circos}
+#| echo: false
 
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
 
-colors <- rainbow(10, alpha = 0.5)   # choix des couleurs
-
-# Si vous souhaitez enregistrer votre image sous forme de pdf
+# Si vous souhaitez enregistrer votre image sous forme de pdf 
 #pdf("visucomp_histo.pdf", 8,8) # nom de l'image
-#par(mar=c(2, 2, 2, 2))  # definition de la fenetre graphique
-
-plot(c(1,800), c(1,800), type="n", axes=FALSE, xlab="", ylab="", main="")
-zoom <- c(1, 22, 939245.5, 154143883, 0, 180)
+#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+ 
+plot(c(1,1000), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+zoom = c(1, 22, 939245.5, 154143883, 0, 180)
 
 ######  Moitié droite du cercle ##########
 
-# mettre les chromosomes et l'emplacement des gènes
-circos(type="chr", R=400, cir="hg18", W=4,
-       print.chr.lab=TRUE, scale=TRUE, zoom=zoom)
+# mettre les chromosomes et l'emplacement des genes
+circos(type = "chr", R = 400, cir = "hg18", W = 3.5, 
+       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
 
 
-# création de la heatmap
-circos(type="heatmap2", R=300, cir="hg18", W=100,
-       mapping=gene.exp, col.v=4, cluster=FALSE,
-       col.bar=TRUE, lwd=0.01, zoom=zoom)
+# creation de la heatmap
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+       col.bar = TRUE, lwd = 0.01, zoom = zoom)
 
 # nombre de copies (gain_rouge, perte_bleu)
-circos(type="ml3", R=220, cir="hg18", W=80, mapping=cnv,
-       col.v=4, B=FALSE, lwd=1, cutoff=0,
-       zoom=zoom)
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
 
-# création de l'histogramme
-circos(type="h", R=140, cir="hg18", W=80, mapping=cnv,
-       col.v=4, B=TRUE, lwd=1, col=colors[1],
-       zoom=zoom)
+# creation de l'histogramme
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
 
 
 # Mise en valeur des chromosomes 11 et 17
-the.col1 = rainbow(10, alpha=0.5)[1]
-highlight = c(140, 400, 11, 282412.5, 11, 133770314.5, the.col1, the.col1)
+highlight = c(140, 400, 11, 282412.5, 11, 133770314.5, "#FFFF0080", "#FFFF0080")
 
-circos(type="hl", R=110, cir="hg18", W=40,
-       mapping=highlight, lwd=2, zoom=zoom)
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#FFFF0080")
 
-the.col2 = rainbow(10, alpha=0.5)[6];
-highlight = c(140, 400, 17, 739525, 17, 78385909, the.col2, the.col2)
+highlight = c(140, 400, 17, 739525, 17, 78385909, "#00FF0080", "#00FF0080")
 
-circos(type="hl", R=110, cir="hg18", W=40,
-       mapping=highlight, lwd=2, zoom=zoom)
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#00FF0080")
 
 highlight.link1 = c(400, 400, 140, 376.8544, 384.0021,
                     450, 540.5)
 
-circos(type="highlight.link", cir="hg18",
-       mapping=highlight.link1, col=the.col1, lwd=1)
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link1, col = "#FFFF0080", lwd = 1)
 
 highlight.link2 = c(400, 400, 140, 419.1154, 423.3032,
                     543, 627)
 
-circos(type="highlight.link", cir="hg18",
-       mapping=highlight.link2, col=the.col2, lwd=1)
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link2, col = "#00FF0080", lwd = 1)
 
 
 ####### Moitié gauche du cercle #######
 
-# Chromosome 11
+# Chromosome 11 
 zoom = c(11, 11, 282412.5, 133770314.5, 180, 270)
 
-circos(type = "chr",R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE,
+circos(type = "chr",R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
        scale = TRUE, zoom = zoom)
 
-circos(type = "heatmap2", R = 300, cir = "hg18", W = 100,
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
        mapping = gene.exp, col.v = 4, cluster = FALSE, lwd = 0.01,
        zoom = zoom)
 
@@ -1053,13 +1055,16 @@ circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
        col.v = 4, B = TRUE, lwd = 1, col = colors[1],
        zoom = zoom)
 
-# Chromosome 17
+
+
+
+# Chromosome 17 
 zoom = c(17, 17, 739525, 78385909, 274, 356)
 
-circos(type = "chr", R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE,
+circos(type = "chr", R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
        scale = TRUE, zoom = zoom)
 
-circos(type = "heatmap2", R = 300, cir = "hg18", W = 100,
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
        mapping = gene.exp, col.v = 4,  cluster = FALSE, lwd = 0.01,
        zoom = zoom)
 
@@ -1072,8 +1077,492 @@ circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
        zoom = zoom)
 
 ```
+-   Placement des chromosomes et des gènes
 
-De l'extérieur vers l'intérieur, vous pouvez trouver :
+```{r, circos1}
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
+
+# Si vous souhaitez enregistrer votre image sous forme de pdf 
+#pdf("visucomp_histo.pdf", 8,8) # nom de l'image
+#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+ 
+plot(c(1,1000), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+zoom = c(1, 22, 939245.5, 154143883, 0, 180)
+
+######  Moitié droite du cercle ##########
+
+# mettre les chromosomes et l'emplacement des genes
+circos(type = "chr", R = 400, cir = "hg18", W = 3.5, 
+       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
+```
+
+-   Création de heatmap
+
+```{r, circos2}
+#| eval: false
+
+# creation de la heatmap
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+       col.bar = TRUE, lwd = 0.01, zoom = zoom)
+```
+
+
+```{r, circos3}
+#| echo: false
+
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
+
+# Si vous souhaitez enregistrer votre image sous forme de pdf 
+#pdf("visucomp_histo.pdf", 8,8) # nom de l'image
+#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+ 
+plot(c(1,1000), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+zoom = c(1, 22, 939245.5, 154143883, 0, 180)
+
+######  Moitié droite du cercle ##########
+
+# mettre les chromosomes et l'emplacement des genes
+circos(type = "chr", R = 400, cir = "hg18", W = 3.5, 
+       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
+
+
+# creation de la heatmap
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+       col.bar = TRUE, lwd = 0.01, zoom = zoom)
+```
+
+-   Ajout de l'étude du nombre de copies
+
+```{r, circos5}
+#| eval: false
+
+# nombre de copies (gain_rouge, perte_bleu)
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+```
+
+
+```{r, circos6}
+#| echo: false
+
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
+
+# Si vous souhaitez enregistrer votre image sous forme de pdf 
+#pdf("visucomp_histo.pdf", 8,8) # nom de l'image
+#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+ 
+plot(c(1,1000), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+zoom = c(1, 22, 939245.5, 154143883, 0, 180)
+
+######  Moitié droite du cercle ##########
+
+# mettre les chromosomes et l'emplacement des genes
+circos(type = "chr", R = 400, cir = "hg18", W = 3.5, 
+       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
+
+
+# creation de la heatmap
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+       col.bar = TRUE, lwd = 0.01, zoom = zoom)
+
+# nombre de copies (gain_rouge, perte_bleu)
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+```
+
+-   Création d'un histogramme
+
+```{r}
+#| eval: false
+
+# creation de l'histogramme
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+```
+
+```{r}
+#| echo: false
+
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
+
+# Si vous souhaitez enregistrer votre image sous forme de pdf 
+#pdf("visucomp_histo.pdf", 8,8) # nom de l'image
+#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+ 
+plot(c(1,1000), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+zoom = c(1, 22, 939245.5, 154143883, 0, 180)
+
+######  Moitié droite du cercle ##########
+
+# mettre les chromosomes et l'emplacement des genes
+circos(type = "chr", R = 400, cir = "hg18", W = 3.5, 
+       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
+
+
+# creation de la heatmap
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+       col.bar = TRUE, lwd = 0.01, zoom = zoom)
+
+# nombre de copies (gain_rouge, perte_bleu)
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+# creation de l'histogramme
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+```
+
+-   Zoom sur les chromosomes 11 et 17
+
+```{r}
+#| eval: false
+
+# Mise en valeur des chromosomes 11 et 17
+highlight = c(140, 400, 11, 282412.5, 11, 133770314.5, "#FFFF0080", "#FFFF0080")
+
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#FFFF0080")
+
+highlight = c(140, 400, 17, 739525, 17, 78385909, "#00FF0080", "#00FF0080")
+
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#00FF0080")
+
+highlight.link1 = c(400, 400, 140, 376.8544, 384.0021,
+                    450, 540.5)
+
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link1, col = "#FFFF0080", lwd = 1)
+
+highlight.link2 = c(400, 400, 140, 419.1154, 423.3032,
+                    543, 627)
+
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link2, col = "#00FF0080", lwd = 1)
+
+
+```
+
+```{r}
+
+
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
+
+# Si vous souhaitez enregistrer votre image sous forme de pdf 
+#pdf("visucomp_histo.pdf", 8,8) # nom de l'image
+#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+ 
+plot(c(1,1000), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+zoom = c(1, 22, 939245.5, 154143883, 0, 180)
+
+######  Moitié droite du cercle ##########
+
+# mettre les chromosomes et l'emplacement des genes
+circos(type = "chr", R = 400, cir = "hg18", W = 3.5, 
+       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
+
+
+# creation de la heatmap
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+       col.bar = TRUE, lwd = 0.01, zoom = zoom)
+
+# nombre de copies (gain_rouge, perte_bleu)
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+# creation de l'histogramme
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+
+# Mise en valeur des chromosomes 11 et 17
+highlight = c(140, 400, 11, 282412.5, 11, 133770314.5, "#FFFF0080", "#FFFF0080")
+
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#FFFF0080")
+
+highlight = c(140, 400, 17, 739525, 17, 78385909, "#00FF0080", "#00FF0080")
+
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#00FF0080")
+
+highlight.link1 = c(400, 400, 140, 376.8544, 384.0021,
+                    450, 540.5)
+
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link1, col = "#FFFF0080", lwd = 1)
+
+highlight.link2 = c(400, 400, 140, 419.1154, 423.3032,
+                    543, 627)
+
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link2, col = "#00FF0080", lwd = 1)
+```
+
+Maintenant passons à la partie gauche du cercle :
+
+-   Pour le chromosome 11 :
+
+```{r}
+#| eval: false
+
+####### Moitié gauche du cercle #######
+
+# Chromosome 11 
+zoom = c(11, 11, 282412.5, 133770314.5, 180, 270)
+
+circos(type = "chr",R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
+       scale = TRUE, zoom = zoom)
+
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, lwd = 0.01,
+       zoom = zoom)
+
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+```
+
+```{r}
+#| echo: false
+
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
+
+# Si vous souhaitez enregistrer votre image sous forme de pdf 
+#pdf("visucomp_histo.pdf", 8,8) # nom de l'image
+#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+ 
+plot(c(1,1000), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+zoom = c(1, 22, 939245.5, 154143883, 0, 180)
+
+######  Moitié droite du cercle ##########
+
+# mettre les chromosomes et l'emplacement des genes
+circos(type = "chr", R = 400, cir = "hg18", W = 3.5, 
+       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
+
+
+# creation de la heatmap
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+       col.bar = TRUE, lwd = 0.01, zoom = zoom)
+
+# nombre de copies (gain_rouge, perte_bleu)
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+# creation de l'histogramme
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+
+# Mise en valeur des chromosomes 11 et 17
+highlight = c(140, 400, 11, 282412.5, 11, 133770314.5, "#FFFF0080", "#FFFF0080")
+
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#FFFF0080")
+
+highlight = c(140, 400, 17, 739525, 17, 78385909, "#00FF0080", "#00FF0080")
+
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#00FF0080")
+
+highlight.link1 = c(400, 400, 140, 376.8544, 384.0021,
+                    450, 540.5)
+
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link1, col = "#FFFF0080", lwd = 1)
+
+highlight.link2 = c(400, 400, 140, 419.1154, 423.3032,
+                    543, 627)
+
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link2, col = "#00FF0080", lwd = 1)
+
+
+####### Moitié gauche du cercle #######
+
+# Chromosome 11 
+zoom = c(11, 11, 282412.5, 133770314.5, 180, 270)
+
+circos(type = "chr",R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
+       scale = TRUE, zoom = zoom)
+
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, lwd = 0.01,
+       zoom = zoom)
+
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+
+
+```
+
+-   Pour le chromosome 17 :
+
+```{r}
+#| eval: false
+
+# Chromosome 17 
+zoom = c(17, 17, 739525, 78385909, 274, 356)
+
+circos(type = "chr", R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
+       scale = TRUE, zoom = zoom)
+
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4,  cluster = FALSE, lwd = 0.01,
+       zoom = zoom)
+
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4,  B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4,  B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+
+```
+
+```{r}
+#| echo: false
+
+colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
+
+# Si vous souhaitez enregistrer votre image sous forme de pdf 
+#pdf("visucomp_histo.pdf", 8,8) # nom de l'image
+#par(mar = c(2, 2, 2, 2))  # definition de la fenetre graphique
+ 
+plot(c(1,1000), c(1,800), type = "n", axes = FALSE, xlab = "", ylab = "", main = "") 
+zoom = c(1, 22, 939245.5, 154143883, 0, 180)
+
+######  Moitié droite du cercle ##########
+
+# mettre les chromosomes et l'emplacement des genes
+circos(type = "chr", R = 400, cir = "hg18", W = 3.5, 
+       print.chr.lab = TRUE, scale = TRUE, zoom = zoom)
+
+
+# creation de la heatmap
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, 
+       col.bar = TRUE, lwd = 0.01, zoom = zoom)
+
+# nombre de copies (gain_rouge, perte_bleu)
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+# creation de l'histogramme
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+
+# Mise en valeur des chromosomes 11 et 17
+highlight = c(140, 400, 11, 282412.5, 11, 133770314.5, "#FFFF0080", "#FFFF0080")
+
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#FFFF0080")
+
+highlight = c(140, 400, 17, 739525, 17, 78385909, "#00FF0080", "#00FF0080")
+
+circos(type = "hl", R = 110, cir = "hg18", W = 40, 
+       mapping = highlight, lwd = 2, zoom = zoom, 
+       col="#00FF0080")
+
+highlight.link1 = c(400, 400, 140, 376.8544, 384.0021,
+                    450, 540.5)
+
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link1, col = "#FFFF0080", lwd = 1)
+
+highlight.link2 = c(400, 400, 140, 419.1154, 423.3032,
+                    543, 627)
+
+circos(type = "highlight.link", cir = "hg18", 
+       mapping = highlight.link2, col = "#00FF0080", lwd = 1)
+
+
+####### Moitié gauche du cercle #######
+
+# Chromosome 11 
+zoom = c(11, 11, 282412.5, 133770314.5, 180, 270)
+
+circos(type = "chr",R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
+       scale = TRUE, zoom = zoom)
+
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4, cluster = FALSE, lwd = 0.01,
+       zoom = zoom)
+
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4, B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+
+
+
+# Chromosome 17 
+zoom = c(17, 17, 739525, 78385909, 274, 356)
+
+circos(type = "chr", R = 400, cir = "hg18", W = 4, print.chr.lab = TRUE, 
+       scale = TRUE, zoom = zoom)
+
+circos(type = "heatmap2", R = 300, cir = "hg18", W = 100, 
+       mapping = gene.exp, col.v = 4,  cluster = FALSE, lwd = 0.01,
+       zoom = zoom)
+
+circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4,  B = FALSE, lwd = 1, cutoff = 0,
+       zoom = zoom)
+
+circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
+       col.v = 4,  B = TRUE, lwd = 1, col = colors[1],
+       zoom = zoom)
+
+
+```
+
+Au total, de l'extérieur vers l'intérieur, vous pouvez trouver :
 
 -   le numéro du chromosome et la position des gènes
 
