@@ -1102,33 +1102,4 @@ De l'extérieur vers l'intérieur, vous pouvez trouver :
 
 * **Bonferroni** : Cette correction statistique permet d'ajuster le niveau de confiance de chaque intervalle pour que le niveau de confiance simultané ne soit pas erroné.
 
-# Graphiques supplémentaires
 
-Ce dernier graphe représente l'expression génique de plusieurs gènes pour chacun des types de cancer. Pour une meilleure lisibilité, seuls les $10$ premiers gènes de la base de données ont été utilisés mais il est possible d'en afficher plus. Par exemple, pour en afficher $15$, vous pourriez utiliser `data <- data[1:15,]`.
-
-```{r}
-# mise en forme des données
-data <- TCGA.PAM50_genefu_hg18
-data <- data[1:10,]
-data_long <- data %>%
-  gather(key="Subtype", value="Expression", -chr, -po, -Gene)
-
-# création de l'objet
-ggplot(data_long, aes(x=Gene, y=Expression, fill=Subtype)) +
-  # définition du type de graphe
-  geom_bar(stat="identity") +
-  # réglage des couleurs de légende
-  scale_fill_manual(values=c("#69b3a2",
-                             "darkred",
-                             "darkblue",
-                             "pink",
-                             "darksalmon")) +
-  # personnalisation des éléments de texte
-  theme(strip.text.x=element_text(size=8),
-        plot.title=element_text(size=10, hjust=0.5, face="bold")) +
-  # titres
-  labs(title="Expression génique des gènes pour les différents types de cancer du sein",
-       x="Gène",
-       y="Expression génique",
-       fill="Type de cancer")
-```
