@@ -1257,7 +1257,7 @@ circos(type = "highlight.link", cir = "hg18",
 ```
 
 ```{r}
-
+#| echo: false
 
 colors = rainbow(10, alpha = 0.5)   # choix des couleurs 
 
