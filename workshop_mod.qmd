@@ -83,39 +83,6 @@ data("TCGA.BC.gene.exp.2k.60")
 data("TCGA.BC.sample60")
 ```
 
--   **ÉTAPE 3** : Mise en forme des données
-
-```{r}
-# vecteur comprenant les positions de lignes des personnes
-# possédant un cancer de type Her2
-Her2.i = which(TCGA.BC.sample60[,2] == "Her2")
-
-# vecteur comprenant les identifiants des personnes
-# présentant un cancer de type Her2
-Her2.n = TCGA.BC.sample60[Her2.i,1]
-
-# indices des colonnes de TCGA.BC.cnv.2k.60 dont
-# les identifiants sont présents dans Her2.n
-Her2.j = which(colnames(TCGA.BC.cnv.2k.60)%in%Her2.n)
-
-# création d'un data d'expression des différents gènes
-# pour chaque individus présentant un cancer Her2
-cnv = TCGA.BC.cnv.2k.60[,c(1:3,Her2.j)]
-
-# data cnv auquel on a enlevé les 3 premières colonnes
-cnv.m = cnv[,c(4:ncol(cnv))]
-
-# bornage des valeurs >2 et <-2
-cnv.m[cnv.m > 2] = 2
-cnv.m[cnv.m < -2] = -2
-
-# on ajoute aux 3 premières colonnes de cnv nos données bornées
-cnv = cbind(cnv[,1:3], cnv.m)
-
-#  extraction des colonnes 1 à 3 de TCGA.BC.gene.exp.2k.60
-# ainsi que des colonnes spécifiées par Her2.j
-gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
-```
 
 # Visualisations classiques
 
@@ -668,9 +635,45 @@ print(density)
 En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous remarquons que les conclusions faites pour le type de cancer *Her2* peuvent être utilisées à nouveau. En effet, les densités associées sont généralement bimodales sauf pour quelques chromosomes. De plus, nous identifions une expression d'ARNm plus concentrée sur les chromosomes $8$, $16$ et $17$ pour le type de cancer *Her2* ainsi que sur les chromosomes $7$, $11$ et $12$ pour le type de cancer *LumA*. Ce grahe permet de mettre en lumière les différentes expressions d'ARNm de mêmes gènes pour les différents types de cancer.
 :::
 
+
+
 # Création de HEATMAP
 
 Une heatmap (ou carte thermique) est une méthode de visualisation qui permet de représenter des données de grande dimension. C'est une représentation sous forme de grille de cellules colorées. Cette méthode peut être utilisée pour visualiser les observations, les corrélations ou des valeurs manquantes par exemple.
+
+## Mise en forme des données
+
+```{r}
+# vecteur comprenant les positions de lignes des personnes
+# possédant un cancer de type Her2
+Her2.i = which(TCGA.BC.sample60[,2] == "Her2")
+
+# vecteur comprenant les identifiants des personnes
+# présentant un cancer de type Her2
+Her2.n = TCGA.BC.sample60[Her2.i,1]
+
+# indices des colonnes de TCGA.BC.cnv.2k.60 dont
+# les identifiants sont présents dans Her2.n
+Her2.j = which(colnames(TCGA.BC.cnv.2k.60)%in%Her2.n)
+
+# création d'un data d'expression des différents gènes
+# pour chaque individus présentant un cancer Her2
+cnv = TCGA.BC.cnv.2k.60[,c(1:3,Her2.j)]
+
+# data cnv auquel on a enlevé les 3 premières colonnes
+cnv.m = cnv[,c(4:ncol(cnv))]
+
+# bornage des valeurs >2 et <-2
+cnv.m[cnv.m > 2] = 2
+cnv.m[cnv.m < -2] = -2
+
+# on ajoute aux 3 premières colonnes de cnv nos données bornées
+cnv = cbind(cnv[,1:3], cnv.m)
+
+#  extraction des colonnes 1 à 3 de TCGA.BC.gene.exp.2k.60
+# ainsi que des colonnes spécifiées par Her2.j
+gene.exp = TCGA.BC.gene.exp.2k.60[,c(1:3,Her2.j)]
+```
 
 ## Création d'une heatmap intéractive
 
