@@ -7,19 +7,31 @@ format:
 
 # Présentation du workshop
 
-Ce workshop s'inscrit dans le cadre des journées [Montpellier Omics Days](https://montpellier-omics-days.fr/) organisées par les étudiants du [Master Bioinformatique](https://formations.umontpellier.fr/fr/formations/master-lmd-XB/master-bioinformatique-KKI9GZEV.html) et a été effectué par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
+Ce workshop s'inscrit dans le cadre des journées [Montpellier Omics Days](https://montpellier-omics-days.fr/) organisées par les étudiants du [Master Bioinformatique](https://formations.umontpellier.fr/fr/formations/master-lmd-XB/master-bioinformatique-KKI9GZEV.html) et a été effectué sous la responsabilité de Tanguy Lefort (**tanguy.lefort\@umontpellier.fr**) et Élodie Brunel-Piccinini (**elodie.brunel-piccinini\@umontpellier.fr**) par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
 
-* Rim Alhajal : **rim.alhajal@etu.umontpellier.fr**
-* Pauline Dusfour-Castan : **pauline.dusfour-castan@etu.umontpellier.fr**
-* Lilou Zulewski : **lilou.zulewski01@etu.umontpellier.fr**
+-   Rim Alhajal : **rim.alhajal\@etu.umontpellier.fr**
+-   Pauline Dusfour-Castan : **pauline.dusfour-castan\@etu.umontpellier.fr**
+-   Lilou Zulewski : **lilou.zulewski01\@etu.umontpellier.fr**
 
-En génomique, les bases de données à étudier sont généralement très grandes : des visualisations exploratoires permettent de les aborder. Cependant, ces visualisations deviennent complexes dû à la dimension ce qui réduit l’accès aux informations significatives, nuisant aux interprétations. L’objectif de ce workshop est d’améliorer vos compétences en visualisation des données appliquées au cancer du sein.
+En génomique, les bases de données à étudier sont généralement très grandes : des visualisations exploratoires permettent de les aborder. Cependant, ces visualisations deviennent complexes dû à la dimension ce qui réduit l'accès aux informations significatives, nuisant aux interprétations. L'objectif de ce workshop est d'améliorer vos compétences en visualisation des données appliquées au cancer du sein.
 
 # Données {#basesdedonnées}
 
-Les données utilisées dans ce Workshop sont disponibles dans la librairie `OmicCircos` de `R`. Elles reposent sur les bases de données fournies par ***[The Cancer Genome Atlas Program](https://www.cancer.gov/ccg/research/genome-sequencing/tcga)*** (TCGA) contenant des données de patients atteints de différents sous-types de cancer du sein (Normal, LumA, LumB, Basal ou Her2) présentés dans le [lexique](#lexique). Voici la liste des tableaux utilisés :
+Les données utilisées dans ce Workshop sont disponibles dans la librairie `OmicCircos` de `R`. Elles reposent sur les bases de données fournies par [***The Cancer Genome Atlas Program***](https://www.cancer.gov/ccg/research/genome-sequencing/tcga) (TCGA) contenant des données de patients atteints de différents sous-types de cancer du sein étant :
 
-* **TCGA.PAM50_genefu_hg18** : Ce tableau contient un ensemble de 50 gènes identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (Normal, LumA, LumB, Basal ou Her2) en fonction des schémas d'expression génique.
+-   **Normal** qui, contrairement à ce que son nom pourrait sous-entendre, ne correspond pas à une absence de cellules cancéreuses.
+
+-   **LumA et Lum B** qui sont les sous-types de cancer du sein les plus aggressifs.
+
+-   **Basal** :
+
+-   **Her2** :
+
+Ces derniers sont davantage expliqués dans le [lexique](#lexique).
+
+Pour la suite de l'atelier, les tableaux qui seront utilisés sont les suivants :
+
+-   **TCGA.PAM50_genefu_hg18** : Ce tableau contient un ensemble de 50 gènes identifiés comme une signature d'expression génique associée aux sous-types du cancer du sein (Normal, LumA, LumB, Basal ou Her2) en fonction des schémas d'expression génique.
 
 ```{r}
 #| echo: false
@@ -29,7 +41,7 @@ data(TCGA.PAM50_genefu_hg18)
 head(TCGA.PAM50_genefu_hg18)
 ```
 
-* **TCGA.BC.fus** : Ce tableau contient les données de fusion de gènes pour un individu précis.
+-   **TCGA.BC.fus** : Ce tableau contient les données de fusion de gènes pour un individu précis.
 
 ```{r}
 #| echo: false
@@ -39,14 +51,11 @@ data(TCGA.BC.fus)
 head(TCGA.BC.fus)
 ```
 
-* **TCGA.BC.cnv.2k.60** : Les variables de ce tableau sont respectivement le chromosome, sa position, le nom du gène observé ainsi que $60$ autres variables représentant $60$ individus différents.
+-   **TCGA.BC.cnv.2k.60** : Les variables de ce tableau sont respectivement le chromosome, sa position, le nom du gène observé ainsi que $60$ autres variables représentant $60$ individus différents.
 
-* **TCGA.BC.gene.exp.2k.60** : Sur $60$ individus, une métrique liée à l'expression génique et le chromosome, sa position et le nom du gène observé sont consignés.
+-   **TCGA.BC.gene.exp.2k.60** : Sur $60$ individus, une métrique liée à l'expression génique et le chromosome, sa position et le nom du gène observé sont consignés.
 
-* **TCGA.BC.sample60** : Ce tableau référence le type de cancer (Normal, LumA, LumB, Basal ou Her2) dont sont atteints $60$ personnes.
-
-* **TCGA.BC_Her2_cnv_exp** : Dans ce tableau, les *t-value* et *p-value* de tests statistiques et les métriques FDR et Bonferroni sont référencées.
-
+-   **TCGA.BC.sample60** : Ce tableau référence le type de cancer (Normal, LumA, LumB, Basal ou Her2) dont sont atteints $60$ personnes.
 
 # Recueil des données
 
@@ -83,10 +92,9 @@ data("TCGA.BC.gene.exp.2k.60")
 data("TCGA.BC.sample60")
 ```
 
-
 # Visualisations classiques
 
-L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie `ggplot2` de `R`. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes.
+L'objectif de ces premières visualisations est d'assimiler la construction de graphes en reprenant les concepts de base de la librairie `ggplot2` de `R`. Nous vous apprendrons notamment à tracer des graphes de densités et des histogrammes pour observer les concentrations des mesures d'expression génique et identifier des zones qui se différencient selon les sous-types de cancer.
 
 L'ensemble des visualisations de cette partie s'appuient sur la base de données [*TCGA.PAM50_genefu_hg18*](#basesdedonnées) et nécessite le chargement de divers packages.
 
@@ -103,10 +111,9 @@ library(hrbrthemes)
 
 Les visualisations permettent d'étudier les différents types de cancer présentés dans le [lexique](#lexique).
 
-
 ## Utilisation de `ggplot2`
 
-Le package `ggplot2` fonctionne par couches successives. La première d’entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc… Enfin, les couches d’affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelles.
+Le package `ggplot2` fonctionne par couches successives. La première d'entre elles, est un peu le canevas du graphe : elle consiste à indiquer dans quel jeu de données se trouve les données, et quelles sont les variables à représenter. Ensuite, une seconde couche est ajoutée, elle consiste à indiquer le type de graphe à réaliser : scatterplot, boxplot, barplot, etc... Enfin, les couches d'affinage permettent de choisir les couleurs, les échelles des axes, les options de légende et toutes autres options visuelles.
 
 ![](./images/schema_ggplot.png)
 
@@ -114,12 +121,11 @@ Le package `ggplot2` fonctionne par couches successives. La première d’entre 
 Il ne faut pas oublier le `+` entre les couches successives.
 :::
 
-
 ## Comparaison de deux densités
 
-Commençons par étudier certaines densités relatives aux  types de cancer du sein deux à deux afin d'en retirer leurs différences.
+Commençons par étudier certaines densités relatives aux types de cancer du sein deux à deux afin d'en retirer leurs différences.
 
-Voici un exemple très simple de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** qui sont ceux les plus communs :
+Voici un exemple très simple de visualisation graphique de la **comparaison des densités des types de cancer *LumA* et *LumB*** qui sont ceux les plus aggressifs :
 
 ```{r}
 #| output: false
@@ -143,7 +149,8 @@ print(comparaison)
 
 ::: {.callout-note appearance="simple"}
 ## `%>%`
-Cet opérateur est un pipe, fréquemment représenté par une barre verticale `|` dans les terminaux : il renvoie la sortie d’une commande vers l’entrée d’une autre.
+
+Cet opérateur est un pipe, fréquemment représenté par une barre verticale `|` dans les terminaux : il renvoie la sortie d'une commande vers l'entrée d'une autre.
 :::
 
 ```{r}
@@ -176,8 +183,8 @@ comparaison <- data %>%
   # définition du type de graphe
   geom_density(aes(color=type), alpha=0.4) +
   # réglage des couleurs de légende
-  scale_color_manual(values=c("darkblue", "pink")) +
-  scale_fill_manual(values=c("darkblue", "pink")) +
+  scale_color_manual(values=c("darkblue", "deeppink")) +
+  scale_fill_manual(values=c("darkblue", "deeppink")) +
   # choix de l'affichage de la légende
   guides(color="none") +
   # personnalisation des éléments de texte
@@ -199,8 +206,8 @@ Il est également possible de représenter les densités sur deux graphes diffé
 
 ::: {.callout-note appearance="simple"}
 ## Utilisation de `facet_wrap()`
-Les échelles des différents graphiques peuvent être formatées différemment à l'aide de l'option `scales` :
-`"fixed"` permet d'obtenir des échelles égales pour tous les graphes mais d'autres options telles que `"free_x"`, `"free_y"` ou `"free"` sont envisageables.
+
+Les échelles des différents graphiques peuvent être formatées différemment à l'aide de l'option `scales` : `"fixed"` permet d'obtenir des échelles égales pour tous les graphes mais d'autres options telles que `"free_x"`, `"free_y"` ou `"free"` sont envisageables.
 :::
 
 ```{r}
@@ -213,8 +220,8 @@ comparaison <- data %>%
   # séparation du graphe en sous parties
   facet_wrap(~type, scales="fixed") +
   # réglage des couleurs de légende
-  scale_color_manual(values=c("darkblue", "pink")) +
-  scale_fill_manual(values=c("darkblue", "pink")) +
+  scale_color_manual(values=c("darkblue", "deeppink")) +
+  scale_fill_manual(values=c("darkblue", "deeppink")) +
   # choix de l'affichage de la légende
   guides(color="none") +
   # personnalisation des éléments de texte
@@ -239,7 +246,7 @@ Les données relatives aux cancer de type *Normal* sont contenues dans la variab
 :::
 
 ::: {.callout-important appearance="simple"}
-Par la suite, les couleurs utilisées pour la représentation de *Her2* et *Normal* seront respectivement `darkred` et `darksalmon`.
+Par la suite, les couleurs utilisées pour la représentation de *Her2* et *Normal* seront respectivement `darkgreen` et `darkorange`.
 :::
 
 ```{r}
@@ -275,6 +282,7 @@ comparaison <- data %>%
 # affichage du graphe
 print(comparaison)
 ```
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Afficher la Solution"
@@ -293,8 +301,8 @@ comparaison <- data %>%
   # définition du type de graphe
   geom_density(aes(color=type), alpha=0.4) +
   # réglage des couleurs de légende
-  scale_color_manual(values=c("darkred", "darksalmon")) +
-  scale_fill_manual(values=c("darkred", "darksalmon")) +
+  scale_color_manual(values=c("darkgreen", "darkorange")) +
+  scale_fill_manual(values=c("darkgreen", "darkorange")) +
   # choix de l'affichage de la légende
   guides(color="none") +
   # personnalisation des éléments de texte
@@ -319,7 +327,7 @@ La densité de l'expression de l'ARNmessager de ce type de cancer est beaucoup p
 **Pour mieux visualiser les différences entre tous les types de cancer, représentez la comparaison de la densité de l'ensemble des types de cancer. Vous pouvez copier-coller les codes précédents et ajouter/modifier uniquement le nécessaire.**
 
 ::: {.callout-important appearance="simple"}
-Il est important de préciser au graphe que la variable doit être considéré comme une densité à l'aide de la commande `aes(y=after_stat(density))`.
+Il est important de préciser au graphe que la variable doit être considéré comme une densité à l'aide de la commande `aes(y=after_stat(density))`. La fonction `after_stat()` permet de mettre à l'échelle l'ensemble des données pour oberver les modes sans qu'aucune densité n'écrase les autres.
 :::
 
 ```{r}
@@ -348,16 +356,16 @@ density <- data %>%
   geom_density(aes(y=after_stat(density),color=type),
                linewidth=0.5, alpha=0.4, fill=NA) +
   # réglage des couleurs de légende
-  scale_color_manual(values=c("#69b3a2",
-                              "darkred",
+  scale_color_manual(values=c("gold",
+                              "darkgreen",
                               "darkblue",
-                              "pink",
-                              "darksalmon")) +
-  scale_fill_manual(values=c("#69b3a2",
-                             "darkred",
+                              "deeppink",
+                              "darkorange")) +
+  scale_fill_manual(values=c("gold",
+                             "darkgreen",
                              "darkblue",
-                             "pink",
-                             "darksalmon")) +
+                             "deeppink",
+                             "darkorange")) +
   # personnalisation des éléments de texte
   theme(strip.text.x=element_text(size=8),
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
@@ -371,9 +379,9 @@ density <- data %>%
 print(density)
 ```
 
-Nous remarquons à nouveau une densité d'expression de l'ARNm très dispersée pour le type de cancer du sein *Normal*. De plus, les densités pour les types de cancer *Basal* et *LumB* sont assez similaires : *Basal* présente un mode légèrement plus haut et et une courbe plus concentrée autour de $0.5$. Notons également que *LumA* est le seul type de cancer pour lequel la densité est bimodale.
+Nous remarquons à nouveau une densité d'expression de l'ARNm très dispersée pour le type de cancer du sein *Normal*. De plus, les densités pour les types de cancer *Basal* et *LumB* sont assez similaires : *Basal* présente un mode légèrement plus haut et et une courbe plus concentrée autour de $0.5$. Notons également que *LumA* est le seul type de cancer pour lequel la densité est bimodale. Pour l'ensemble des densités tracées, on observe des artéfacts sur les bords : ce sont des valeurs atypiques créant des bosses sur la courbe dû à la méthode des noyaux pour l'estimation de la densité.
 
-::: {.callout-warning appearance="default" icon=false}
+::: {.callout-warning appearance="default" icon="false"}
 # POUR ALLER PLUS LOIN...
 
 **Ajoutez les histogrammes respectifs des différents types de cancer sur le graphe précédent.**
@@ -397,8 +405,8 @@ density <- data %>%
   # définition du second type de graphe
   geom_density(aes(y=after_stat(density), color=type), linewidth=0.5, fill=NA) +
   # réglage des couleurs de légende
-  scale_color_manual(values=c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
-  scale_fill_manual(values=c("#69b3a2", "darkred", "darkblue", "pink", "darksalmon")) +
+  scale_color_manual(values=c("gold", "darkgreen", "darkblue", "deeppink", "darkorange")) +
+  scale_fill_manual(values=c("gold", "darkgreen", "darkblue", "deeppink", "darkorange")) +
   # choix de l'affichage de la légende
   guides(color="none") +
   # personnalisation des éléments de texte
@@ -413,20 +421,19 @@ density <- data %>%
 # affichage du graphe
 print(density)
 ```
-
 :::
 
 ::: {.callout-note appearance="simple"}
 ## `geom_histogram`
-Cette commande du package `ggplot2` permet de créer des histogrammes sur R. De nombreuses options sont disponibles comme `color`, `alpha` (règle la transparence du remplissage), `binwidth` (règle la largeur des intervalles)
-et `position = "identity", "dodge"` (règle la position des bandes).
+
+Cette commande du package `ggplot2` permet de créer des histogrammes sur R. De nombreuses options sont disponibles comme `color`, `alpha` (règle la transparence du remplissage), `binwidth` (règle la largeur des intervalles) et `position = "identity", "dodge"` (règle la position des bandes).
 :::
 
-## Comparaison des densités pour chacun des chromosomes
+## Comparaison des comptages du nombrede mesures d'expresion génique de l'ARNmessager pour chacun des chromosomes
 
 ### À vous de jouer
 
-**En appliquant les compétences acquises jusqu'ici, remplissez les trous du code ci-dessous (indiqués par 'XXX') afin de représenter la densité et l'histogramme d'expression de l'ARNmessager des gènes pour le type de cancer *Her2* pour chacun des chromosomes.**
+**En appliquant les compétences acquises jusqu'ici, remplissez les trous du code ci-dessous (indiqués par 'XXX') afin de représenter les comptages du nombre de mesures d'expression de l'ARNmessager des gènes prises en compte pour le type de cancer *Her2* pour chacun des chromosomes.**
 
 ```{r, warning=FALSE, message=FALSE}
 #| output: false
@@ -443,12 +450,6 @@ density <- data %>%
   ggplot(aes(x=XXX, bins=30, color=XXX, fill=XXX)) +
   # définition du premier type de graphe
   geom_histogram(alpha=0.6, position="identity") +
-  # définition du second type de graphe
-  geom_density(aes(y=after_stat(ndensity)),
-               alpha=0.5,
-               fill="grey",
-               color="black",
-               linewidth=0.25) +
   # séparation du graphe en sous parties
   facet_wrap(~XXX, scales="XXX", nrow=3) +
   # réglage des couleurs de légende
@@ -461,8 +462,8 @@ density <- data %>%
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
   xlab("Expression d'ARNm") +
-  ylab("Fréquence") +
-  labs(title="Densités d'expression génique pour le type de cancer Her2 sur chacun des chromosomes")
+  ylab("Comptage") +
+  labs(title="Comptages du nombre de mesures d'expression génique pour le type de cancer Her2 sur chacun des chromosomes")
 
 # affichage du graphe
 print(density)
@@ -484,12 +485,6 @@ density <- data %>%
   ggplot(aes(x=value, bins=30, color=type, fill=type)) +
   # définition du premier type de graphe
   geom_histogram(alpha=0.6, position="identity") +
-  # définition du second type de graphe
-  geom_density(aes(y=after_stat(ndensity)),
-               alpha=0.5,
-               fill="grey",
-               color="black",
-               linewidth=0.25) +
   # séparation du graphe en sous parties
   facet_wrap(~type, scales="fixed", nrow=3) +
   # réglage des couleurs de légende
@@ -502,21 +497,19 @@ density <- data %>%
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
   xlab("Expression d'ARNm") +
-  ylab("Fréquence") +
-  labs(title="Densités d'expression génique pour le type de cancer Her2 sur chacun des chromosomes")
+  ylab("Comptage") +
+  labs(title="Comptages du nombre de mesures d'expression génique pour le type de cancer Her2 sur chacun des chromosomes")
 
 # affichage du graphe
 print(density)
 ```
 
-Notons que la densité ne peut pas être représentée avec un seul point ce qui explique l'absence de courbe pour les chromosomes $3$, $14$ et $22$. Quant à lui, l'histogramme représente le nombre de gènes ayant une valeur de test à un endroit donné : par exemple, pour le chromosome $16$, il y a deux gènes qui ont une valeur de test environ égale à $0.21$ pour le type de cancer *Her2*.
+Le graphe précédent représente le nombre de mesures d'expression d'ARNmessager prises en compte sur chacun des chromosomes : plus précisémment, il s'agit du nombre de gènes ayant une valeur de test à un endroit donné. Par exemple, pour le chromosome $16$, il y a deux gènes qui ont une d'expression environ égale à $0.21$ pour le type de cancer *Her2*. Ce comptage est clairement variable pour l'ensemble des chromosomes.
 
-Pour la plupart des chromosomes, la densité observée est bimodale. Quelques chromosomes possèdent une densité différente. En effet, le chromosome $1$ possède un grand mode sur l'histogramme autour de la valeur de test $0$. Le chromosome $17$ est aussi atypique puisque la densité associée est assez étalée dû aux $4$ modes de valeurs assez dispersées présents dans l'histogramme.
-
-::: {.callout-warning appearance="default" icon=false}
+::: {.callout-warning appearance="default" icon="false"}
 # POUR ALLER PLUS LOIN...
 
-**De la même façon que le graphe précédent, remplissez les trous du code ci-dessous (indiqués par 'XXX') pour représenter graphiquement la densité et les histogrammes d'expression de l'ARNm des gènes pour chaque type de cancer sur chacun des chromosomes.**
+**De la même façon que le graphe précédent, remplissez les trous du code ci-dessous (indiqués par 'XXX') pour représenter graphiquement les comptages du nombre de mesures d'expression de l'ARNmessager des gènes prises en compte pour chaque type de cancer sur chacun des chromosomes.**
 
 ```{r, warning=FALSE, message=FALSE}
 #| output: false
@@ -542,24 +535,19 @@ density <- data %>%
   ggplot(aes(x=XXX, fill=XXX, color=XXX)) +
   # définition du premier type de graphe
   geom_histogram(alpha=0.6, position="dodge") +
-  # définition du second type de graphe
-  geom_density(aes(y=after_stat(ndensity), color=XXX),
-               alpha=0.25,
-               fill="grey",
-               linewidth=0.25) +
   # séparation du graphe en sous parties
   facet_wrap(~XXX, scales="XXX", nrow=3) +
   # réglage des couleurs de légende
-  scale_color_manual(values=c("#69b3a2",
-                              "darkred",
+  scale_color_manual(values=c("gold",
+                              "darkgreen",
                               "darkblue",
-                              "pink",
-                              "darksalmon")) +
-  scale_fill_manual(values=c("#69b3a2",
-                             "darkred",
+                              "deeppink",
+                              "darkorange")) +
+  scale_fill_manual(values=c("gold",
+                             "darkgreen",
                              "darkblue",
-                             "pink",
-                             "darksalmon")) +
+                             "deeppink",
+                             "darkorange")) +
   # choix de l'affichage de la légende
   guides(color="none") +
   # personnalisation des éléments de texte
@@ -567,8 +555,8 @@ density <- data %>%
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
   xlab("Expression d'ARNm") +
-  ylab("Fréquence") +
-  labs(title="Densités d'expression génique pour chaque type de cancer sur chacun des chromosomes",
+  ylab("Comptage") +
+  labs(title="Comptages du nombre de mesures d'expression génique pour le type de cancer Her2 sur chacun des chromosomes",
        fill="Type de cancer")
 
 # affichage du graphe
@@ -599,24 +587,19 @@ density <- data %>%
   ggplot(aes(x=value, fill=subtype, color=subtype)) +
   # définition du premier type de graphe
   geom_histogram(alpha=0.6, position="dodge") +
-  # définition du second type de graphe
-  geom_density(aes(y=after_stat(ndensity), color=subtype),
-               alpha=0.25,
-               fill="grey",
-               linewidth=0.25) +
   # séparation du graphe en sous parties
   facet_wrap(~type, scales="fixed", nrow=3) +
   # réglage des couleurs de légende
-  scale_color_manual(values=c("#69b3a2",
-                              "darkred",
+  scale_color_manual(values=c("gold",
+                              "darkgreen",
                               "darkblue",
-                              "pink",
-                              "darksalmon")) +
-  scale_fill_manual(values=c("#69b3a2",
-                             "darkred",
+                              "deeppink",
+                              "darkorange")) +
+  scale_fill_manual(values=c("gold",
+                             "darkgreen",
                              "darkblue",
-                             "pink",
-                             "darksalmon")) +
+                             "deeppink",
+                             "darkorange")) +
   # choix de l'affichage de la légende
   guides(color="none") +
   # personnalisation des éléments de texte
@@ -624,18 +607,16 @@ density <- data %>%
         plot.title=element_text(size=10, hjust=0.5, face="bold")) +
   # titres
   xlab("Expression d'ARNm") +
-  ylab("Fréquence") +
-  labs(title="Densités d'expression génique pour chaque type de cancer sur chacun des chromosomes",
+  ylab("Comptage") +
+  labs(title="Comptages du nombre de mesures d'expression génique pour le type de cancer Her2 sur chacun des chromosomes",
        fill="Type de cancer")
 
 # affichage du graphe
 print(density)
 ```
 
-En comparant l'expression de l'ARNm pour l'ensemble des types de cancer, nous remarquons que les conclusions faites pour le type de cancer *Her2* peuvent être utilisées à nouveau. En effet, les densités associées sont généralement bimodales sauf pour quelques chromosomes. De plus, nous identifions une expression d'ARNm plus concentrée sur les chromosomes $8$, $16$ et $17$ pour le type de cancer *Her2* ainsi que sur les chromosomes $7$, $11$ et $12$ pour le type de cancer *LumA*. Ce grahe permet de mettre en lumière les différentes expressions d'ARNm de mêmes gènes pour les différents types de cancer.
+En comparant le comptage du nombre de mesures d'expression de l'ARNm pour l'ensemble des types de cancer, nous remarquons que les conclusions faites pour le type de cancer *Her2* peuvent être utilisées à nouveau. En effet, les comptages sont très variables selon le chromosome observé. De plus, ceux-ci dépendent également du sous-type de cancer. Par exemple, le chromosome $8$ présente un seul comptage égal à $2$ pour le sous-type *Her2* tandis que les autres sous-types de cancer présentent des comptages dispersés à différentes valeurs d'expression d'ARNm.
 :::
-
-
 
 # Création de HEATMAP
 
@@ -701,7 +682,6 @@ Vous pouvez trouver ci-joint deux sites donnant des exemples d'utilisation et de
 
 -   [Aide heatmaply](https://www.rdocumentation.org/packages/heatmaply/versions/1.4.2/topics/heatmaply)
 
-
 Dans un premier temps, nous allons sélectionner le chromosome que l'on souhaite étudier.
 
 Prenons ici le chromosome numéro 1.
@@ -754,14 +734,12 @@ heatmaply(mydata_17, scale_fill_gradient_fun=gradient_col,
           main="Expression des gènes du chromosome 17")
 ```
 
-
 ## Création d'une heatmap circulaire
 
 L'objectif de cette seconde partie sur les heatmap est de réaliser des heatmap circulaires avec dendrogrammes.
 
 ::: {.callout-note apparance="simple"}
-La méthode de clustering appliquée est `hclust` soit une méthode de classification hierarchique, la distance utilisée par défaut est celle de Ward.
-Vous pouvez trouver des informations sur `hclust`au [Lien suivant](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/hclust) et sur la classification hierarchique [ici](https://larmarange.github.io/analyse-R/classification-ascendante-hierarchique.html) et [ici](https://pbil.univ-lyon1.fr/R/pdf/stage7.pdf).
+La méthode de clustering appliquée est `hclust` soit une méthode de classification hierarchique, la distance utilisée par défaut est celle de Ward. Vous pouvez trouver des informations sur `hclust`au [Lien suivant](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/hclust) et sur la classification hierarchique [ici](https://larmarange.github.io/analyse-R/classification-ascendante-hierarchique.html) et [ici](https://pbil.univ-lyon1.fr/R/pdf/stage7.pdf).
 :::
 
 Commencez par charger les packages nécessaires :
@@ -815,7 +793,7 @@ Le vecteur `split`doit contenir les différents groupes/catégories si vous souh
 
 Création des heatmap circulaires :
 
--   Sur cette première heatmap, nous avons affiché tous les chromosomes ainsi que tous les gènes de manière simple. 
+-   Sur cette première heatmap, nous avons affiché tous les chromosomes ainsi que tous les gènes de manière simple.
 
 ```{r}
 ## Affichage des heatmaps
@@ -864,7 +842,6 @@ circos.heatmap(mat_numeric[, !(colnames(mat_numeric) %in% c("chr", "NAME"))],
 ```
 
 -   Sur cette quatrième heatmap, nous avons rajouté les dendrogrammes ainsi qu'une légende de couleur.
-
 
 ```{r}
 #| message: false
@@ -1080,6 +1057,7 @@ circos(type = "h", R = 140, cir = "hg18", W = 80, mapping = cnv,
        zoom = zoom)
 
 ```
+
 -   Placement des chromosomes et des gènes
 
 ```{r, circos1}
@@ -1109,7 +1087,6 @@ circos(type = "heatmap2", R = 300, cir = "hg18", W = 100,
        mapping = gene.exp, col.v = 4, cluster = FALSE, 
        col.bar = TRUE, lwd = 0.01, zoom = zoom)
 ```
-
 
 ```{r, circos3}
 #| echo: false
@@ -1146,7 +1123,6 @@ circos(type = "ml3", R = 220, cir = "hg18", W = 80, mapping = cnv,
        col.v = 4, B = FALSE, lwd = 1, cutoff = 0,
        zoom = zoom)
 ```
-
 
 ```{r, circos6}
 #| echo: false
@@ -1575,23 +1551,14 @@ Au total, de l'extérieur vers l'intérieur, vous pouvez trouver :
 
 -   des histogrammes pour observer la dispersion des distributions
 
+# Lexique {#lexique}
 
+-   **hg18** : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 correspond à l'avant dernière version.
 
+-   **Her2** : Il s'agit d'une protéine naturellement présente dans l'organisme : un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire.
 
-# Lexique
+-   **LumA** : Le cancer du sein Luminal A est l'un des sous-types luminaux et est généralement associé à des caractéristiques moins agressives que Luminal B.
 
-* **hg18** : La représentation du génome humain a connu plusieurs versions avant d'aboutir à la représentation la plus optimale. La version 18 correspond à l'avant dernière version.
+-   **LumB** : Ce type de cancer du sein est associé à un grade plus élevé, des taux de prolifération accrus, et un pronostic global plus défavorable.
 
-* **Her2** : Il s'agit d'une protéine naturellement présente dans l’organisme : un récepteur transmembranaire impliqué dans la régulation de la prolifération cellulaire.
-
-* **LumA** : Le cancer du sein Luminal A est l'un des sous-types luminaux et est généralement associé à des caractéristiques moins agressives que Luminal B.
-
-* **LumB** : Ce type de cancer du sein est associé à un grade plus élevé, des taux de prolifération accrus, et un pronostic global plus défavorable.
-
-* **Basal** : Il s'agit d'un sous-type du cancer du sein négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
-
-* **FDR** (First Division Restitution) : Ceci réfère à l'évènement où l'une des cellules filles produites lors de la première division méiotique conserve les deux chromatides d'un chromosome, sans subir la séparation normale en deux cellules distinctes. Cela aboutit à un gamète avec un ensemble complet de chromosomes, plutôt que la moitié attendue.
-
-* **Bonferroni** : Cette correction statistique permet d'ajuster le niveau de confiance de chaque intervalle pour que le niveau de confiance simultané ne soit pas erroné.
-
-
+-   **Basal** : Il s'agit d'un sous-type du cancer du sein négatif pour les récepteurs d'oestrogène (ER), les récepteurs de progestérone (PR) et le récepteur 2 du facteur de croissance épidermique humain (HER2). On le désigne souvent comme un cancer du sein triple négatif (TNBC).
