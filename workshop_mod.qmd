@@ -19,13 +19,13 @@ En génomique, les bases de données à étudier sont généralement très grand
 
 Les données utilisées dans ce Workshop sont disponibles dans la librairie `OmicCircos` de `R`. Elles reposent sur les bases de données fournies par [***The Cancer Genome Atlas Program***](https://www.cancer.gov/ccg/research/genome-sequencing/tcga) (TCGA) contenant des données de patients atteints de différents sous-types de cancer du sein étant :
 
--   **Normal** qui, contrairement à ce que son nom pourrait sous-entendre, ne correspond pas à une absence de cellules cancéreuses.
+-   **Normal** qui, contrairement à ce que son nom pourrait sous-entendre, ne correspond pas à une absence de cellules cancéreuses
 
--   **LumA et Lum B** qui sont les sous-types de cancer du sein les plus aggressifs.
+-   **LumA et Lum B** qui sont les sous-types de cancer du sein les plus aggressifs
 
--   **Basal** :
+-   **Basal**
 
--   **Her2** :
+-   **Her2**
 
 Ces derniers sont davantage expliqués dans le [lexique](#lexique).
 
