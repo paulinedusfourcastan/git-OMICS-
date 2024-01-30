@@ -7,7 +7,7 @@ format:
 
 # Présentation du workshop
 
-Ce workshop s'inscrit dans le cadre des journées [Montpellier Omics Days](https://montpellier-omics-days.fr/) organisées par les étudiants du [Master Bioinformatique](https://formations.umontpellier.fr/fr/formations/master-lmd-XB/master-bioinformatique-KKI9GZEV.html) et a été effectué sous la responsabilité de Tanguy Lefort (**tanguy.lefort\@umontpellier.fr**) et Élodie Brunel-Piccinini (**elodie.brunel-piccinini\@umontpellier.fr**) par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
+Ce workshop s'inscrit dans le cadre des journées [Montpellier Omics Days](https://montpellier-omics-days.fr/) organisées par les étudiants du [Master Bioinformatique](https://formations.umontpellier.fr/fr/formations/master-lmd-XB/master-bioinformatique-KKI9GZEV.html) et a été effectué sous la responsabilité de [Tanguy Lefort](https://tanglef.github.io/) et [Élodie Brunel-Piccinini](https://imag.umontpellier.fr/~brunel/index.html) par des étudiants du [master Statistiques et Sciences des Données](https://formations.umontpellier.fr/fr/formations/master-XB/master-mathematiques-ME157/statistique-et-science-des-donnees-ssd-KKIDCY8N.html) :
 
 -   Rim Alhajal : **rim.alhajal\@etu.umontpellier.fr**
 -   Pauline Dusfour-Castan : **pauline.dusfour-castan\@etu.umontpellier.fr**
