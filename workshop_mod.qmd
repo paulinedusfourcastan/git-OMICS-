@@ -379,7 +379,7 @@ density <- data %>%
 print(density)
 ```
 
-Nous remarquons à nouveau une densité d'expression de l'ARNm très dispersée pour le type de cancer du sein *Normal*. De plus, les densités pour les types de cancer *Basal* et *LumB* sont assez similaires : *Basal* présente un mode légèrement plus haut et et une courbe plus concentrée autour de $0.5$. Notons également que *LumA* est le seul type de cancer pour lequel la densité est bimodale. Pour l'ensemble des densités tracées, on observe des artéfacts sur les bords : ce sont des valeurs atypiques créant des bosses sur la courbe dû à la méthode des noyaux pour l'estimation de la densité.
+Nous remarquons à nouveau une densité d'expression de l'ARNm très dispersée pour le type de cancer du sein *Normal*. De plus, les densités pour les types de cancer *Basal* et *LumB* sont assez similaires : *Basal* présente un mode légèrement plus haut et et une courbe plus concentrée autour de $0.5$. Notons également que *LumA* est le seul type de cancer pour lequel la densité est bimodale. Pour l'ensemble des densités tracées, on observe des artéfacts sur les bords : ce sont des valeurs atypiques créant des bosses sur la courbe dû à la méthode des noyaux utilisée pour l'estimation de la densité.
 
 ::: {.callout-warning appearance="default" icon="false"}
 # POUR ALLER PLUS LOIN...
@@ -429,7 +429,7 @@ print(density)
 Cette commande du package `ggplot2` permet de créer des histogrammes sur R. De nombreuses options sont disponibles comme `color`, `alpha` (règle la transparence du remplissage), `binwidth` (règle la largeur des intervalles) et `position = "identity", "dodge"` (règle la position des bandes).
 :::
 
-## Comparaison des comptages du nombrede mesures d'expresion génique de l'ARNmessager pour chacun des chromosomes
+## Comparaison des comptages du nombre de mesures d'expresion génique de l'ARNmessager pour chacun des chromosomes
 
 ### À vous de jouer
 
